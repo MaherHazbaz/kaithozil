@@ -1,0 +1,10 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "tasks": {
+    "typecheck": {},
+    "lint": {},
+    "test": {
+      "inputs": ["$TURBO_DEFAULT$", "../../design/tokens.json"]
+    }
+  }
+}

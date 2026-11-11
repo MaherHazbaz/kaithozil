@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Log in</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Noto+Sans+Tamil:wght@400;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#4C1D95}a:hover{color:#3B1574}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: linear-gradient(180deg, #F3EEFB 0%, #F8F7FB 35%, #FFFFFF 100%); font-family: 'Plus Jakarta Sans', 'Noto Sans Tamil', sans-serif; color: #1C1730; display: flex; flex-direction: column; overflow: hidden">
+<div style="padding: 22px 20px 0 20px; display: flex; align-items: center; gap: 12px">
+  <a href="Welcome.dc.html" aria-label="Back" style="width: 44px; height: 44px; flex-shrink: 0; border-radius: 22px; background: #FFFFFF; border: 1px solid #E8E5F0; display: flex; align-items: center; justify-content: center; color: #1C1730"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg></a>
+  <div style="flex-grow: 1; display: flex; flex-direction: column"><div style="font-size: 18px; font-weight: 800">Log in</div><div style="font-size: 12px; color: #625B73">உள்நுழைக</div></div>
+  
+</div><div style="padding: 16px 20px 0 20px; display: flex; flex-direction: column; gap: 14px; flex-grow: 1; min-height: 0; overflow-y: auto; overflow-x: hidden">
+
+<div style="display: flex; flex-direction: column; gap: 4px; padding-top: 6px"><div style="font-size: 22px; font-weight: 800">Enter your mobile number</div><div style="font-size: 13px; color: #625B73">உங்கள் மொபைல் எண்ணை உள்ளிடுங்கள்</div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><label for="mob" style="font-size: 13px; font-weight: 700; color: #625B73">Mobile number</label><div style="display: flex; gap: 8px"><div style="height: 52px; padding: 0 14px; border-radius: 12px; border: 1px solid #DDD8E8; background: #FFFFFF; display: flex; align-items: center; font-weight: 700">+91</div><input id="mob" type="tel" value="98400 12345" style="flex-grow: 1; height: 52px; border-radius: 12px; border: 1px solid #DDD8E8; background: #FFFFFF; padding: 0 14px; font-family: inherit; font-size: 17px; font-weight: 700; color: #1C1730; box-sizing: border-box; min-width: 0"></div><div style="font-size: 12px; color: #625B73">We'll send a 6-digit code by SMS.</div></div>
+<div style="height: 1px; background: #E8E5F0"></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><div style="font-size: 15px; font-weight: 800">Enter the code</div><div style="font-size: 13px; color: #625B73">Sent to +91 98400 12345 · <a href="#">Change</a></div><div style="display: flex; justify-content: space-between" role="group" aria-label="6-digit code"><input aria-label="Digit 1" type="text" inputmode="numeric" maxlength="1" value="4" style="width: 46px; height: 56px; border-radius: 12px; border: 2px solid #4C1D95; background: #FFFFFF; text-align: center; font-family: inherit; font-size: 22px; font-weight: 800; color: #1C1730; box-sizing: border-box"><input aria-label="Digit 2" type="text" inputmode="numeric" maxlength="1" value="8" style="width: 46px; height: 56px; border-radius: 12px; border: 2px solid #4C1D95; background: #FFFFFF; text-align: center; font-family: inherit; font-size: 22px; font-weight: 800; color: #1C1730; box-sizing: border-box"><input aria-label="Digit 3" type="text" inputmode="numeric" maxlength="1" value="2" style="width: 46px; height: 56px; border-radius: 12px; border: 2px solid #4C1D95; background: #FFFFFF; text-align: center; font-family: inherit; font-size: 22px; font-weight: 800; color: #1C1730; box-sizing: border-box"><input aria-label="Digit 4" type="text" inputmode="numeric" maxlength="1" value="7" style="width: 46px; height: 56px; border-radius: 12px; border: 2px solid #4C1D95; background: #FFFFFF; text-align: center; font-family: inherit; font-size: 22px; font-weight: 800; color: #1C1730; box-sizing: border-box"><input aria-label="Digit 5" type="text" inputmode="numeric" maxlength="1" value="1" style="width: 46px; height: 56px; border-radius: 12px; border: 2px solid #4C1D95; background: #FFFFFF; text-align: center; font-family: inherit; font-size: 22px; font-weight: 800; color: #1C1730; box-sizing: border-box"><input aria-label="Digit 6" type="text" inputmode="numeric" maxlength="1" value="" style="width: 46px; height: 56px; border-radius: 12px; border: 1px solid #DDD8E8; background: #FFFFFF; text-align: center; font-family: inherit; font-size: 22px; font-weight: 800; color: #1C1730; box-sizing: border-box"></div><div style="font-size: 13px; color: #625B73">Resend code in 0:24</div></div>
+
+</div><div style="padding: 14px 20px 26px 20px; background: #FFFFFF; border-top: 1px solid #E8E5F0; display: flex; flex-direction: column; gap: 10px"><a href="Main.dc.html" style="height: 56px; border-radius: 16px; border: none; background: linear-gradient(135deg, #6A3BB5 0%, #4C1D95 60%, #3B1574 100%); box-shadow: 0 10px 24px rgba(76, 29, 149, 0.30); color: #FFFFFF; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 16px; font-weight: 700; text-decoration: none; cursor: pointer; box-sizing: border-box">Verify and continue</a><a href="WSignup.dc.html" style="text-align: center; font-size: 14px; font-weight: 700; padding: 8px 0">Joining as a worker? Set up your profile</a></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

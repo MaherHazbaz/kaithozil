@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Book a construction crew</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Noto+Sans+Tamil:wght@400;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#4C1D95}a:hover{color:#3B1574}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: linear-gradient(180deg, #F3EEFB 0%, #F8F7FB 35%, #FFFFFF 100%); font-family: 'Plus Jakarta Sans', 'Noto Sans Tamil', sans-serif; color: #1C1730; display: flex; flex-direction: column; overflow: hidden">
+  <div style="padding: 22px 20px 0 20px; display: flex; align-items: center; gap: 12px">
+    <a href="Main.dc.html" aria-label="Back" style="width: 44px; height: 44px; border-radius: 22px; background: #FFFFFF; border: 1px solid #E8E5F0; display: flex; align-items: center; justify-content: center; color: #1C1730">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </a>
+    <div style="display: flex; flex-direction: column">
+      <div style="font-size: 18px; font-weight: 800">Construction workers</div>
+      <div style="font-size: 12px; color: #625B73">கட்டுமான தொழிலாளர்கள்</div>
+    </div>
+  </div>
+
+  <div style="padding: 14px 20px 0 20px; display: flex; flex-direction: column; gap: 12px; flex-grow: 1; min-height: 0; overflow-y: auto; overflow-x: hidden">
+    <div style="display: flex; flex-wrap: wrap; gap: 6px" role="group" aria-label="Type of work">
+      <sc-for list="{{workTypes}}" as="w" hint-placeholder-count="4">
+        <button aria-pressed="{{w.pressed}}" onClick="{{w.pick}}" style="{{w.style}}">{{w.label}}</button>
+      </sc-for>
+    </div>
+
+    <div style="font-size: 15px; font-weight: 800">How many workers do you need?</div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <sc-for list="{{roles}}" as="r" hint-placeholder-count="3">
+        <div style="background: #FFFFFF; border: 1px solid #EEEAF6; border-radius: 20px; box-shadow: 0 8px 24px rgba(59, 21, 116, 0.08); padding: 12px 12px 12px 14px; display: flex; align-items: center; gap: 10px">
+          <div style="flex-grow: 1; display: flex; flex-direction: column; gap: 1px; min-width: 0">
+            <div style="font-size: 17px; font-weight: 700">{{r.en}}</div>
+            <div style="font-size: 13px; font-weight: 700; color: #4C1D95">{{r.ta}}</div>
+            <div style="font-size: 12px; color: #625B73">{{r.desc}}</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6px">
+            <button aria-label="{{r.decLabel}}" onClick="{{r.dec}}" style="width: 44px; height: 44px; border-radius: 12px; border: 1px solid #DDD8E8; background: #FFFFFF; color: #4C1D95; font-size: 22px; font-weight: 700; cursor: pointer">−</button>
+            <div style="width: 32px; text-align: center; font-size: 22px; font-weight: 800" aria-live="polite">{{r.count}}</div>
+            <button aria-label="{{r.incLabel}}" onClick="{{r.inc}}" style="width: 44px; height: 44px; border-radius: 12px; border: none; background: #4C1D95; color: #FFFFFF; font-size: 22px; font-weight: 700; cursor: pointer">+</button>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="background: #FFFFFF; border: 1px solid #EEEAF6; border-radius: 20px; box-shadow: 0 8px 24px rgba(59, 21, 116, 0.08); padding: 12px 12px 12px 14px; display: flex; align-items: center; gap: 10px">
+      <div style="flex-grow: 1; display: flex; flex-direction: column; gap: 1px">
+        <div style="font-size: 15px; font-weight: 700">Number of days</div>
+        <div style="font-size: 12px; color: #625B73">எத்தனை நாட்கள் · from tomorrow, 8 AM</div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 6px">
+        <button aria-label="Fewer days" onClick="{{decDays}}" style="width: 44px; height: 44px; border-radius: 12px; border: 1px solid #DDD8E8; background: #FFFFFF; color: #4C1D95; font-size: 22px; font-weight: 700; cursor: pointer">−</button>
+        <div style="width: 32px; text-align: center; font-size: 22px; font-weight: 800" aria-live="polite">{{days}}</div>
+        <button aria-label="More days" onClick="{{incDays}}" style="width: 44px; height: 44px; border-radius: 12px; border: none; background: #4C1D95; color: #FFFFFF; font-size: 22px; font-weight: 700; cursor: pointer">+</button>
+      </div>
+    </div>
+
+    <button aria-pressed="{{mestriPressed}}" onClick="{{toggleMestri}}" style="background: #FFFFFF; border: 1px solid #EEEAF6; border-radius: 20px; box-shadow: 0 8px 24px rgba(59, 21, 116, 0.08); padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; font-family: inherit; color: #1C1730; text-align: left; cursor: pointer">
+      <span style="display: flex; flex-direction: column; gap: 1px">
+        <span style="font-size: 15px; font-weight: 700">Send as one team with a mestri</span>
+        <span style="font-size: 12px; color: #625B73">A verified team leader brings the whole crew</span>
+      </span>
+      <span style="{{switchTrack}}"><span style="width: 24px; height: 24px; border-radius: 12px; background: #FFFFFF"></span></span>
+    </button>
+  </div>
+
+  <div style="padding: 14px 20px 26px 20px; background: #FFFFFF; border-top: 1px solid #E8E5F0; display: flex; flex-direction: column; gap: 10px">
+    <div style="display: flex; justify-content: space-between; align-items: baseline">
+      <span style="font-size: 14px; color: #625B73">{{summary}}</span>
+      <span style="font-size: 14px; font-weight: 800; color: #7C4A03; background: #FEF3C7; border-radius: 8px; padding: 4px 8px">{{workerDays}}</span>
+    </div>
+    <a href="CrewTeam.dc.html" style="text-decoration: none; box-sizing: border-box; display: flex; align-items: center; justify-content: center; height: 56px; border-radius: 16px; border: none; background: linear-gradient(135deg, #6A3BB5 0%, #4C1D95 60%, #3B1574 100%); box-shadow: 0 10px 24px rgba(76, 29, 149, 0.30); color: #FFFFFF; font-family: inherit; font-size: 16px; font-weight: 700; cursor: pointer">Find {{total}} workers</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { counts: { kothanar: 2, periyaal: 3, sithaal: 2 }, days: 5, mestri: true, work: 'house' };
+  }
+  renderVals() {
+    const s = this.state;
+    const defs = [
+      { id: 'kothanar', ta: 'கொத்தனார் · Kothanaar', en: 'Mason', desc: 'Brickwork, plastering, tiling' },
+      { id: 'periyaal', ta: 'பெரியாள் · Periyaal', en: 'Heavy helper', desc: 'Mixing concrete, heavy lifting' },
+      { id: 'sithaal', ta: 'சித்தாள் · Sithaal', en: 'Site helper', desc: 'Carrying bricks and mortar, site cleaning' }
+    ];
+    const setCount = (id, d) => {
+      const c = Object.assign({}, this.state.counts);
+      c[id] = Math.max(0, Math.min(20, c[id] + d));
+      this.setState({ counts: c });
+    };
+    const roles = defs.map((r) => Object.assign({}, r, {
+      count: s.counts[r.id],
+      inc: () => setCount(r.id, 1),
+      dec: () => setCount(r.id, -1),
+      incLabel: 'Add one ' + r.en,
+      decLabel: 'Remove one ' + r.en
+    }));
+    const total = s.counts.kothanar + s.counts.periyaal + s.counts.sithaal;
+    const types = [
+      { id: 'house', label: 'New house' },
+      { id: 'wall', label: 'Compound wall' },
+      { id: 'plaster', label: 'Plastering' },
+      { id: 'repair', label: 'Repair work' }
+    ];
+    const on = 'height: 40px; padding: 0 14px; border-radius: 999px; border: 2px solid #4C1D95; background: #EFE9FB; color: #4C1D95; font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer';
+    const off = 'height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid #DDD8E8; background: #FFFFFF; color: #1C1730; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer';
+    const workTypes = types.map((t) => ({
+      label: t.label,
+      pressed: s.work === t.id ? 'true' : 'false',
+      style: s.work === t.id ? on : off,
+      pick: () => this.setState({ work: t.id })
+    }));
+    const trackOn = 'width: 52px; height: 30px; flex-shrink: 0; border-radius: 15px; background: #F59E0B; display: flex; align-items: center; justify-content: flex-end; padding: 3px; box-sizing: border-box';
+    const trackOff = 'width: 52px; height: 30px; flex-shrink: 0; border-radius: 15px; background: #CFC9DC; display: flex; align-items: center; justify-content: flex-start; padding: 3px; box-sizing: border-box';
+    return {
+      roles,
+      workTypes,
+      days: s.days,
+      incDays: () => this.setState({ days: Math.min(60, this.state.days + 1) }),
+      decDays: () => this.setState({ days: Math.max(1, this.state.days - 1) }),
+      total,
+      summary: total + ' workers × ' + s.days + (s.days === 1 ? ' day' : ' days'),
+      workerDays: (total * s.days) + ' worker-days',
+      mestriPressed: s.mestri ? 'true' : 'false',
+      switchTrack: s.mestri ? trackOn : trackOff,
+      toggleMestri: () => this.setState({ mestri: !this.state.mestri })
+    };
+  }
+}
+</script>
+</body>
+</html>

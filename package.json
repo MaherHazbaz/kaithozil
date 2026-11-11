@@ -1,0 +1,23 @@
+{
+  "name": "kaithozhil",
+  "private": true,
+  "packageManager": "pnpm@12.18.0",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "typecheck": "turbo run typecheck",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "tokens": "pnpm --filter @kaithozhil/ui run tokens",
+    "doctor": "pnpm --filter @kaithozhil/customer run doctor",
+    "emulator": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/start-emulator.ps1",
+    "check": "pnpm format:check && turbo run typecheck lint test"
+  },
+  "devDependencies": {
+    "prettier": "^3.9.10",
+    "turbo": "^2.11.10"
+  }
+}

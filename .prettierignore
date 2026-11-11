@@ -1,0 +1,17 @@
+# The approved design and the archived Flutter starter are never reformatted.
+design/
+archive/
+
+# Generated or third-party
+node_modules/
+pnpm-lock.yaml
+.expo/
+.turbo/
+coverage/
+apps/*/android/
+apps/*/ios/
+apps/*/visual/
+apps/*/expo-env.d.ts
+
+# Written by packages/ui/scripts/generate-tokens.mjs; `pnpm tokens:check` guards it.
+packages/ui/src/tokens.ts

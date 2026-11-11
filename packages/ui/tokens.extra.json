@@ -1,0 +1,139 @@
+{
+  "name": "Kaithozhil design tokens (supplement)",
+  "why": "design/tokens.json is the designer's file and is never edited. These are exact values that appear in design/source/*.dc.html but are missing from it. Each entry in `sources` says where the value comes from. If the designer later adds a value to design/tokens.json under the same name, delete it here; the generator fails on duplicates.",
+  "color": {
+    "pageTop": "#F3EEFB",
+    "dotInactive": "#CFC9DC",
+    "goldInk": "#5A3A00",
+    "placeholder": "#757575",
+    "onHeroFill": "rgba(255,255,255,0.16)",
+    "onHeroBorder": "rgba(255,255,255,0.35)",
+    "onDarkFill": "rgba(255,255,255,0.12)",
+    "skyline": "rgba(255,255,255,0.09)",
+    "letterNight": "#120626",
+    "letterShadow": "rgba(13,4,32,0.88)",
+    "skyCream": "#FDF3D8",
+    "dusk": "#3A2F4F"
+  },
+  "gradient": {
+    "welcomeHeader": {
+      "angle": 160,
+      "stops": [
+        ["#6A3BB5", 0],
+        ["#4C1D95", 0.55],
+        ["#3B1574", 1]
+      ]
+    },
+    "slideNight": {
+      "angle": 135,
+      "stops": [
+        ["#2E0F5E", 0],
+        ["#1E0A3F", 1]
+      ]
+    },
+    "slideLavender": {
+      "angle": 135,
+      "stops": [
+        ["#EFE9FB", 0],
+        ["#DDD3F5", 1]
+      ]
+    },
+    "splashLetters": {
+      "angle": 180,
+      "stops": [
+        ["#120626", 0],
+        ["#3B1574", 0.35],
+        ["#6A3BB5", 0.6],
+        ["#DDD3F5", 0.8],
+        ["#FBDD96", 1]
+      ]
+    },
+    "splashSky": {
+      "angle": 180,
+      "stops": [
+        ["#1E0A3F", 0],
+        ["#4C1D95", 0.3],
+        ["#7A4BC7", 0.55],
+        ["#DDD3F5", 0.78],
+        ["#FDF3D8", 1]
+      ]
+    },
+    "splashEnd": {
+      "angle": 180,
+      "stops": [
+        ["#1E0A3F", 0],
+        ["#2E0F5E", 0.55],
+        ["#3A2F4F", 1]
+      ]
+    },
+    "splashShimmer": {
+      "angle": 90,
+      "stops": [
+        ["#7A4BC7", 0],
+        ["#DDD3F5", 0.25],
+        ["#F5C76A", 0.5],
+        ["#DDD3F5", 0.75],
+        ["#7A4BC7", 1]
+      ]
+    }
+  },
+  "shadow": {
+    "tile": { "color": "rgba(59,21,116,0.12)", "x": 0, "y": 8, "blur": 22 },
+    "searchField": { "color": "rgba(0,0,0,0.18)", "x": 0, "y": 8, "blur": 20 },
+    "logoSmall": { "color": "rgba(0,0,0,0.25)", "x": 0, "y": 4, "blur": 12 },
+    "logoWelcome": { "color": "rgba(0,0,0,0.30)", "x": 0, "y": 12, "blur": 28 },
+    "logoSplash": { "color": "rgba(0,0,0,0.45)", "x": 0, "y": 16, "blur": 36 }
+  },
+  "radius": {
+    "statusPill": 8,
+    "dot": 4,
+    "logoSmall": 12,
+    "smallButton": 14,
+    "crewIcon": 14,
+    "tileIcon": 16,
+    "searchField": 18,
+    "navItem": 18,
+    "slideIcon": 26,
+    "logoWelcome": 30,
+    "logoSplash": 32,
+    "welcomeHeaderBottom": 32
+  },
+  "sources": {
+    "color.pageTop": "Welcome/Login/Main root background gradient, first stop",
+    "color.dotInactive": "Main.dc.html carousel dots (inactive)",
+    "color.goldInk": "Main.dc.html carousel slide 2 label and body",
+    "color.placeholder": "Main.dc.html search input placeholder: the browser default grey as rendered in design/screenshots/Main.png",
+    "color.onHeroFill": "Main.dc.html profile button background",
+    "color.onHeroBorder": "Main.dc.html profile button border",
+    "color.onDarkFill": "Main.dc.html carousel slide 3 icon box",
+    "color.skyline": "Main.dc.html hero skyline (white at 9%)",
+    "color.letterNight": "Splash.dc.html kzLetterFill first stop",
+    "color.letterShadow": "Splash.dc.html kz-fillB text (#0D0420 at 88%)",
+    "color.skyCream": "Splash.dc.html kzSkyFill last stop",
+    "color.dusk": "Splash.dc.html kzEndFill last stop",
+    "gradient.welcomeHeader": "Welcome.dc.html header",
+    "gradient.slideNight": "Main.dc.html carousel slide 3",
+    "gradient.slideLavender": "Main.dc.html carousel slide 4",
+    "gradient.splashLetters": "Splash.dc.html #kzLetterFill",
+    "gradient.splashSky": "Splash.dc.html #kzSkyFill",
+    "gradient.splashEnd": "Splash.dc.html #kzEndFill",
+    "gradient.splashShimmer": "Splash.dc.html .kz-shimmer",
+    "shadow.tile": "Main.dc.html service tiles",
+    "shadow.searchField": "Main.dc.html search field",
+    "shadow.logoSmall": "Main.dc.html hero logo",
+    "shadow.logoWelcome": "Welcome.dc.html logo",
+    "shadow.logoSplash": "Splash.dc.html logo",
+    "radius.statusPill": "DESIGN.md shared components: status pill; Bookings.dc.html",
+    "radius.dot": "Main.dc.html carousel dots",
+    "radius.logoSmall": "Main.dc.html hero logo",
+    "radius.smallButton": "Main.dc.html Book button; DESIGN.md secondary button",
+    "radius.crewIcon": "Main.dc.html construction crew icon box",
+    "radius.tileIcon": "Main.dc.html service tile icon box",
+    "radius.searchField": "Main.dc.html search field and mic button",
+    "radius.navItem": "Main.dc.html bottom nav active pill",
+    "radius.slideIcon": "Main.dc.html carousel icon box",
+    "radius.logoWelcome": "Welcome.dc.html logo",
+    "radius.logoSplash": "Splash.dc.html logo",
+    "radius.welcomeHeaderBottom": "Welcome.dc.html header bottom corners"
+  }
+}

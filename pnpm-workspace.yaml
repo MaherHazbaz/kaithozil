@@ -1,0 +1,21 @@
+packages:
+  - apps/*
+  - packages/*
+
+# WHY hoisted: pnpm's default layout links packages through directory junctions
+# on Windows. The C++ builds of native modules (Skia, Worklets) then see the same
+# files under two paths and CMake regenerates forever ("build.ninja still dirty
+# after 100 tries"). Hoisted gives every package a real folder, like npm.
+# Expo documents this as the fallback: https://docs.expo.dev/guides/monorepos/
+nodeLinker: hoisted
+
+# Expo SDK 58 pins React 19.3.0. react-dom arrives only as an optional peer of
+# Expo's web tooling and would otherwise float to a newer patch that asks for a
+# newer React, so we hold it at the same version.
+overrides:
+  react-dom: 19.3.0
+
+# pnpm blocks dependency install scripts unless listed here. @parcel/watcher is
+# an optional file watcher we do not need to compile.
+allowBuilds:
+  '@parcel/watcher': false
