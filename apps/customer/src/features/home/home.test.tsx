@@ -70,6 +70,8 @@ describe('HomeScreen', () => {
       'Carpenter',
       'Tailor',
       'Painter',
+      'Mechanic',
+      'வாகன பழுது',
       'Verified workers only',
       'Pay the worker directly',
       'Know the price first',
