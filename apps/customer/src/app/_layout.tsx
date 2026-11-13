@@ -28,6 +28,9 @@ export default function RootLayout() {
         <Stack.Screen name="welcome" options={{ animation: 'fade' }} />
         <Stack.Screen name="login" />
         <Stack.Screen name="home" options={{ animation: 'fade' }} />
+        {/* Tab screens fade into each other; a slide would suggest going deeper. */}
+        <Stack.Screen name="bookings" options={{ animation: 'fade' }} />
+        <Stack.Screen name="profile" options={{ animation: 'fade' }} />
       </Stack>
     </GestureHandlerRootView>
   );

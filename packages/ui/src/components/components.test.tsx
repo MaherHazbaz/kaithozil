@@ -2,7 +2,11 @@ import { fireEvent, render, screen } from '@testing-library/react-native';
 
 import { AppText } from './AppText';
 import { BottomNav } from './BottomNav';
+import { SecondaryButton } from './Button';
 import { Chip } from './Chip';
+import { ListRow } from './ListRow';
+import { ScreenHeader } from './ScreenHeader';
+import { SegmentedControl } from './SegmentedControl';
 import { Stepper } from './Stepper';
 
 describe('Chip', () => {
@@ -53,6 +57,72 @@ describe('BottomNav', () => {
     expect(screen.getByRole('tab', { name: 'Bookings' })).not.toBeSelected();
     await fireEvent.press(screen.getByRole('tab', { name: 'Bookings' }));
     expect(onSelect).toHaveBeenCalledWith('bookings');
+  });
+});
+
+describe('SecondaryButton', () => {
+  it('is named by its label, with or without an icon', async () => {
+    const onPress = jest.fn();
+    await render(<SecondaryButton label="Add photo" icon="camera" onPress={onPress} />);
+    await fireEvent.press(screen.getByRole('button', { name: 'Add photo' }));
+    expect(onPress).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('ScreenHeader', () => {
+  it('shows the title as a heading and reports the back button', async () => {
+    const onBack = jest.fn();
+    await render(
+      <ScreenHeader
+        title="Electrician"
+        subtitle="மின் பணியாளர்"
+        backLabel="Back"
+        onBack={onBack}
+      />,
+    );
+    expect(screen.getByRole('header', { name: 'Electrician' })).toBeOnTheScreen();
+    expect(screen.getByText('மின் பணியாளர்')).toBeOnTheScreen();
+    await fireEvent.press(screen.getByRole('button', { name: 'Back' }));
+    expect(onBack).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('SegmentedControl', () => {
+  it('marks the selected segment and reports the tapped one', async () => {
+    const onSelect = jest.fn();
+    await render(
+      <SegmentedControl
+        segments={[
+          { key: 'upcoming', label: 'Upcoming (2)' },
+          { key: 'past', label: 'Past (2)' },
+        ]}
+        selectedKey="upcoming"
+        onSelect={onSelect}
+        accessibilityLabel="Show"
+      />,
+    );
+    expect(screen.getByRole('button', { name: 'Upcoming (2)' })).toBeSelected();
+    expect(screen.getByRole('button', { name: 'Past (2)' })).not.toBeSelected();
+    await fireEvent.press(screen.getByRole('button', { name: 'Past (2)' }));
+    expect(onSelect).toHaveBeenCalledWith('past');
+  });
+});
+
+describe('ListRow', () => {
+  it('reads title and subtitle as one button and reports presses', async () => {
+    const onPress = jest.fn();
+    await render(
+      <ListRow
+        icon="wallet"
+        title="Payments"
+        subtitle="Pay workers with any UPI app"
+        onPress={onPress}
+      />,
+    );
+    await fireEvent.press(
+      screen.getByRole('button', { name: 'Payments, Pay workers with any UPI app' }),
+    );
+    expect(onPress).toHaveBeenCalledTimes(1);
   });
 });
 

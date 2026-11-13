@@ -22,7 +22,6 @@ export const homeCopy = {
   },
   bookAgain: 'Book again',
   book: 'Book',
-  nav: { home: 'Home', bookings: 'Bookings', profile: 'Profile' },
 } as const;
 
 export type ServiceKey =

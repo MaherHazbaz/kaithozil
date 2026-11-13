@@ -23,10 +23,12 @@ import { StatusBar } from 'expo-status-bar';
 import { ScrollView, StyleSheet, TextInput, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { CUSTOMER_TABS, type CustomerTab } from '@/features/navigation/customerTabs';
+
 import { BenefitsCarousel } from '../components/BenefitsCarousel';
 import { homeCopy, services, type ServiceKey } from '../copy';
 
-export type HomeTab = 'home' | 'bookings' | 'profile';
+export type HomeTab = CustomerTab;
 
 export type HomeScreenProps = {
   /** Shown data. The route passes the design's sample values until Supabase exists (Sprint 2). */
@@ -42,12 +44,6 @@ export type HomeScreenProps = {
   onBookAgain?: () => void;
   onTab?: (tab: HomeTab) => void;
 };
-
-const NAV_ITEMS = [
-  { key: 'home', label: homeCopy.nav.home, icon: 'home' },
-  { key: 'bookings', label: homeCopy.nav.bookings, icon: 'calendar' },
-  { key: 'profile', label: homeCopy.nav.profile, icon: 'user' },
-] as const;
 
 /** Customer home (design/source/Main.dc.html). */
 export function HomeScreen({
@@ -234,7 +230,7 @@ export function HomeScreen({
       </ScrollView>
 
       <BottomNav
-        items={NAV_ITEMS}
+        items={CUSTOMER_TABS}
         activeKey="home"
         onSelect={(tab) => onTab?.(tab)}
         bottomInset={insets.bottom}

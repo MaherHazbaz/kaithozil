@@ -1,0 +1,16 @@
+# Always check text files out with LF line endings, on every machine.
+#
+# WHY: Git for Windows defaults to core.autocrlf=true, which rewrites files with
+# CRLF whenever Git touches them (checkout, stash, branch switch). Prettier
+# expects LF, so `pnpm check` then fails on files nobody edited.
+* text=auto eol=lf
+
+# Windows batch files must keep CRLF to run correctly.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Never convert binary files.
+*.png binary
+*.jpg binary
+*.ttf binary
+*.otf binary

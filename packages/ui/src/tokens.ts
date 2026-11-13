@@ -92,6 +92,8 @@ export const radius = {
   heroBottom: 34,
   pill: 999,
   statusPill: 8,
+  segment: 10,
+  segmentTrack: 12,
   dot: 4,
   logoSmall: 12,
   smallButton: 14,

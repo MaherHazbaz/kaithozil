@@ -13,6 +13,8 @@ export type ListRowProps = {
   onPress?: () => void;
   /** Draw the 1pt divider under the row. Default true. */
   divider?: boolean;
+  /** Draw the chevron at the end. Default true; "Log out" has none. */
+  chevron?: boolean;
   testID?: string;
 };
 
@@ -20,7 +22,15 @@ export type ListRowProps = {
  * Settings-style row: 36pt lavender icon box, title 15/700, muted 12pt
  * subtitle, chevron. Values from design/source/Profile.dc.html.
  */
-export function ListRow({ icon, title, subtitle, onPress, divider = true, testID }: ListRowProps) {
+export function ListRow({
+  icon,
+  title,
+  subtitle,
+  onPress,
+  divider = true,
+  chevron = true,
+  testID,
+}: ListRowProps) {
   return (
     <Tappable
       onPress={onPress}
@@ -40,7 +50,7 @@ export function ListRow({ icon, title, subtitle, onPress, divider = true, testID
           </AppText>
         ) : null}
       </View>
-      <Icon name="chevronRight" size={18} color={color.muted} />
+      {chevron ? <Icon name="chevronRight" size={18} color={color.muted} /> : null}
     </Tappable>
   );
 }

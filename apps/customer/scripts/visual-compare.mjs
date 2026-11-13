@@ -45,6 +45,8 @@ const SCREENS = [
   { name: 'Login', path: 'login', settleMs: 2500 },
   // Captured before the carousel's first auto-advance at 3.5 s.
   { name: 'Main', path: 'home', settleMs: 2200 },
+  { name: 'Bookings', path: 'bookings', settleMs: 2500 },
+  { name: 'Profile', path: 'profile', settleMs: 2500 },
   { name: 'Splash_frame_1s', path: '?t=1', settleMs: 2500, fullScreen: true },
   { name: 'Splash_frame_2.5s', path: '?t=2.5', settleMs: 2500, fullScreen: true },
   { name: 'Splash_frame_3.5s', path: '?t=3.5', settleMs: 2500, fullScreen: true },

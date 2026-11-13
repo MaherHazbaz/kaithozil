@@ -86,6 +86,8 @@
   },
   "radius": {
     "statusPill": 8,
+    "segment": 10,
+    "segmentTrack": 12,
     "dot": 4,
     "logoSmall": 12,
     "smallButton": 14,
@@ -124,6 +126,8 @@
     "shadow.logoWelcome": "Welcome.dc.html logo",
     "shadow.logoSplash": "Splash.dc.html logo",
     "radius.statusPill": "DESIGN.md shared components: status pill; Bookings.dc.html",
+    "radius.segment": "Bookings.dc.html Upcoming / Past buttons",
+    "radius.segmentTrack": "Bookings.dc.html Upcoming / Past track",
     "radius.dot": "Main.dc.html carousel dots",
     "radius.logoSmall": "Main.dc.html hero logo",
     "radius.smallButton": "Main.dc.html Book button; DESIGN.md secondary button",

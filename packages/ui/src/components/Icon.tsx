@@ -52,6 +52,17 @@ const ICONS = {
     { t: 'path', d: 'M19 10v2a7 7 0 0 1-14 0v-2' },
     line(12, 19, 12, 22),
   ],
+  camera: [
+    {
+      t: 'path',
+      d: 'M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z',
+    },
+    { t: 'circle', cx: 12, cy: 13, r: 4 },
+  ],
+  bell: [
+    { t: 'path', d: 'M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9' },
+    { t: 'path', d: 'M10.3 21a1.94 1.94 0 0 0 3.4 0' },
+  ],
   zap: [{ t: 'polygon', points: '13 2 3 14 12 14 11 22 21 10 12 10 13 2' }],
   droplet: [
     {
@@ -115,6 +126,35 @@ const ICONS = {
     { t: 'polyline', points: '14 2 14 8 20 8' },
   ],
   shield: [{ t: 'path', d: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z' }],
+  // Profile.dc.html: Business account, Language, Help and support, Log out.
+  building: [
+    { t: 'rect', x: 4, y: 2, width: 16, height: 20, rx: 2 },
+    line(9, 6, 9, 6.01),
+    line(15, 6, 15, 6.01),
+    line(9, 10, 9, 10.01),
+    line(15, 10, 15, 10.01),
+    line(9, 14, 9, 14.01),
+    line(15, 14, 15, 14.01),
+    { t: 'path', d: 'M10 22v-4h4v4' },
+  ],
+  globe: [
+    { t: 'circle', cx: 12, cy: 12, r: 10 },
+    line(2, 12, 22, 12),
+    {
+      t: 'path',
+      d: 'M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z',
+    },
+  ],
+  helpCircle: [
+    { t: 'circle', cx: 12, cy: 12, r: 10 },
+    { t: 'path', d: 'M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3' },
+    line(12, 17, 12.01, 17),
+  ],
+  logOut: [
+    { t: 'path', d: 'M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4' },
+    { t: 'polyline', points: '16 17 21 12 16 7' },
+    line(21, 12, 9, 12),
+  ],
   brickWall: [
     { t: 'rect', x: 3, y: 5, width: 18, height: 14, rx: 1 },
     line(3, 9.7, 21, 9.7),

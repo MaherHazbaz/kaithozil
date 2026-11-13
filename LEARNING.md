@@ -110,3 +110,34 @@ Three separate failures, all recorded in
 [docs/decisions/0002-windows-native-build.md](docs/decisions/0002-windows-native-build.md): pnpm's
 linked layout confuses CMake, old Ninja cannot create paths over 260 characters, and Android Studio's
 JDK 25 is newer than React Native supports.
+
+## Bookings step: tab screens and a shared tab bar
+
+### Your task for the Bookings step
+
+Implement Indian digit grouping in `formatRupees` in
+[packages/core/src/money.ts](packages/core/src/money.ts).
+
+It already shows `₹650` correctly, which is all the Bookings sample data needs. Larger amounts need
+Indian grouping: the last three digits form one group and every group before it has two digits, so
+`125000` is `₹1,25,000`. [money.test.ts](packages/core/src/money.test.ts) lists four `it.todo` cases.
+
+1. Turn each `it.todo` into a real test and watch it fail: `pnpm --filter @kaithozhil/core test`.
+2. Implement the grouping. Keep the function pure.
+
+It should take 15 to 20 minutes. Tell me when it is done and I will review it.
+
+### What this step shows
+
+**Tabs without a tab navigator.** Home and Bookings are ordinary Stack screens. Tapping a tab calls
+`router.replace`, which swaps the screen instead of stacking a new one, so Back does not walk through
+every tab you visited ([bookings.tsx](apps/customer/src/app/bookings.tsx)). The tab list itself lives in
+one place ([customerTabs.ts](apps/customer/src/features/navigation/customerTabs.ts)).
+
+**State that only one screen needs stays in that screen.** Which list shows (Upcoming or Past) is a
+`useState` in [BookingsScreen.tsx](apps/customer/src/features/bookings/screens/BookingsScreen.tsx); the
+route does not know about it.
+
+**A component is promoted to `packages/ui` when the design repeats it.** The Upcoming / Past switch is
+[SegmentedControl.tsx](packages/ui/src/components/SegmentedControl.tsx); the two card layouts appear
+only on this screen, so they stay in the feature folder.

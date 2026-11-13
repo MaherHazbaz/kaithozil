@@ -3,13 +3,17 @@
 #
 #   pnpm emulator                      from the repo root
 #   pnpm emulator -- -HeightPercent 70 smaller window
+#   pnpm emulator -- -Avd <name>       a specific device (any API level)
 #
-# WHY this script: the emulator remembers its last window position and opens
-# at an automatic size. On a 720-point-tall screen that window is taller than
-# the screen, so Windows pushes it up and its title bar ends up off-screen.
-# Placing it ourselves after it opens is reliable whatever it remembered.
+# WHY this script: the emulator opens at an automatic size. On a 720-point-tall
+# screen that window is taller than the screen, so its title bar ends up
+# off-screen. The emulator also ignores the position saved in emulator-user.ini
+# and overwrites it on exit, so we place the window ourselves after it opens.
+# scripts/emulator-corner-watch.ps1 does the same for every other way of
+# starting the emulator (Android Studio, `emulator -avd`, `pnpm android`).
 param(
-  [string]$Avd = 'Medium_Phone_API_37.0',
+  # Device name. Empty = Medium_Phone_API_37.0 if it exists, else the first device found.
+  [string]$Avd = '',
   # Phone window height as a percentage of the usable screen height.
   [ValidateRange(40, 100)][int]$HeightPercent = 90,
   # Gap from the screen edges, in points.
@@ -61,6 +65,13 @@ function Get-Size($handle) {
   $rect = New-Object KtWindows+RECT
   [void][KtWindows]::GetWindowRect($handle, [ref]$rect)
   return @{ Width = $rect.R - $rect.L; Height = $rect.B - $rect.T }
+}
+
+# Resolve which device to start.
+if (-not $Avd) {
+  $names = @(& $emulatorExe -list-avds | Where-Object { $_ -match '^\S+$' -and $_ -notmatch '^(INFO|WARNING|ERROR)' })
+  if ($names.Count -eq 0) { throw 'No Android virtual devices found. Create one in Android Studio first.' }
+  $Avd = if ($names -contains 'Medium_Phone_API_37.0') { 'Medium_Phone_API_37.0' } else { $names[0] }
 }
 
 # 1. Start the emulator unless it is already running.

@@ -12,6 +12,8 @@ type CommonProps = {
   disabled?: boolean;
   /** Read by screen readers instead of `label` when given. */
   accessibilityLabel?: string;
+  /** Read by screen readers after the label, e.g. why the button is disabled. */
+  accessibilityHint?: string;
   testID?: string;
 };
 
@@ -39,6 +41,7 @@ function GradientButton({
   onPress,
   disabled,
   accessibilityLabel,
+  accessibilityHint,
   testID,
   height = size.primaryButtonHeight,
   radius: radiusName = 'button',
@@ -53,10 +56,14 @@ function GradientButton({
       disabled={disabled}
       accessibilityRole="button"
       accessibilityLabel={accessibilityLabel ?? label}
+      accessibilityHint={accessibilityHint}
       accessibilityState={{ disabled: Boolean(disabled) }}
       testID={testID}
       // Shadow on the outer view, gradient clipped to the corners inside it.
-      style={{ height, borderRadius: corner, boxShadow: shadow[v.shadow] }}
+      style={[
+        { height, borderRadius: corner, boxShadow: shadow[v.shadow] },
+        disabled ? styles.disabled : null,
+      ]}
     >
       <Gradient
         name={v.gradient}
@@ -80,14 +87,27 @@ export function GoldButton(props: GradientButtonProps) {
   return <GradientButton variant="gold" {...props} />;
 }
 
-/** White outlined button, purple label (height 48, radius 14). */
+export type SecondaryButtonProps = CommonProps & {
+  /** Optional 18pt icon before the label ("Add photo", "Voice note"). */
+  icon?: IconName;
+  /** Default 48. The card buttons on Bookings are 44. */
+  height?: number;
+  /** Label colour. "purple" (default) or "ink" ("Get help" on Bookings). */
+  tone?: 'purple' | 'ink';
+};
+
+/** White outlined button, purple label by default (height 48, radius 14). */
 export function SecondaryButton({
   label,
   onPress,
   disabled,
   accessibilityLabel,
   testID,
-}: CommonProps) {
+  icon,
+  height = size.secondaryButtonHeight,
+  tone = 'purple',
+}: SecondaryButtonProps) {
+  const tint = tone === 'purple' ? color.purple : color.ink;
   return (
     <Tappable
       onPress={onPress}
@@ -96,9 +116,10 @@ export function SecondaryButton({
       accessibilityLabel={accessibilityLabel ?? label}
       accessibilityState={{ disabled: Boolean(disabled) }}
       testID={testID}
-      style={styles.secondary}
+      style={[styles.secondary, { height }]}
     >
-      <AppText size={14} weight={700} color={color.purple} numberOfLines={1}>
+      {icon ? <Icon name={icon} size={18} color={tint} /> : null}
+      <AppText size={14} weight={700} color={tint} numberOfLines={1}>
         {label}
       </AppText>
     </Tappable>
@@ -141,14 +162,21 @@ const styles = StyleSheet.create({
     gap: 8,
     overflow: 'hidden',
   },
+  // NOT in the design, which shows no disabled buttons. Half opacity is the
+  // least intrusive way to show "not yet"; screen readers get the disabled
+  // state separately through accessibilityState.
+  disabled: {
+    opacity: 0.5,
+  },
   secondary: {
-    height: size.secondaryButtonHeight,
     borderRadius: radius.smallButton,
     borderWidth: 1,
     borderColor: color.borderStrong,
     backgroundColor: color.white,
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    gap: 8,
   },
   iconButton: {
     width: 52,

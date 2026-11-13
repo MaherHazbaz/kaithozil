@@ -16,6 +16,7 @@ export {
   SecondaryButton,
   type GoldIconButtonProps,
   type GradientButtonProps,
+  type SecondaryButtonProps,
 } from './components/Button';
 export { Card, type CardProps } from './components/Card';
 export { Chip, type ChipProps } from './components/Chip';
@@ -26,6 +27,12 @@ export { IconBox, type IconBoxProps, type IconBoxTone } from './components/IconB
 export { ListRow, type ListRowProps } from './components/ListRow';
 export { Logo, type LogoProps } from './components/Logo';
 export { ScreenBackground } from './components/ScreenBackground';
+export { ScreenHeader, type ScreenHeaderProps } from './components/ScreenHeader';
+export {
+  SegmentedControl,
+  type Segment,
+  type SegmentedControlProps,
+} from './components/SegmentedControl';
 export { Skyline } from './components/Skyline';
 export { StatusPill, type StatusPillProps } from './components/StatusPill';
 export { Stepper, type StepperProps } from './components/Stepper';

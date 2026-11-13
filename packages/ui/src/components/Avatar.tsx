@@ -1,7 +1,8 @@
 import { StyleSheet, View } from 'react-native';
 
-import { color } from '../tokens';
+import { color, shadow } from '../tokens';
 import { AppText } from './AppText';
+import { Gradient } from './Gradient';
 import { Tappable } from './Tappable';
 
 export type AvatarProps = {
@@ -9,8 +10,13 @@ export type AvatarProps = {
   initials: string;
   /** Diameter. Default 44. */
   size?: number;
-  /** "mango": mango tint circle. "onHero": translucent white circle for purple headers. */
-  tone?: 'mango' | 'onHero';
+  /**
+   * "mango": mango tint circle. "onHero": translucent white circle for purple
+   * headers. "primary": the purple button gradient with its shadow (Profile).
+   */
+  tone?: 'mango' | 'onHero' | 'primary';
+  /** Initials size. Default 14; Profile's 52pt avatar uses 17. */
+  fontSize?: number;
   /** Makes the avatar a button. Requires `accessibilityLabel`. */
   onPress?: () => void;
   accessibilityLabel?: string;
@@ -22,20 +28,30 @@ export function Avatar({
   initials,
   size = 44,
   tone = 'mango',
+  fontSize = 14,
   onPress,
   accessibilityLabel,
   testID,
 }: AvatarProps) {
-  const circle = [
-    styles.circle,
-    { width: size, height: size, borderRadius: size / 2 },
-    tone === 'mango' ? styles.mango : styles.onHero,
-  ];
+  const round = { width: size, height: size, borderRadius: size / 2 };
   const label = (
-    <AppText size={14} weight={800} color={tone === 'mango' ? color.mangoText : color.white}>
+    <AppText size={fontSize} weight={800} color={tone === 'mango' ? color.mangoText : color.white}>
       {initials}
     </AppText>
   );
+  // The shadow sits on the outer view; the gradient inside is clipped to the circle.
+  const circle =
+    tone === 'primary'
+      ? [styles.circle, round, { boxShadow: shadow.button }]
+      : [styles.circle, round, tone === 'mango' ? styles.mango : styles.onHero];
+  const content =
+    tone === 'primary' ? (
+      <Gradient name="button" style={[styles.fill, round]}>
+        {label}
+      </Gradient>
+    ) : (
+      label
+    );
 
   if (onPress) {
     return (
@@ -49,13 +65,13 @@ export function Avatar({
         testID={testID}
         style={circle}
       >
-        {label}
+        {content}
       </Tappable>
     );
   }
   return (
     <View style={circle} testID={testID}>
-      {label}
+      {content}
     </View>
   );
 }
@@ -65,6 +81,11 @@ const styles = StyleSheet.create({
     flexShrink: 0,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  fill: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
   },
   mango: {
     backgroundColor: color.mangoTint,

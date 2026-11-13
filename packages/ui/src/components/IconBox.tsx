@@ -10,6 +10,8 @@ const TONES = {
   purple: { background: color.purple, foreground: color.white },
   deep: { background: color.purpleDeep, foreground: color.gold },
   onDark: { background: color.onDarkFill, foreground: color.gold },
+  // Finished jobs on Bookings (design/source/Bookings.dc.html, Past list).
+  neutral: { background: color.neutralTint, foreground: color.muted },
 } as const;
 
 export type IconBoxTone = keyof typeof TONES;
