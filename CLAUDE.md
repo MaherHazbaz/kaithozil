@@ -90,6 +90,13 @@ react-native-maps, FlashList, Sentry.
 - Unsure about an API or version? Check the installed package or the official docs. Never guess.
   Expo SDK 58 is newer than most reference material.
 - Ask before anything destructive.
+- The app is still in development. Never make a production or release build (no EAS production
+  profile, no `--variant release`, no store submission) until the owner says so. Development builds
+  only.
+- Never start a native build (`pnpm android`, `pnpm prebuild`) unless the owner asks for one. Day to
+  day work is code plus the code checks. When a build is asked for, make it the fastest correct one:
+  keep the build caches (`android/`, `node_modules/*/android/build` and `.cxx`), build incrementally,
+  never clean first, and close the emulator while compiling if memory is short.
 - The owner tests on the Android Studio emulator (no physical phone yet).
 
 ## Commands

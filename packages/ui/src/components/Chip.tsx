@@ -10,6 +10,8 @@ export type ChipProps = {
   onPress?: () => void;
   /** Default 44. Crew uses 40 (design/source/Crew.dc.html). */
   height?: number;
+  /** Smaller text and padding: the feedback chips on Pay (design/source/Pay.dc.html). */
+  compact?: boolean;
   testID?: string;
 };
 
@@ -17,7 +19,14 @@ export type ChipProps = {
  * Pill-shaped choice. Off: white with a 1pt border. On: lavender with a 2pt
  * purple border and purple bold text.
  */
-export function Chip({ label, selected, onPress, height = size.chipHeight, testID }: ChipProps) {
+export function Chip({
+  label,
+  selected,
+  onPress,
+  height = size.chipHeight,
+  compact = false,
+  testID,
+}: ChipProps) {
   return (
     <Tappable
       onPress={onPress}
@@ -25,10 +34,15 @@ export function Chip({ label, selected, onPress, height = size.chipHeight, testI
       accessibilityState={{ selected }}
       accessibilityLabel={label}
       testID={testID}
-      style={[styles.base, { height }, selected ? styles.on : styles.off]}
+      style={[
+        styles.base,
+        { height },
+        compact ? styles.compact : null,
+        selected ? styles.on : styles.off,
+      ]}
     >
       <AppText
-        size={13}
+        size={compact ? 12 : 13}
         weight={selected ? 700 : 600}
         color={selected ? color.purple : color.ink}
         numberOfLines={1}
@@ -45,6 +59,9 @@ const styles = StyleSheet.create({
     borderRadius: radius.pill,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  compact: {
+    paddingHorizontal: 12,
   },
   off: {
     borderWidth: 1,

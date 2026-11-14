@@ -34,6 +34,30 @@ describe('useAutoCarousel', () => {
     expect(result.current.index).toBe(0);
   });
 
+  it('stops advancing while paused and starts a fresh countdown afterwards', async () => {
+    const { result } = await renderHook(() => useAutoCarousel(4, 3500));
+    await act(async () => {
+      result.current.setPaused(true);
+    });
+    // A finger is holding the slides: nothing moves, however long it stays.
+    await act(async () => {
+      jest.advanceTimersByTime(3500 * 3);
+    });
+    expect(result.current.index).toBe(0);
+
+    await act(async () => {
+      result.current.setPaused(false);
+    });
+    await act(async () => {
+      jest.advanceTimersByTime(3400);
+    });
+    expect(result.current.index).toBe(0);
+    await act(async () => {
+      jest.advanceTimersByTime(100);
+    });
+    expect(result.current.index).toBe(1);
+  });
+
   it('restarts the countdown when a slide is chosen by hand', async () => {
     const { result } = await renderHook(() => useAutoCarousel(4, 3500));
     await act(async () => {

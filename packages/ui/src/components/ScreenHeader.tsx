@@ -18,6 +18,10 @@ export type ScreenHeaderProps = {
    * the status bar.
    */
   topInset?: number;
+  /** The design's top padding. Default 22; Book.dc.html uses 24. */
+  paddingTop?: number;
+  /** Default 800; Book.dc.html uses 700. */
+  titleWeight?: 700 | 800;
   testID?: string;
 };
 
@@ -32,10 +36,12 @@ export function ScreenHeader({
   onBack,
   backLabel,
   topInset = 0,
+  paddingTop = 22,
+  titleWeight = typeStyle.screenTitleWithBack.weight,
   testID,
 }: ScreenHeaderProps) {
   return (
-    <View style={[styles.header, { paddingTop: 22 + topInset }]}>
+    <View style={[styles.header, { paddingTop: paddingTop + topInset }]}>
       <Tappable
         onPress={onBack}
         accessibilityRole="button"
@@ -48,7 +54,7 @@ export function ScreenHeader({
       <View style={styles.text}>
         <AppText
           size={typeStyle.screenTitleWithBack.size}
-          weight={typeStyle.screenTitleWithBack.weight}
+          weight={titleWeight}
           accessibilityRole="header"
         >
           {title}

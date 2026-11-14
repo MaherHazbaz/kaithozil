@@ -13,7 +13,12 @@
     "letterNight": "#120626",
     "letterShadow": "rgba(13,4,32,0.88)",
     "skyCream": "#FDF3D8",
-    "dusk": "#3A2F4F"
+    "dusk": "#3A2F4F",
+    "mapGround": "#ECE8F4",
+    "mangoBorder": "#F8E3A8",
+    "starBorder": "#F3D9B5",
+    "starTint": "#FEF6EC",
+    "starOff": "#8A979E"
   },
   "gradient": {
     "welcomeHeader": {
@@ -98,7 +103,12 @@
     "slideIcon": 26,
     "logoWelcome": 30,
     "logoSplash": 32,
-    "welcomeHeaderBottom": 32
+    "welcomeHeaderBottom": 32,
+    "sheetTop": 24,
+    "codeCard": 16,
+    "codeDigit": 12,
+    "ratingStar": 12,
+    "statTile": 12
   },
   "sources": {
     "color.pageTop": "Welcome/Login/Main root background gradient, first stop",
@@ -113,6 +123,11 @@
     "color.letterShadow": "Splash.dc.html kz-fillB text (#0D0420 at 88%)",
     "color.skyCream": "Splash.dc.html kzSkyFill last stop",
     "color.dusk": "Splash.dc.html kzEndFill last stop",
+    "color.mapGround": "Tracking.dc.html map illustration background",
+    "color.mangoBorder": "Tracking.dc.html start code card border",
+    "color.starBorder": "Pay.dc.html rating star button border (chosen)",
+    "color.starTint": "Pay.dc.html rating star button background (chosen)",
+    "color.starOff": "Pay.dc.html rating star (not chosen)",
     "gradient.welcomeHeader": "Welcome.dc.html header",
     "gradient.slideNight": "Main.dc.html carousel slide 3",
     "gradient.slideLavender": "Main.dc.html carousel slide 4",
@@ -138,6 +153,11 @@
     "radius.slideIcon": "Main.dc.html carousel icon box",
     "radius.logoWelcome": "Welcome.dc.html logo",
     "radius.logoSplash": "Splash.dc.html logo",
-    "radius.welcomeHeaderBottom": "Welcome.dc.html header bottom corners"
+    "radius.welcomeHeaderBottom": "Welcome.dc.html header bottom corners",
+    "radius.sheetTop": "Tracking.dc.html sheet over the map, top corners",
+    "radius.codeCard": "Tracking.dc.html start code card",
+    "radius.codeDigit": "Tracking.dc.html start code digit boxes",
+    "radius.ratingStar": "Pay.dc.html rating star buttons",
+    "radius.statTile": "Book.dc.html Rating / Jobs done / Experience tiles"
   }
 }

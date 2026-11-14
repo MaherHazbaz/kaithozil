@@ -42,6 +42,11 @@ export const color = {
   letterShadow: "rgba(13,4,32,0.88)",
   skyCream: "#FDF3D8",
   dusk: "#3A2F4F",
+  mapGround: "#ECE8F4",
+  mangoBorder: "#F8E3A8",
+  starBorder: "#F3D9B5",
+  starTint: "#FEF6EC",
+  starOff: "#8A979E",
 } as const;
 
 /** Linear gradients. `angle` is a CSS angle in degrees; see theme/gradient.ts. */
@@ -105,6 +110,11 @@ export const radius = {
   logoWelcome: 30,
   logoSplash: 32,
   welcomeHeaderBottom: 32,
+  sheetTop: 24,
+  codeCard: 16,
+  codeDigit: 12,
+  ratingStar: 12,
+  statTile: 12,
 } as const;
 
 /** Spacing steps. */

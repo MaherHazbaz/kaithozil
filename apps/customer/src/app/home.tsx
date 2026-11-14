@@ -17,6 +17,8 @@ export default function HomeRoute() {
       verifiedWorkerCount={12}
       bookAgain={{ initials: 'MK', name: 'Murugan K.', trade: 'Electrician', rating: '4.8' }}
       onProfile={() => router.replace('/profile')}
+      // Sample worker until bookings come from the server (Sprint 2).
+      onBookAgain={() => router.push({ pathname: '/worker/[id]', params: { id: 'murugan-k' } })}
       onTab={(tab) => {
         // `replace` swaps one tab screen for another, so Back does not walk
         // through every tab you visited.

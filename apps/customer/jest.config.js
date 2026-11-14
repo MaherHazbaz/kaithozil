@@ -2,6 +2,8 @@
 module.exports = {
   // jest-expo sets up Babel for TypeScript/JSX and mocks React Native's native side.
   preset: 'jest-expo',
+  // Gesture Handler ships mocks for its native module (there are no touches in Jest).
+  setupFiles: ['react-native-gesture-handler/jestSetup'],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   // Reanimated (and react-native-worklets under it) normally call native code
   // that does not exist in Jest. This resolver, shipped by Reanimated, makes

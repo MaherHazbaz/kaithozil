@@ -24,6 +24,10 @@ export type GradientButtonProps = CommonProps & {
   radius?: 'button' | 'smallButton';
   /** Default 16. */
   fontSize?: number;
+  /** Default 700. "Pay with UPI" is 800 (design/source/Pay.dc.html). */
+  fontWeight?: 700 | 800;
+  /** Optional 22pt icon before the label (the wallet on "Pay with UPI"). */
+  icon?: IconName;
   /** Horizontal padding for buttons sized by their label (e.g. "Book"). */
   paddingHorizontal?: number;
 };
@@ -46,6 +50,8 @@ function GradientButton({
   height = size.primaryButtonHeight,
   radius: radiusName = 'button',
   fontSize = typeStyle.button.size,
+  fontWeight = typeStyle.button.weight,
+  icon,
   paddingHorizontal = 0,
 }: GradientButtonProps & { variant: Variant }) {
   const v = VARIANT[variant];
@@ -69,7 +75,8 @@ function GradientButton({
         name={v.gradient}
         style={[styles.fill, { borderRadius: corner, paddingHorizontal }]}
       >
-        <AppText size={fontSize} weight={typeStyle.button.weight} color={v.text} numberOfLines={1}>
+        {icon ? <Icon name={icon} size={22} color={v.text} /> : null}
+        <AppText size={fontSize} weight={fontWeight} color={v.text} numberOfLines={1}>
           {label}
         </AppText>
       </Gradient>
@@ -159,7 +166,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 8,
+    // Between the icon and the label (Pay.dc.html).
+    gap: 10,
     overflow: 'hidden',
   },
   // NOT in the design, which shows no disabled buttons. Half opacity is the
