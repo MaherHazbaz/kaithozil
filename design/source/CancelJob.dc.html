@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Can't continue this job</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Noto+Sans+Tamil:wght@400;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#4C1D95}a:hover{color:#3B1574}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: linear-gradient(180deg, #F3EEFB 0%, #F8F7FB 35%, #FFFFFF 100%); font-family: 'Plus Jakarta Sans', 'Noto Sans Tamil', sans-serif; color: #1C1730; display: flex; flex-direction: column; overflow: hidden">
+<div style="padding: 22px 20px 0 20px; display: flex; align-items: center; gap: 12px">
+  <a href="ActiveJob.dc.html" aria-label="Back" style="width: 44px; height: 44px; flex-shrink: 0; border-radius: 22px; background: #FFFFFF; border: 1px solid #E8E5F0; display: flex; align-items: center; justify-content: center; color: #1C1730"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg></a>
+  <div style="flex-grow: 1; display: flex; flex-direction: column"><div style="font-size: 18px; font-weight: 800">Can't continue this job</div><div style="font-size: 12px; color: #625B73">இந்த வேலையைத் தொடர முடியவில்லை</div></div>
+  
+</div><div style="padding: 16px 20px 0 20px; display: flex; flex-direction: column; gap: 12px; flex-grow: 1; min-height: 0; overflow-y: auto; overflow-x: hidden">
+
+<div style="display: flex; gap: 12px; align-items: flex-start; background: #EFE9FB; border: 1px solid #DDD3F5; border-radius: 16px; padding: 14px"><div style="width: 40px; height: 40px; flex-shrink: 0; border-radius: 12px; background: #4C1D95; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg></div><div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px; font-weight: 800">It's okay, things happen</span><span style="font-size: 12px; color: #625B73; line-height: 1.4">One cancellation won't affect your level. We only review if it happens often. We'll tell Priya and find her another worker.</span></div></div>
+<a href="Support.dc.html" style="display: flex; align-items: center; gap: 12px; background: #FFFFFF; border: 2px solid #4C1D95; border-radius: 16px; padding: 12px 14px; text-decoration: none; color: #1C1730"><div style="width: 36px; height: 36px; flex-shrink: 0; border-radius: 12px; background: #4C1D95; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div><span style="flex-grow: 1; display: flex; flex-direction: column"><span style="font-size: 14px; font-weight: 800; color: #4C1D95">I feel unsafe</span><span style="font-size: 12px; color: #625B73">Leave now and call our safety line</span></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4C1D95" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
+<div style="font-size: 14px; font-weight: 800">What happened? <span style="font-weight: 500; color: #625B73">· என்ன நடந்தது?</span></div>
+<div role="radiogroup" aria-label="Reason" style="border: 1px solid #EEEAF6; border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; background: #FFFFFF; box-shadow: 0 8px 24px rgba(59, 21, 116, 0.08)"><sc-for list="{{reasons}}" as="o" hint-placeholder-count="6"><button role="radio" aria-checked="{{o.checked}}" onClick="{{o.pick}}" style="width: 100%; min-height: 54px; display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: #FFFFFF; border: none; border-bottom: 1px solid #E8E5F0; font-family: inherit; color: #1C1730; text-align: left; cursor: pointer"><span style="{{o.dot}}"></span><span style="font-size: 15px; font-weight: 600">{{o.label}}</span></button></sc-for></div>
+<sc-if value="{{isOther}}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-direction: column; gap: 6px"><label for="note" style="font-size: 13px; font-weight: 700; color: #625B73">Tell us more</label><textarea id="note" rows="3" placeholder="Type the reason" onInput="{{onNote}}" style="border-radius: 12px; border: 1px solid #DDD8E8; background: #FFFFFF; padding: 10px 14px; font-family: inherit; font-size: 14px; color: #1C1730; resize: none"></textarea></div></sc-if>
+
+</div><div style="padding: 14px 20px 26px 20px; background: #FFFFFF; border-top: 1px solid #E8E5F0; display: flex; flex-direction: column; gap: 10px"><a href="{{ctaHref}}" aria-disabled="{{ctaDisabled}}" style="{{ctaStyle}}">{{cta}}</a><sc-if value="{{missing}}" hint-placeholder-val="{{ true }}"><div style="font-size: 12px; color: #625B73; text-align: center">{{missingText}}</div></sc-if><a href="ActiveJob.dc.html" style="height: 44px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: #4C1D95; text-decoration: none">Go back to the job</a></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { r: -1, note: '' }; }
+  renderVals() {
+    const s = this.state;
+    const reasons = ["Personal emergency", "Vehicle broke down", "Customer isn't answering", "Address is wrong or unreachable", "Job is different from the description", "Other"];
+    const missing = s.r < 0 ? 'Choose a reason to continue' : (s.r === 5 && s.note.trim() === '' ? 'Tell us the reason to continue' : '');
+    return {
+      reasons: reasons.map((t, k) => ({ label: t, checked: k === s.r ? 'true' : 'false', dot: k === s.r ? 'width: 22px; height: 22px; flex-shrink: 0; box-sizing: border-box; border-radius: 11px; border: 7px solid #4C1D95; background: #FFFFFF' : 'width: 22px; height: 22px; flex-shrink: 0; box-sizing: border-box; border-radius: 11px; border: 2px solid #DDD8E8; background: #FFFFFF', pick: () => this.setState({ r: k }) })),
+      isOther: s.r === 5,
+      onNote: (e) => this.setState({ note: e && e.target ? e.target.value : '' }),
+      missing: missing !== '',
+      missingText: missing,
+      ctaHref: missing === '' ? 'Worker.dc.html' : '#',
+      ctaDisabled: missing === '' ? 'false' : 'true',
+      ctaStyle: missing === '' ? 'height: 56px; border-radius: 16px; border: none; background: #1C1730; color: #FFFFFF; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 16px; font-weight: 700; text-decoration: none; cursor: pointer; box-sizing: border-box' : 'height: 56px; border-radius: 16px; border: none; background: #1C1730; color: #FFFFFF; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 16px; font-weight: 700; text-decoration: none; cursor: default; opacity: 0.45; pointer-events: none; box-sizing: border-box',
+      cta: 'Cancel this job'
+    };
+  }
+}
+</script>
+</body>
+</html>

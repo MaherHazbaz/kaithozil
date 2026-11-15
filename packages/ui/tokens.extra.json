@@ -3,7 +3,6 @@
   "why": "design/tokens.json is the designer's file and is never edited. These are exact values that appear in design/source/*.dc.html but are missing from it. Each entry in `sources` says where the value comes from. If the designer later adds a value to design/tokens.json under the same name, delete it here; the generator fails on duplicates.",
   "color": {
     "pageTop": "#F3EEFB",
-    "dotInactive": "#CFC9DC",
     "goldInk": "#5A3A00",
     "placeholder": "#757575",
     "onHeroFill": "rgba(255,255,255,0.16)",
@@ -15,7 +14,6 @@
     "skyCream": "#FDF3D8",
     "dusk": "#3A2F4F",
     "mapGround": "#ECE8F4",
-    "mangoBorder": "#F8E3A8",
     "starBorder": "#F3D9B5",
     "starTint": "#FEF6EC",
     "starOff": "#8A979E"
@@ -112,7 +110,6 @@
   },
   "sources": {
     "color.pageTop": "Welcome/Login/Main root background gradient, first stop",
-    "color.dotInactive": "Main.dc.html carousel dots (inactive)",
     "color.goldInk": "Main.dc.html carousel slide 2 label and body",
     "color.placeholder": "Main.dc.html search input placeholder: the browser default grey as rendered in design/screenshots/Main.png",
     "color.onHeroFill": "Main.dc.html profile button background",
@@ -124,7 +121,6 @@
     "color.skyCream": "Splash.dc.html kzSkyFill last stop",
     "color.dusk": "Splash.dc.html kzEndFill last stop",
     "color.mapGround": "Tracking.dc.html map illustration background",
-    "color.mangoBorder": "Tracking.dc.html start code card border",
     "color.starBorder": "Pay.dc.html rating star button border (chosen)",
     "color.starTint": "Pay.dc.html rating star button background (chosen)",
     "color.starOff": "Pay.dc.html rating star (not chosen)",

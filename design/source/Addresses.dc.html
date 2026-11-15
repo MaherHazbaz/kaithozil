@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Saved addresses</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Noto+Sans+Tamil:wght@400;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#4C1D95}a:hover{color:#3B1574}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: linear-gradient(180deg, #F3EEFB 0%, #F8F7FB 35%, #FFFFFF 100%); font-family: 'Plus Jakarta Sans', 'Noto Sans Tamil', sans-serif; color: #1C1730; display: flex; flex-direction: column; overflow: hidden">
+<div style="padding: 22px 20px 0 20px; display: flex; align-items: center; gap: 12px">
+  <a href="Profile.dc.html" aria-label="Back" style="width: 44px; height: 44px; flex-shrink: 0; border-radius: 22px; background: #FFFFFF; border: 1px solid #E8E5F0; display: flex; align-items: center; justify-content: center; color: #1C1730"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg></a>
+  <div style="flex-grow: 1; display: flex; flex-direction: column"><div style="font-size: 18px; font-weight: 800">Saved addresses</div><div style="font-size: 12px; color: #625B73">சேமித்த முகவரிகள்</div></div>
+  
+</div><div style="padding: 16px 20px 0 20px; display: flex; flex-direction: column; gap: 12px; flex-grow: 1; min-height: 0; overflow-y: auto; overflow-x: hidden">
+
+<sc-for list="{{addresses}}" as="a" hint-placeholder-count="3">
+<div style="{{a.cardBorder}}">
+  <div style="display: flex; gap: 12px; align-items: flex-start">
+    <div style="width: 40px; height: 40px; flex-shrink: 0; border-radius: 12px; background: #EFE9FB; color: #4C1D95; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg></div>
+    <div style="flex-grow: 1; display: flex; flex-direction: column; gap: 3px; min-width: 0">
+      <div style="display: flex; align-items: center; gap: 8px"><span style="font-size: 16px; font-weight: 800">{{a.label}}</span><span style="{{a.pill}}">Default</span></div>
+      <span style="font-size: 13px; color: #1C1730; line-height: 1.4">{{a.line}}</span>
+      <span style="font-size: 12px; color: #625B73">{{a.near}}</span>
+    </div>
+  </div>
+  <div style="display: flex; gap: 8px; align-items: center">
+    <a href="AddressEdit.dc.html" aria-label="{{a.editLabel}}" style="text-decoration: none; box-sizing: border-box; height: 44px; padding: 0 14px; border-radius: 12px; border: 1px solid #DDD8E8; background: #FFFFFF; color: #1C1730; font-family: inherit; font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 6px; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>Edit</a>
+    <button aria-label="{{a.removeLabel}}" style="height: 44px; padding: 0 14px; border-radius: 12px; border: 1px solid #DDD8E8; background: #FFFFFF; color: #1C1730; font-family: inherit; font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 6px; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg>Remove</button>
+    <span style="flex-grow: 1"></span>
+    <button onClick="{{a.makeDefault}}" style="{{a.setBtn}}">Set as default</button>
+  </div>
+</div>
+</sc-for>
+<div style="display: flex; gap: 10px; align-items: flex-start; background: #EFE9FB; border-radius: 16px; padding: 12px 14px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4C1D95" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg><span style="font-size: 13px; color: #1C1730; line-height: 1.4">Workers see your full address only after they accept your job.</span></div>
+
+</div><div style="padding: 14px 20px 26px 20px; background: #FFFFFF; border-top: 1px solid #E8E5F0; display: flex; flex-direction: column; gap: 10px"><a href="AddressEdit.dc.html" style="height: 56px; border-radius: 16px; border: none; background: linear-gradient(135deg, #6A3BB5 0%, #4C1D95 60%, #3B1574 100%); box-shadow: 0 10px 24px rgba(76, 29, 149, 0.30); color: #FFFFFF; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 16px; font-weight: 700; text-decoration: none; cursor: pointer; box-sizing: border-box"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>Add new address</a></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { def: 0 }; }
+  renderVals() {
+    const list = [
+      { label: 'Home', line: '12, 4th Street, Anna Nagar, Chennai 600040', near: 'Near Tower Park' },
+      { label: 'Office', line: 'Plot 18, 2nd Avenue, Ambattur Industrial Estate, Chennai 600058', near: 'Gate 2, ground floor' },
+      { label: "Amma's house", line: '7, Kamarajar Street, Villivakkam, Chennai 600049', near: 'Opposite the temple' }
+    ];
+    return {
+      addresses: list.map((a, k) => Object.assign({}, a, {
+        pressed: k === this.state.def ? 'true' : 'false',
+        pill: k === this.state.def ? 'display: inline-flex; font-size: 12px; font-weight: 700; color: #4C1D95; background: #EFE9FB; border-radius: 8px; padding: 3px 8px' : 'display: none',
+        setBtn: k === this.state.def ? 'display: none' : 'display: flex; height: 44px; padding: 0 14px; border-radius: 12px; border: 1px solid #DDD8E8; background: #FFFFFF; color: #4C1D95; font-family: inherit; font-size: 13px; font-weight: 700; align-items: center; cursor: pointer',
+        cardBorder: k === this.state.def ? 'background: #FFFFFF; border: 2px solid #4C1D95; border-radius: 20px; padding: 14px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 8px 24px rgba(59, 21, 116, 0.08)' : 'background: #FFFFFF; border: 1px solid #EEEAF6; border-radius: 20px; padding: 14px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 8px 24px rgba(59, 21, 116, 0.08)',
+        makeDefault: () => this.setState({ def: k }),
+        editLabel: 'Edit ' + a.label,
+        removeLabel: 'Remove ' + a.label
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>

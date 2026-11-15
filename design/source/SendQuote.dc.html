@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Send a quote</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Noto+Sans+Tamil:wght@400;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#4C1D95}a:hover{color:#3B1574}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: linear-gradient(180deg, #F3EEFB 0%, #F8F7FB 35%, #FFFFFF 100%); font-family: 'Plus Jakarta Sans', 'Noto Sans Tamil', sans-serif; color: #1C1730; display: flex; flex-direction: column; overflow: hidden">
+<div style="padding: 22px 20px 0 20px; display: flex; align-items: center; gap: 12px">
+  <a href="WRequests.dc.html" aria-label="Back" style="width: 44px; height: 44px; flex-shrink: 0; border-radius: 22px; background: #FFFFFF; border: 1px solid #E8E5F0; display: flex; align-items: center; justify-content: center; color: #1C1730"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg></a>
+  <div style="flex-grow: 1; display: flex; flex-direction: column"><div style="font-size: 18px; font-weight: 800">Send a quote</div><div style="font-size: 12px; color: #625B73">மதிப்பீடு அனுப்பு</div></div>
+  
+</div><div style="padding: 16px 20px 0 20px; display: flex; flex-direction: column; gap: 12px; flex-grow: 1; min-height: 0; overflow-y: auto; overflow-x: hidden">
+
+<div style="display: flex; align-items: center; gap: 10px; background: #F8F7FB; border-radius: 14px; padding: 10px 12px"><div style="width: 36px; height: 36px; flex-shrink: 0; border-radius: 12px; background: #EFE9FB; color: #4C1D95; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="16" height="6" rx="2"></rect><path d="M10 16v-2a2 2 0 0 1 2-2h8a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"></path><rect x="8" y="16" width="4" height="6" rx="1"></rect></svg></div><div style="display: flex; flex-direction: column"><span style="font-size: 13px; font-weight: 700">Interior walls · 2 BHK · Priya R.</span><span style="font-size: 12px; color: #625B73">Visited today · Anna Nagar</span></div></div>
+<div style="background: #FFFFFF; border: 1px solid #EEEAF6; border-radius: 20px; padding: 14px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 8px 24px rgba(59, 21, 116, 0.08); gap: 0; padding: 6px 14px">
+<div style="display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #E8E5F0"><label for="lab" style="flex-grow: 1; display: flex; flex-direction: column; gap: 1px"><span style="font-size: 14px; font-weight: 700">Labour</span><span style="font-size: 11px; color: #625B73">2 painters</span></label><div style="width: 128px; height: 46px; display: flex; align-items: center; gap: 4px; border-radius: 12px; border: 1px solid #DDD8E8; background: #FFFFFF; padding: 0 10px; box-sizing: border-box"><span style="font-size: 15px; font-weight: 800; color: #625B73">₹</span><input id="lab" type="text" inputmode="numeric" value="{{labour}}" onInput="{{onLabour}}" style="border: none; outline: none; background: transparent; font-family: inherit; font-size: 15px; font-weight: 800; color: #1C1730; width: 100%; text-align: right"></div></div>
+<div style="display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #E8E5F0"><label for="pnt" style="flex-grow: 1; display: flex; flex-direction: column; gap: 1px"><span style="font-size: 14px; font-weight: 700">Paint and materials</span><span style="font-size: 11px; color: #625B73">Emulsion, 2 coats</span></label><div style="width: 128px; height: 46px; display: flex; align-items: center; gap: 4px; border-radius: 12px; border: 1px solid #DDD8E8; background: #FFFFFF; padding: 0 10px; box-sizing: border-box"><span style="font-size: 15px; font-weight: 800; color: #625B73">₹</span><input id="pnt" type="text" inputmode="numeric" value="{{paint}}" onInput="{{onPaint}}" style="border: none; outline: none; background: transparent; font-family: inherit; font-size: 15px; font-weight: 800; color: #1C1730; width: 100%; text-align: right"></div></div>
+<div style="display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #E8E5F0"><label for="prp" style="flex-grow: 1; display: flex; flex-direction: column; gap: 1px"><span style="font-size: 14px; font-weight: 700">Putty and primer</span><span style="font-size: 11px; color: #625B73">Wall preparation</span></label><div style="width: 128px; height: 46px; display: flex; align-items: center; gap: 4px; border-radius: 12px; border: 1px solid #DDD8E8; background: #FFFFFF; padding: 0 10px; box-sizing: border-box"><span style="font-size: 15px; font-weight: 800; color: #625B73">₹</span><input id="prp" type="text" inputmode="numeric" value="{{prep}}" onInput="{{onPrep}}" style="border: none; outline: none; background: transparent; font-family: inherit; font-size: 15px; font-weight: 800; color: #1C1730; width: 100%; text-align: right"></div></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; padding: 12px 0 6px 0"><span style="font-size: 15px; font-weight: 800">Total</span><span style="font-size: 26px; font-weight: 800; color: #4C1D95">{{total}}</span></div>
+</div>
+<div style="display: flex; align-items: center; justify-content: space-between; background: #FFFFFF; border: 1px solid #E8E5F0; border-radius: 14px; padding: 10px 14px"><span style="display: flex; flex-direction: column"><span style="font-size: 14px; font-weight: 700">Days needed</span><span style="font-size: 12px; color: #625B73">Can start Mon 17 Nov</span></span><div style="display: flex; align-items: center; gap: 6px"><button aria-label="Fewer days" onClick="{{lessDays}}" style="width: 44px; height: 44px; border-radius: 12px; border: 1px solid #DDD8E8; background: #FFFFFF; color: #4C1D95; font-size: 22px; font-weight: 700; cursor: pointer">−</button><span style="width: 32px; text-align: center; font-size: 20px; font-weight: 800">{{days}}</span><button aria-label="More days" onClick="{{moreDays}}" style="width: 44px; height: 44px; border-radius: 12px; border: none; background: #4C1D95; color: #FFFFFF; font-size: 22px; font-weight: 700; cursor: pointer">+</button></div></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><div style="font-size: 14px; font-weight: 800">How the customer pays <span style="font-weight: 500; color: #625B73">· பணம் செலுத்தும் முறை</span></div><div style="display: flex; flex-wrap: wrap; gap: 6px" role="group" aria-label="Payment plan"><sc-for list="{{plans}}" as="o" hint-placeholder-count="4"><button aria-pressed="{{o.pressed}}" onClick="{{o.pick}}" style="{{o.style}}">{{o.label}}</button></sc-for></div><div style="font-size: 12px; color: #625B73; line-height: 1.4">{{planNote}} Every payment goes straight to you by UPI and is recorded.</div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><label for="qnote" style="font-size: 13px; font-weight: 700; color: #625B73">Note to Priya (optional)</label><textarea id="qnote" rows="2" placeholder="e.g. Price includes moving furniture and covering floors" style="border-radius: 12px; border: 1px solid #DDD8E8; background: #FFFFFF; padding: 10px 14px; font-family: inherit; font-size: 14px; color: #1C1730; resize: none"></textarea></div>
+
+</div><div style="padding: 14px 20px 26px 20px; background: #FFFFFF; border-top: 1px solid #E8E5F0; display: flex; flex-direction: column; gap: 10px"><a href="WRequests.dc.html" style="height: 56px; border-radius: 16px; border: none; background: linear-gradient(135deg, #6A3BB5 0%, #4C1D95 60%, #3B1574 100%); box-shadow: 0 10px 24px rgba(76, 29, 149, 0.30); color: #FFFFFF; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 16px; font-weight: 700; text-decoration: none; cursor: pointer; box-sizing: border-box"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path></svg>Send quote to Priya</a><div style="font-size: 12px; color: #625B73; text-align: center">The quote stays valid for 7 days.</div></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { labour: 9600, paint: 7200, prep: 1600, days: 4, plan: 1 }; }
+  renderVals() {
+    const s = this.state;
+    const num = (e) => { const v = parseInt(((e && e.target ? e.target.value : '') || '').replace(/[^0-9]/g, ''), 10); return isNaN(v) ? 0 : v; };
+    const fmt = (n) => '₹' + n.toLocaleString('en-IN');
+    const total = s.labour + s.paint + s.prep;
+    return {
+      labour: String(s.labour), paint: String(s.paint), prep: String(s.prep),
+      onLabour: (e) => this.setState({ labour: num(e) }),
+      onPaint: (e) => this.setState({ paint: num(e) }),
+      onPrep: (e) => this.setState({ prep: num(e) }),
+      total: fmt(total),
+      days: s.days,
+      lessDays: () => this.setState({ days: Math.max(1, this.state.days - 1) }),
+      moreDays: () => this.setState({ days: Math.min(60, this.state.days + 1) }),
+      plans: ["After completion", "Materials at start, rest at end", "Day by day"].map((l, k) => ({ label: l, pressed: k === s.plan ? 'true' : 'false', style: k === s.plan ? 'height: 44px; padding: 0 14px; border-radius: 999px; border: 2px solid #4C1D95; background: #EFE9FB; color: #4C1D95; font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer' : 'height: 44px; padding: 0 14px; border-radius: 999px; border: 1px solid #DDD8E8; background: #FFFFFF; color: #1C1730; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer', pick: () => this.setState({ plan: k }) })),
+      planNote: s.plan === 1 ? 'Customer pays ' + fmt(Math.round(s.paint)) + ' for materials at the start, the rest on completion.' : s.plan === 2 ? 'Customer pays for each day of work at the end of that day.' : 'Customer pays the full amount when the job is finished.'
+    };
+  }
+}
+</script>
+</body>
+</html>

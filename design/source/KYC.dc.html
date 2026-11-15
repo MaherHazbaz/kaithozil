@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Identity check</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Noto+Sans+Tamil:wght@400;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#4C1D95}a:hover{color:#3B1574}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: linear-gradient(180deg, #F3EEFB 0%, #F8F7FB 35%, #FFFFFF 100%); font-family: 'Plus Jakarta Sans', 'Noto Sans Tamil', sans-serif; color: #1C1730; display: flex; flex-direction: column; overflow: hidden">
+<div style="padding: 22px 20px 0 20px; display: flex; align-items: center; gap: 12px">
+  <a href="Verify.dc.html" aria-label="Back" style="width: 44px; height: 44px; flex-shrink: 0; border-radius: 22px; background: #FFFFFF; border: 1px solid #E8E5F0; display: flex; align-items: center; justify-content: center; color: #1C1730"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg></a>
+  <div style="flex-grow: 1; display: flex; flex-direction: column"><div style="font-size: 18px; font-weight: 800">Identity check</div><div style="font-size: 12px; color: #625B73">அடையாள சரிபார்ப்பு</div></div>
+  
+</div><div style="padding: 16px 20px 0 20px; display: flex; flex-direction: column; gap: 12px; flex-grow: 1; min-height: 0; overflow-y: auto; overflow-x: hidden">
+
+<div style="display: flex; align-items: flex-start; justify-content: space-between; padding: 0 6px" aria-hidden="true"><sc-for list="{{steps}}" as="st" hint-placeholder-count="3"><div style="display: flex; flex-direction: column; align-items: center; gap: 4px; width: 80px"><span style="{{st.dot}}">{{st.num}}</span><span style="{{st.label}}">{{st.name}}</span></div></sc-for></div>
+
+<sc-if value="{{intro}}" hint-placeholder-val="{{ true }}">
+<div style="background: linear-gradient(160deg, #6A3BB5 0%, #4C1D95 50%, #2E0F5E 100%); color: #FFFFFF; border-radius: 22px; padding: 18px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 10px 24px rgba(76, 29, 149, 0.30)"><div style="display: flex; align-items: center; gap: 10px"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F5C76A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"></rect><circle cx="8" cy="12" r="2"></circle><line x1="13" y1="10" x2="18" y2="10"></line><line x1="13" y1="14" x2="18" y2="14"></line></svg><span style="font-size: 18px; font-weight: 800">Verify with DigiLocker</span></div><div style="font-size: 13px; color: #DDD3F5; line-height: 1.5">DigiLocker is the government's secure document service. You log in there and allow it to share your documents. They arrive digitally signed, so they're genuine.</div></div>
+<div style="font-size: 14px; font-weight: 800">What DigiLocker shares with us</div>
+<div style="background: #FFFFFF; border: 1px solid #EEEAF6; border-radius: 18px; padding: 4px 14px; box-shadow: 0 8px 24px rgba(59, 21, 116, 0.08)"><div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #E8E5F0; font-size: 14px"><span style="display: flex; flex-direction: column; gap: 1px"><span style="color: #1C1730; font-weight: 600">Aadhaar</span><span style="font-size: 11px; color: #625B73">Name, date of birth, photo, last 4 digits</span></span><span style="color: #4C1D95; font-weight: 800">Required</span></div><sc-if value="{{hasPan}}" hint-placeholder-val="{{ true }}"><div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #E8E5F0; font-size: 14px"><span style="display: flex; flex-direction: column; gap: 1px"><span style="color: #1C1730; font-weight: 600">PAN</span><span style="font-size: 11px; color: #625B73">PAN number and name</span></span><span style="color: #7C4A03; font-weight: 800">Required for loans</span></div></sc-if></div>
+<button role="checkbox" aria-checked="{{noPanPressed}}" onClick="{{toggleNoPan}}" style="width: 100%; display: flex; gap: 12px; align-items: center; padding: 12px 14px; background: #FFFFFF; border: 1px solid #E8E5F0; border-radius: 14px; font-family: inherit; color: #1C1730; text-align: left; cursor: pointer"><span style="{{noPanBox}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span><span style="display: flex; flex-direction: column; gap: 1px"><span style="font-size: 14px; font-weight: 700">I don't have a PAN yet</span><span style="font-size: 12px; color: #625B73">You can still join. PAN is needed later for loans.</span></span></button>
+<sc-if value="{{noPan}}" hint-placeholder-val="{{ false }}"><div style="display: flex; gap: 12px; align-items: flex-start; background: #FEF3C7; border: 1px solid #F8E3A8; border-radius: 16px; padding: 14px"><div style="width: 40px; height: 40px; flex-shrink: 0; border-radius: 12px; background: #FFFFFF; color: #7C4A03; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg></div><div style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 14px; font-weight: 800">Get a free e-PAN in minutes</span><span style="font-size: 12px; color: #7C4A03; line-height: 1.4">The Income Tax e-filing website issues an instant e-PAN using your Aadhaar and its linked mobile number. It's free.</span><a href="#" style="font-size: 13px; font-weight: 700; min-height: 44px; display: flex; align-items: center; gap: 4px">Show me how<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4C1D95" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg></a></div></div></sc-if>
+<div style="display: flex; gap: 10px; align-items: flex-start; background: #EFE9FB; border-radius: 16px; padding: 12px 14px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4C1D95" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"></path><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"></path><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"></path><line x1="2" y1="2" x2="22" y2="22"></line></svg><span style="font-size: 13px; color: #1C1730; line-height: 1.4"><b>We never store your full Aadhaar number.</b> We keep the last 4 digits and a reference from DigiLocker. Your PAN is stored encrypted.</span></div>
+<button onClick="{{start}}" style="height: 56px; border-radius: 16px; border: none; background: linear-gradient(135deg, #6A3BB5 0%, #4C1D95 60%, #3B1574 100%); box-shadow: 0 10px 24px rgba(76, 29, 149, 0.30); color: #FFFFFF; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 16px; font-weight: 700; text-decoration: none; cursor: pointer; box-sizing: border-box"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>Continue to DigiLocker</button>
+<button onClick="{{useQr}}" style="align-self: center; min-height: 44px; border: none; background: transparent; padding: 0 8px; font-family: inherit; font-size: 14px; font-weight: 700; color: #4C1D95; display: flex; align-items: center; gap: 6px; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3"></path></svg>No DigiLocker? Scan your Aadhaar QR code</button>
+</sc-if>
+
+<sc-if value="{{qr}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 4px"><div style="font-size: 18px; font-weight: 800">Scan the QR code on your Aadhaar</div><div style="font-size: 13px; color: #625B73; line-height: 1.4">Use the large QR code on your Aadhaar card or printed e-Aadhaar. It's signed by UIDAI, so we can check it's genuine.</div></div>
+<div style="position: relative; height: 250px; border-radius: 20px; background: #1C1730; display: flex; align-items: center; justify-content: center" role="img" aria-label="Camera view for scanning the QR code"><div style="width: 170px; height: 170px; border: 3px solid #F5C76A; border-radius: 18px; display: flex; align-items: center; justify-content: center; color: #DDD3F5"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3"></path></svg></div><span style="position: absolute; bottom: 12px; font-size: 12px; color: #DDD3F5">Hold the card inside the frame</span></div>
+<button onClick="{{toSelfie}}" style="height: 56px; border-radius: 16px; border: none; background: linear-gradient(135deg, #6A3BB5 0%, #4C1D95 60%, #3B1574 100%); box-shadow: 0 10px 24px rgba(76, 29, 149, 0.30); color: #FFFFFF; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 16px; font-weight: 700; text-decoration: none; cursor: pointer; box-sizing: border-box">I've scanned it</button>
+<button style="align-self: center; min-height: 44px; border: none; background: transparent; padding: 0 8px; font-family: inherit; font-size: 14px; font-weight: 700; color: #4C1D95; display: flex; align-items: center; gap: 6px; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>Upload Aadhaar offline XML instead</button>
+<button onClick="{{backToIntro}}" style="align-self: center; min-height: 44px; border: none; background: transparent; padding: 0 8px; font-family: inherit; font-size: 14px; font-weight: 700; color: #625B73; display: flex; align-items: center; gap: 6px; cursor: pointer">Back to DigiLocker</button>
+</sc-if>
+
+<sc-if value="{{waiting}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; padding: 26px 0 6px 0"><div style="width: 96px; height: 96px; border-radius: 48px; background: #EFE9FB; color: #4C1D95; display: flex; align-items: center; justify-content: center"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></div><div style="font-size: 20px; font-weight: 800">Finish in DigiLocker</div><div style="font-size: 14px; color: #625B73; line-height: 1.5; max-width: 310px">Log in with your Aadhaar-linked mobile, tick <b style="color: #1C1730">{{docsText}}</b>, then tap <b style="color: #1C1730">Allow</b>. Come back here when you're done.</div></div>
+<button onClick="{{toSelfie}}" style="height: 56px; border-radius: 16px; border: none; background: linear-gradient(135deg, #6A3BB5 0%, #4C1D95 60%, #3B1574 100%); box-shadow: 0 10px 24px rgba(76, 29, 149, 0.30); color: #FFFFFF; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 16px; font-weight: 700; text-decoration: none; cursor: pointer; box-sizing: border-box">I've finished in DigiLocker</button>
+<button onClick="{{start}}" style="height: 48px; border-radius: 14px; border: 1px solid #DDD8E8; background: #FFFFFF; color: #4C1D95; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 14px; font-weight: 700; text-decoration: none; cursor: pointer; box-sizing: border-box">Open DigiLocker again</button>
+</sc-if>
+
+<sc-if value="{{selfie}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 4px"><div style="font-size: 18px; font-weight: 800">Take a quick selfie</div><div style="font-size: 13px; color: #625B73; line-height: 1.4">We match it with your Aadhaar photo, to make sure it's really you. செல்ஃபி எடுங்கள்</div></div>
+<div style="height: 280px; border-radius: 20px; background: #1C1730; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px" role="img" aria-label="Front camera view"><div style="width: 170px; height: 210px; border: 3px dashed #F5C76A; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #DDD3F5"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div><span style="font-size: 13px; font-weight: 700; color: #FFFFFF; background: rgba(255, 255, 255, 0.12); border-radius: 999px; padding: 6px 12px">Blink twice, then hold still</span></div>
+<div style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: #625B73"><span>• Face the light, remove sunglasses and caps</span><span>• Only your face in the frame</span></div>
+<button onClick="{{takeSelfie}}" style="height: 56px; border-radius: 16px; border: none; background: linear-gradient(135deg, #FBDD96 0%, #F5C76A 45%, #E2A43A 100%); box-shadow: 0 10px 24px rgba(226, 164, 58, 0.35); color: #3B2300; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 16px; font-weight: 800; text-decoration: none; cursor: pointer; box-sizing: border-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>Take selfie</button>
+</sc-if>
+
+<sc-if value="{{checking}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; padding: 60px 0 10px 0" role="status"><div style="width: 96px; height: 96px; border-radius: 48px; background: #EFE9FB; color: #4C1D95; display: flex; align-items: center; justify-content: center"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg></div><div style="font-size: 20px; font-weight: 800">Checking your details…</div><div style="font-size: 14px; color: #625B73">Matching your documents, UPI name and selfie.</div></div>
+</sc-if>
+
+<sc-if value="{{done}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; padding: 8px 0 4px 0"><div style="width: 88px; height: 88px; border-radius: 44px; background: linear-gradient(160deg, #6A3BB5 0%, #4C1D95 50%, #2E0F5E 100%); color: #F5C76A; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 24px rgba(76, 29, 149, 0.30)"><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"></path><path d="m9 12 2 2 4-4"></path></svg></div><div style="font-size: 22px; font-weight: 800">Identity verified</div><div style="font-size: 13px; color: #625B73">அடையாளம் சரிபார்க்கப்பட்டது</div></div>
+<div style="background: #FFFFFF; border: 1px solid #EEEAF6; border-radius: 18px; padding: 4px 14px; box-shadow: 0 8px 24px rgba(59, 21, 116, 0.08)">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #E8E5F0; font-size: 14px"><span style="display: flex; flex-direction: column; gap: 1px"><span style="color: #1C1730; font-weight: 600">Aadhaar</span><span style="font-size: 11px; color: #625B73">•••• •••• 4821 · signed by UIDAI</span></span><span style="color: #4C1D95; font-weight: 800">Verified ✓</span></div>
+<sc-if value="{{hasPan}}" hint-placeholder-val="{{ true }}"><div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #E8E5F0; font-size: 14px"><span style="display: flex; flex-direction: column; gap: 1px"><span style="color: #1C1730; font-weight: 600">PAN</span><span style="font-size: 11px; color: #625B73">ABCDE••••F · linked to Aadhaar</span></span><span style="color: #4C1D95; font-weight: 800">Verified ✓</span></div></sc-if>
+<sc-if value="{{noPan}}" hint-placeholder-val="{{ false }}"><div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #E8E5F0; font-size: 14px"><span style="display: flex; flex-direction: column; gap: 1px"><span style="color: #1C1730; font-weight: 600">PAN</span><span style="font-size: 11px; color: #625B73">Needed for loans</span></span><span style="color: #7C4A03; font-weight: 800">Add later</span></div></sc-if>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #E8E5F0; font-size: 14px"><span style="display: flex; flex-direction: column; gap: 1px"><span style="color: #1C1730; font-weight: 600">Name matches</span><span style="font-size: 11px; color: #625B73">MURUGAN K</span></span><span style="color: #4C1D95; font-weight: 800">Aadhaar · PAN · UPI ✓</span></div>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #E8E5F0; font-size: 14px"><span style="display: flex; flex-direction: column; gap: 1px"><span style="color: #1C1730; font-weight: 600">Face match</span><span style="font-size: 11px; color: #625B73">Selfie and Aadhaar photo</span></span><span style="color: #4C1D95; font-weight: 800">Matched ✓</span></div>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #E8E5F0; font-size: 14px"><span style="display: flex; flex-direction: column; gap: 1px"><span style="color: #1C1730; font-weight: 600">Age</span></span><span style="color: #4C1D95; font-weight: 800">18+ ✓</span></div>
+</div>
+<div style="font-size: 12px; color: #625B73; text-align: center; line-height: 1.4">Full Aadhaar number not stored. You'll take a quick selfie when you start each job, so customers know it's you.</div>
+<a href="Verify.dc.html" style="height: 56px; border-radius: 16px; border: none; background: linear-gradient(135deg, #6A3BB5 0%, #4C1D95 60%, #3B1574 100%); box-shadow: 0 10px 24px rgba(76, 29, 149, 0.30); color: #FFFFFF; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 16px; font-weight: 700; text-decoration: none; cursor: pointer; box-sizing: border-box">Back to verification</a>
+</sc-if>
+
+<button onClick="{{toggleHelp}}" style="align-self: center; min-height: 44px; border: none; background: transparent; padding: 0 8px; font-family: inherit; font-size: 14px; font-weight: 700; color: #4C1D95; display: flex; align-items: center; gap: 6px; cursor: pointer">{{helpText}}</button>
+<sc-if value="{{showHelp}}" hint-placeholder-val="{{ false }}"><div style="background: #FFFFFF; border: 1px solid #EEEAF6; border-radius: 20px; box-shadow: 0 8px 24px rgba(59, 21, 116, 0.08); padding: 14px; display: flex; flex-direction: column; gap: 8px; font-size: 13px; line-height: 1.45"><b>Common problems</b><span>• Names don't match: use the UPI ID of your own bank account, with the same name as your Aadhaar.</span><span>• No DigiLocker account: create one with your Aadhaar-linked mobile number, or scan your Aadhaar QR code.</span><span>• Selfie not matching: try again in good light, without a cap or glasses.</span><span>• Still stuck: visit [HELP CENTRE] and we'll verify you in person.</span></div></sc-if>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { st: 'intro', noPan: false, help: false }; }
+  componentWillUnmount() { clearTimeout(this.t); }
+  renderVals() {
+    const s = this.state;
+    const stepOf = { intro: 0, qr: 0, waiting: 0, selfie: 1, checking: 2, done: 2 };
+    const cur = stepOf[s.st];
+    const names = ['DigiLocker', 'Selfie', 'Result'];
+    const steps = names.map((n, i) => ({
+      name: n,
+      dot: i < cur ? 'width: 26px; height: 26px; border-radius: 13px; background: #4C1D95; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800'
+         : i === cur ? 'width: 26px; height: 26px; border-radius: 13px; background: #F5C76A; color: #2E0F5E; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800'
+         : 'width: 26px; height: 26px; box-sizing: border-box; border-radius: 13px; border: 2px solid #DDD8E8; background: #FFFFFF; color: #625B73; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800',
+      num: i < cur ? '✓' : String(i + 1),
+      label: i === cur ? 'font-size: 11px; font-weight: 800; color: #1C1730' : 'font-size: 11px; font-weight: 600; color: #625B73'
+    }));
+    const box = (on) => on ? 'width: 28px; height: 28px; flex-shrink: 0; border-radius: 8px; background: #4C1D95; color: #FFFFFF; display: flex; align-items: center; justify-content: center' : 'width: 28px; height: 28px; flex-shrink: 0; box-sizing: border-box; border-radius: 8px; border: 2px solid #DDD8E8; background: #FFFFFF; color: transparent; display: flex; align-items: center; justify-content: center';
+    return {
+      steps,
+      intro: s.st === 'intro', qr: s.st === 'qr', waiting: s.st === 'waiting', selfie: s.st === 'selfie', checking: s.st === 'checking', done: s.st === 'done',
+      start: () => this.setState({ st: 'waiting' }),
+      useQr: () => this.setState({ st: 'qr' }),
+      backToIntro: () => this.setState({ st: 'intro' }),
+      toSelfie: () => this.setState({ st: 'selfie' }),
+      takeSelfie: () => { this.setState({ st: 'checking' }); clearTimeout(this.t); this.t = setTimeout(() => this.setState({ st: 'done' }), 1500); },
+      noPan: s.noPan,
+      hasPan: !s.noPan,
+      noPanPressed: s.noPan ? 'true' : 'false',
+      noPanBox: box(s.noPan),
+      toggleNoPan: () => this.setState({ noPan: !this.state.noPan }),
+      docsText: s.noPan ? 'Aadhaar' : 'Aadhaar and PAN',
+      showHelp: s.help,
+      toggleHelp: () => this.setState({ help: !this.state.help }),
+      helpText: s.help ? 'Hide help' : 'Having trouble?'
+    };
+  }
+}
+</script>
+</body>
+</html>

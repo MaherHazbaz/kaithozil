@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Suggest another time</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Noto+Sans+Tamil:wght@400;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#4C1D95}a:hover{color:#3B1574}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: linear-gradient(180deg, #F3EEFB 0%, #F8F7FB 35%, #FFFFFF 100%); font-family: 'Plus Jakarta Sans', 'Noto Sans Tamil', sans-serif; color: #1C1730; display: flex; flex-direction: column; overflow: hidden">
+<div style="padding: 22px 20px 0 20px; display: flex; align-items: center; gap: 12px">
+  <a href="BookingRequest.dc.html" aria-label="Back" style="width: 44px; height: 44px; flex-shrink: 0; border-radius: 22px; background: #FFFFFF; border: 1px solid #E8E5F0; display: flex; align-items: center; justify-content: center; color: #1C1730"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg></a>
+  <div style="flex-grow: 1; display: flex; flex-direction: column"><div style="font-size: 18px; font-weight: 800">Suggest another time</div><div style="font-size: 12px; color: #625B73">வேறு நேரம் பரிந்துரைக்கவும்</div></div>
+  
+</div><div style="padding: 16px 20px 0 20px; display: flex; flex-direction: column; gap: 12px; flex-grow: 1; min-height: 0; overflow-y: auto; overflow-x: hidden">
+
+<div style="background: #FFFFFF; border: 1px solid #EEEAF6; border-radius: 20px; padding: 14px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 8px 24px rgba(59, 21, 116, 0.08); padding: 4px 14px"><div style="display: flex; justify-content: space-between; gap: 12px; padding: 9px 0; border-bottom: 1px solid #E8E5F0; font-size: 13px"><span style="color: #625B73; flex-shrink: 0">Priya asked for</span><span style="display: flex; flex-direction: column; align-items: flex-end; text-align: right"><span style="font-weight: 700; text-decoration: line-through; color: #625B73">Sat 15 Nov · 10 AM – 12 PM</span><span style="font-size: 11px; color: #625B73">Fan not working · Anna Nagar</span></span></div></div>
+<div style="font-size: 14px; font-weight: 800">Day <span style="font-weight: 500; color: #625B73">· நாள்</span></div>
+<div style="display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px" role="group" aria-label="Day"><sc-for list="{{days}}" as="d" hint-placeholder-count="5"><button aria-pressed="{{d.pressed}}" onClick="{{d.pick}}" style="{{d.style}}"><span style="font-size: 12px; font-weight: 700">{{d.top}}</span><span style="font-size: 20px; font-weight: 800; line-height: 1">{{d.num}}</span></button></sc-for></div>
+<div style="font-size: 14px; font-weight: 800">Time <span style="font-weight: 500; color: #625B73">· நேரம்</span></div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px" role="group" aria-label="Time"><sc-for list="{{slots}}" as="t" hint-placeholder-count="6"><button aria-pressed="{{t.pressed}}" aria-disabled="{{t.disabled}}" onClick="{{t.pick}}" style="{{t.style}}">{{t.label}}</button></sc-for></div>
+<div style="font-size: 12px; color: #625B73">"Busy" slots already have a Kaithozhil job.</div>
+<div style="display: flex; flex-direction: column; gap: 6px"><label for="sugnote" style="font-size: 13px; font-weight: 700; color: #625B73">Message to Priya (optional)</label><textarea id="sugnote" rows="2" placeholder="e.g. Morning is booked, I can come after lunch" style="border-radius: 12px; border: 1px solid #DDD8E8; background: #FFFFFF; padding: 10px 14px; font-family: inherit; font-size: 14px; color: #1C1730; resize: none"></textarea></div>
+
+</div><div style="padding: 14px 20px 26px 20px; background: #FFFFFF; border-top: 1px solid #E8E5F0; display: flex; flex-direction: column; gap: 10px"><div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px"><span style="color: #625B73">New time</span><span style="font-weight: 800">{{chosen}}</span></div><a href="{{ctaHref}}" style="{{ctaStyle}}">Send new time</a></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { day: 0, slot: 3 }; }
+  renderVals() {
+    const s = this.state;
+    const days = [{ top: 'Sat', num: '15' }, { top: 'Sun', num: '16' }, { top: 'Mon', num: '17' }, { top: 'Tue', num: '18' }, { top: 'Wed', num: '19' }];
+    const slots = ['8 – 10 AM', '10 AM – 12 PM', '12 – 2 PM', '2 – 4 PM', '4 – 6 PM', '6 – 8 PM'];
+    const busy = (d, k) => (d === 0 && (k === 0 || k === 1)) || (d === 1 && k === 4);
+    const dOn = 'flex-shrink: 0; width: 60px; height: 70px; border-radius: 16px; border: 2px solid #4C1D95; background: #4C1D95; color: #FFFFFF; font-family: inherit; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; cursor: pointer';
+    const dOff = 'flex-shrink: 0; width: 60px; height: 70px; border-radius: 16px; border: 1px solid #DDD8E8; background: #FFFFFF; color: #1C1730; font-family: inherit; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; cursor: pointer';
+    const sOn = 'height: 52px; border-radius: 14px; border: 2px solid #4C1D95; background: #EFE9FB; color: #4C1D95; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer';
+    const sOff = 'height: 52px; border-radius: 14px; border: 1px solid #DDD8E8; background: #FFFFFF; color: #1C1730; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer';
+    const sNa = 'height: 52px; border-radius: 14px; border: 1px dashed #DDD8E8; background: #F8F7FB; color: #8A82A0; font-family: inherit; font-size: 13px; font-weight: 600; cursor: not-allowed';
+    const ok = s.slot >= 0 && !busy(s.day, s.slot);
+    return {
+      days: days.map((d, i) => ({ top: d.top, num: d.num, pressed: i === s.day ? 'true' : 'false', style: i === s.day ? dOn : dOff, pick: () => this.setState({ day: i, slot: -1 }) })),
+      slots: slots.map((l, k) => { const na = busy(s.day, k); const on = !na && k === s.slot; return { label: na ? l + ' · busy' : l, pressed: on ? 'true' : 'false', disabled: na ? 'true' : 'false', style: na ? sNa : on ? sOn : sOff, pick: () => { if (!na) this.setState({ slot: k }); } }; }),
+      chosen: ok ? days[s.day].top + ' ' + days[s.day].num + ' Nov · ' + slots[s.slot] : 'Choose a free slot',
+      ctaHref: ok ? 'WRequests.dc.html' : '#',
+      ctaStyle: ok ? 'height: 56px; border-radius: 16px; background: linear-gradient(135deg, #6A3BB5 0%, #4C1D95 60%, #3B1574 100%); box-shadow: 0 10px 24px rgba(76, 29, 149, 0.30); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; text-decoration: none' : 'height: 56px; border-radius: 16px; background: linear-gradient(135deg, #6A3BB5 0%, #4C1D95 60%, #3B1574 100%); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; text-decoration: none; opacity: 0.5; pointer-events: none'
+    };
+  }
+}
+</script>
+</body>
+</html>
