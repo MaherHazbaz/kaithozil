@@ -7,6 +7,7 @@ export const profileCopy = {
   edit: 'Edit',
   editLabel: 'Edit your name and number',
   savedAddresses: 'Saved addresses',
+  measurements: 'Measurements',
   businessAccount: 'Business account',
   businessAccountDetail: 'Regular maintenance for a society, office or shop',
   payments: 'Payments',

@@ -27,7 +27,7 @@ export type BookingsScreenProps = {
   initialTab?: BookingsTab;
   // The screens these lead to are not built yet, so the route leaves them unset.
   onOpenBooking?: (id: string) => void;
-  onBookAgain?: (id: string) => void;
+  onViewReceipt?: (id: string) => void;
   onGetHelp?: (id: string) => void;
   onTab?: (tab: CustomerTab) => void;
 };
@@ -38,7 +38,7 @@ export function BookingsScreen({
   past,
   initialTab = 'upcoming',
   onOpenBooking,
-  onBookAgain,
+  onViewReceipt,
   onGetHelp,
   onTab,
 }: BookingsScreenProps) {
@@ -104,7 +104,7 @@ export function BookingsScreen({
               <PastBookingCard
                 key={booking.id}
                 booking={booking}
-                onBookAgain={() => onBookAgain?.(booking.id)}
+                onViewReceipt={() => onViewReceipt?.(booking.id)}
                 onGetHelp={() => onGetHelp?.(booking.id)}
                 testID={`booking-${booking.id}`}
               />

@@ -2,6 +2,7 @@ import {
   AppText,
   Chip,
   Icon,
+  InfoNote,
   PrimaryButton,
   ScreenBackground,
   ScreenHeader,
@@ -35,6 +36,8 @@ export type DescribeJobScreenProps = {
   onAddPhoto?: () => void;
   onVoiceNote?: () => void;
   onChangeAddress?: () => void;
+  /** "Choose a date and time", shown when Schedule is picked. */
+  onChooseTime?: () => void;
   onSubmit?: (draft: JobDraft) => void;
 };
 
@@ -48,12 +51,13 @@ export function DescribeJobScreen({
   onAddPhoto,
   onVoiceNote,
   onChangeAddress,
+  onChooseTime,
   onSubmit,
 }: DescribeJobScreenProps) {
   const insets = useSafeAreaInsets();
   const copy: JobService = jobServices[service];
   const draft = useJobDraft(copy.problems, initialDraft);
-  const { problem, description, timing, missing } = draft;
+  const { problem, description, timing, duration, missing } = draft;
   // "Other" says nothing by itself, so the description stops being optional.
   const descriptionRequired = copy.problems.some(
     (option) => option.key === problem && option.needsDescription,
@@ -176,6 +180,43 @@ export function DescribeJobScreen({
                 testID="job-timing-schedule"
               />
             </View>
+            {timing === 'schedule' ? (
+              <Tappable
+                onPress={onChooseTime}
+                accessibilityRole="link"
+                style={styles.timeLink}
+                testID="job-choose-time"
+              >
+                <AppText size={14} weight={700} color={color.purple}>
+                  {describeJobCopy.chooseTime}
+                </AppText>
+                <Icon name="chevronRight" size={16} color={color.purple} />
+              </Tappable>
+            ) : null}
+            <View style={styles.section}>
+              <AppText size={15} weight={800} accessibilityRole="header">
+                {describeJobCopy.durationHeading}
+                <AppText size={12} weight={600} color={color.muted}>
+                  {describeJobCopy.durationHeadingTamil}
+                </AppText>
+              </AppText>
+              <View style={styles.chips} accessibilityLabel={describeJobCopy.durationGroupLabel}>
+                {describeJobCopy.durations.map((option) => (
+                  <Chip
+                    key={option.key}
+                    label={option.label}
+                    selected={duration === option.key}
+                    onPress={() => draft.setDuration(option.key)}
+                    testID={`job-duration-${option.key}`}
+                  />
+                ))}
+              </View>
+              {duration === 'unsure' ? (
+                <InfoNote tone="info" icon="check" iconStrokeWidth={2.5}>
+                  {describeJobCopy.durationUnsureNote}
+                </InfoNote>
+              ) : null}
+            </View>
           </View>
 
           <View style={styles.address}>
@@ -219,7 +260,7 @@ export function DescribeJobScreen({
             // Read out after the button's name, so screen-reader users also
             // hear why it is disabled.
             accessibilityHint={missing ? describeJobCopy.missing[missing] : undefined}
-            onPress={() => onSubmit?.({ problem, description, timing })}
+            onPress={() => onSubmit?.({ problem, description, timing, duration })}
             testID="job-submit"
           />
           {/* A disabled button with no reason looks broken: say what is missing. */}
@@ -275,6 +316,13 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     gap: 8,
+  },
+  timeLink: {
+    alignSelf: 'flex-start',
+    minHeight: 44,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
   },
   address: {
     flexDirection: 'row',

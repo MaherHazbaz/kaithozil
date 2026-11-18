@@ -51,6 +51,13 @@ const SCREENS = [
   { name: 'Tracking', path: 'job/tracking', settleMs: 2500 },
   { name: 'Pay', path: 'job/pay', settleMs: 2500 },
   { name: 'Book', path: 'worker/murugan-k', settleMs: 2500 },
+  // System states (development preview routes, see src/app/dev/states).
+  { name: 'NoInternet', path: 'dev/states/no-internet', settleMs: 2500 },
+  { name: 'ErrorState', path: 'dev/states/error', settleMs: 2500 },
+  { name: 'EmptyState', path: 'dev/states/empty-bookings', settleMs: 2500 },
+  { name: 'UpdateApp', path: 'update', settleMs: 2500 },
+  // Captured mid-ripple, so the waves never match the still screenshot.
+  { name: 'Maintenance', path: 'dev/states/maintenance', settleMs: 2500 },
   { name: 'Splash_frame_1s', path: '?t=1', settleMs: 2500, fullScreen: true },
   { name: 'Splash_frame_2.5s', path: '?t=2.5', settleMs: 2500, fullScreen: true },
   { name: 'Splash_frame_3.5s', path: '?t=3.5', settleMs: 2500, fullScreen: true },

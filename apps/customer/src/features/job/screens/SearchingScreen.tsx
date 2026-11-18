@@ -2,6 +2,7 @@ import {
   AppText,
   Card,
   Icon,
+  Ripple,
   ScreenBackground,
   SecondaryButton,
   color,
@@ -11,7 +12,6 @@ import { StatusBar } from 'expo-status-bar';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { SearchRipple } from '../components/SearchRipple';
 import { SearchStep } from '../components/SearchStep';
 import { jobServices, searchingCopy, type JobServiceKey } from '../copy';
 
@@ -54,7 +54,7 @@ export function SearchingScreen({
             <View style={[styles.ring, styles.ringOuter]} />
             <View style={[styles.ring, styles.ringInner]} />
             {/* Drawn over the still rings and under the disc. */}
-            <SearchRipple from={DISC} to={OUTER} />
+            <Ripple kind="searchWaves" size={DISC} />
             <View style={styles.searchDisc}>
               <Icon name="search" size={40} color={color.white} />
             </View>

@@ -21,6 +21,18 @@ export const describeJobCopy = {
   whenHeading: 'When do you need it?',
   now: { title: 'Now', subtitle: 'Nearby workers get a call right away' },
   schedule: { title: 'Schedule', subtitle: 'Pick a date and time' },
+  chooseTime: 'Choose a date and time',
+  durationHeading: 'How long might it take? ',
+  durationHeadingTamil: '· எவ்வளவு நேரம்?',
+  durationGroupLabel: 'How long it might take',
+  durations: [
+    { key: 'quick', label: 'Quick fix (under 1 hour)' },
+    { key: 'halfDay', label: 'Half a day' },
+    { key: 'fullDay', label: 'A full day or more' },
+    { key: 'unsure', label: "Not sure, let's decide together" },
+  ],
+  durationUnsureNote:
+    "That's fine. The worker checks the job, then you both agree the time and price in the app before work starts.",
   changeAddress: 'Change',
   estimateLabel: 'Estimated cost',
   estimate: (range: string) => `${range} · agreed on site`,
@@ -44,13 +56,24 @@ export const trackingCopy = {
   onTheWay: (firstName: string) => `${firstName} is on the way`,
   call: (firstName: string) => `Call ${firstName}`,
   message: (firstName: string) => `Message ${firstName}`,
-  codeLabel: 'Give this code when he arrives',
-  codeNote: 'He needs it to start the job. Share it only when he is at your door.',
+  arrivalTitle: 'Step 1 · Arrival code',
+  arrivalTitleTamil: 'வருகைக் குறியீடு',
+  arrivalNote: (firstName: string) =>
+    `Give this only when ${firstName} is at your door. It confirms he has really arrived.`,
+  workStartTitle: 'Step 2 · Work-start code',
+  workStartTitleTamil: 'வேலை தொடக்கக் குறியீடு',
+  workStartNote: "Give this when you're ready for the work to begin.",
   // NOT visible in the design: read by screen readers in place of four separate digits.
-  codeSpoken: (code: string) => `Start code ${code.split('').join(' ')}`,
+  arrivalSpoken: (code: string) => `Arrival code ${code.split('').join(' ')}`,
+  workStartSpoken: (code: string) => `Work-start code ${code.split('').join(' ')}`,
+  arrived: (firstName: string, time: string) => `${firstName} arrived · ${time}`,
+  arrivedDetail: 'Arrival code and location matched',
+  started: (time: string) => `Work started · ${time}`,
+  startedDetail: 'Work-start code matched',
   estimate: (range: string) => `Estimate ${range}`,
   payNow: 'Job finished? Pay now',
   cancel: 'Cancel booking',
+  reportProblem: 'Report a problem',
 } as const;
 
 // Exact wording from design/source/Pay.dc.html.

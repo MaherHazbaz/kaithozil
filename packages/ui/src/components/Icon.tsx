@@ -190,6 +190,69 @@ const ICONS = {
     { t: 'path', d: 'M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2' },
     { t: 'circle', cx: 12, cy: 7, r: 4 },
   ],
+  // Profile.dc.html Measurements row.
+  ruler: [
+    {
+      t: 'path',
+      d: 'M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z',
+    },
+    { t: 'path', d: 'm14.5 12.5 2-2' },
+    { t: 'path', d: 'm11.5 9.5 2-2' },
+    { t: 'path', d: 'm8.5 6.5 2-2' },
+    { t: 'path', d: 'm17.5 15.5 2-2' },
+  ],
+  // Main.dc.html Housekeeping tile.
+  sparkles: [
+    { t: 'path', d: 'M9.94 14.06 12 21l2.06-6.94L21 12l-6.94-2.06L12 3 9.94 9.94 3 12z' },
+    { t: 'path', d: 'M20 3v4' },
+    { t: 'path', d: 'M22 5h-4' },
+  ],
+  // System states (NoInternet, ErrorState, EmptyState, UpdateApp .dc.html).
+  wifiOff: [
+    { t: 'path', d: 'M12 20h.01' },
+    { t: 'path', d: 'M8.5 16.43a5 5 0 0 1 7 0' },
+    { t: 'path', d: 'M5 12.86a10 10 0 0 1 5.17-2.69' },
+    { t: 'path', d: 'M19 12.86a10 10 0 0 0-2.01-1.52' },
+    { t: 'path', d: 'M2 8.82a15 15 0 0 1 4.17-2.65' },
+    { t: 'path', d: 'M10.66 5c4.01-.36 8.14.9 11.34 3.76' },
+    { t: 'path', d: 'm2 2 20 20' },
+  ],
+  alertCircle: [
+    { t: 'circle', cx: 12, cy: 12, r: 10 },
+    line(12, 8, 12, 12),
+    line(12, 16, 12.01, 16),
+  ],
+  rotateCcw: [
+    { t: 'path', d: 'M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8' },
+    { t: 'path', d: 'M3 3v5h5' },
+  ],
+  // The "Checking…" spinner arc.
+  loader: [{ t: 'path', d: 'M21 12a9 9 0 1 1-6.219-8.56' }],
+  settings: [
+    {
+      t: 'path',
+      d: 'M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z',
+    },
+    { t: 'circle', cx: 12, cy: 12, r: 3 },
+  ],
+  inbox: [
+    { t: 'polyline', points: '22 12 16 12 14 15 10 15 8 12 2 12' },
+    {
+      t: 'path',
+      d: 'M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z',
+    },
+  ],
+  searchX: [
+    { t: 'circle', cx: 11, cy: 11, r: 8 },
+    { t: 'path', d: 'm21 21-4.3-4.3' },
+    { t: 'path', d: 'm8.5 8.5 5 5' },
+    { t: 'path', d: 'm13.5 8.5-5 5' },
+  ],
+  download: [
+    { t: 'path', d: 'M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4' },
+    { t: 'polyline', points: '7 10 12 15 17 10' },
+    line(12, 15, 12, 3),
+  ],
 } satisfies Record<string, Shape[]>;
 
 export type IconName = keyof typeof ICONS;
@@ -246,6 +309,10 @@ export function Icon({ name, size = 24, color = colors.ink, strokeWidth = 2 }: I
       strokeWidth={strokeWidth}
       strokeLinecap="round"
       strokeLinejoin="round"
+      // v3 layout rule: icons never shrink. In a row that runs out of space
+      // (long Tamil text, large system fonts) flexbox would otherwise squash
+      // the icon before wrapping the text.
+      style={NO_SHRINK}
       accessible={false}
       importantForAccessibility="no-hide-descendants"
     >
@@ -253,3 +320,5 @@ export function Icon({ name, size = 24, color = colors.ink, strokeWidth = 2 }: I
     </Svg>
   );
 }
+
+const NO_SHRINK = { flexShrink: 0 } as const;

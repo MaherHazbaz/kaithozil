@@ -1,10 +1,14 @@
 export type JobTiming = 'now' | 'schedule';
 
+/** The customer's guess at the job's size (design v3). "unsure" leaves it to the worker. */
+export type JobDuration = 'quick' | 'halfDay' | 'fullDay' | 'unsure';
+
 export type JobDraft = {
   /** Key of the chosen problem chip, or null while nothing is chosen. */
   problem: string | null;
   description: string;
   timing: JobTiming;
+  duration: JobDuration;
 };
 
 export type JobProblem = {

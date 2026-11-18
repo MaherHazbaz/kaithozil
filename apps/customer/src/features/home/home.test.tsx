@@ -111,7 +111,7 @@ describe('HomeScreen', () => {
     ]) {
       expect(screen.getAllByText(text, { includeHiddenElements: true }).length).toBeGreaterThan(0);
     }
-    expect(screen.getByPlaceholderText('What needs fixing today?')).toBeOnTheScreen();
+    expect(screen.getByRole('button', { name: 'Search work or workers…' })).toBeOnTheScreen();
   });
 
   it('marks Home as the active tab', async () => {
@@ -136,12 +136,13 @@ describe('HomeScreen', () => {
     expect(dot(4, 'Safe at your door')).toBeSelected();
   });
 
-  it('reports taps on services, crew, book again, profile and tabs', async () => {
+  it('reports taps on services, crew, book again, profile, search and tabs', async () => {
     const handlers = {
       onService: jest.fn(),
       onCrew: jest.fn(),
       onBookAgain: jest.fn(),
       onProfile: jest.fn(),
+      onSearch: jest.fn(),
       onTab: jest.fn(),
     };
     await renderScreen(<HomeScreen {...designData} {...handlers} />);
@@ -149,11 +150,13 @@ describe('HomeScreen', () => {
     await fireEvent.press(screen.getByTestId('home-crew'));
     await fireEvent.press(screen.getByTestId('home-book-again'));
     await fireEvent.press(screen.getByTestId('home-profile'));
+    await fireEvent.press(screen.getByTestId('home-search'));
     await fireEvent.press(screen.getByRole('tab', { name: 'Bookings' }));
     expect(handlers.onService).toHaveBeenCalledWith('plumber');
     expect(handlers.onCrew).toHaveBeenCalledTimes(1);
     expect(handlers.onBookAgain).toHaveBeenCalledTimes(1);
     expect(handlers.onProfile).toHaveBeenCalledTimes(1);
+    expect(handlers.onSearch).toHaveBeenCalledTimes(1);
     expect(handlers.onTab).toHaveBeenCalledWith('bookings');
   });
 });

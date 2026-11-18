@@ -159,12 +159,41 @@ describe('DescribeJobScreen', () => {
     await fireEvent.press(screen.getByRole('button', { name: 'Switchboard' }));
     await fireEvent.changeText(screen.getByTestId('job-description'), 'Sparks when switched on');
     await fireEvent.press(screen.getByTestId('job-timing-schedule'));
+    await fireEvent.press(screen.getByRole('button', { name: 'Half a day' }));
     await fireEvent.press(screen.getByTestId('job-submit'));
     expect(onSubmit).toHaveBeenCalledWith({
       problem: 'switchboard',
       description: 'Sparks when switched on',
       timing: 'schedule',
+      duration: 'halfDay',
     });
+  });
+
+  it('asks how long it might take, "Not sure" first', async () => {
+    await renderScreen(<DescribeJobScreen {...designData} />);
+    expect(
+      screen.getByRole('header', { name: 'How long might it take? · எவ்வளவு நேரம்?' }),
+    ).toBeOnTheScreen();
+    for (const label of ['Quick fix (under 1 hour)', 'Half a day', 'A full day or more']) {
+      expect(screen.getByRole('button', { name: label })).not.toBeSelected();
+    }
+    expect(screen.getByRole('button', { name: "Not sure, let's decide together" })).toBeSelected();
+    const note =
+      "That's fine. The worker checks the job, then you both agree the time and price in the app before work starts.";
+    expect(screen.getByText(note)).toBeOnTheScreen();
+
+    await fireEvent.press(screen.getByRole('button', { name: 'Quick fix (under 1 hour)' }));
+    expect(screen.getByRole('button', { name: 'Quick fix (under 1 hour)' })).toBeSelected();
+    expect(screen.queryByText(note)).toBeNull();
+  });
+
+  it('offers "Choose a date and time" only when scheduling', async () => {
+    const onChooseTime = jest.fn();
+    await renderScreen(<DescribeJobScreen {...designData} onChooseTime={onChooseTime} />);
+    expect(screen.queryByRole('link', { name: 'Choose a date and time' })).toBeNull();
+    await fireEvent.press(screen.getByTestId('job-timing-schedule'));
+    await fireEvent.press(screen.getByRole('link', { name: 'Choose a date and time' }));
+    expect(onChooseTime).toHaveBeenCalledTimes(1);
   });
 
   it('reports back, add photo, voice note and change address', async () => {

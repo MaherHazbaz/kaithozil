@@ -10,6 +10,7 @@ const designData: ProfileScreenProps = {
   initials: 'PR',
   phone: '+91 98400 12345',
   addressesSummary: 'Home · Anna Nagar, and 1 more',
+  measurementsSummary: 'For tailoring · you and Amma',
 };
 
 describe('ProfileScreen', () => {
@@ -24,6 +25,8 @@ describe('ProfileScreen', () => {
       'Edit',
       'Saved addresses',
       'Home · Anna Nagar, and 1 more',
+      'Measurements',
+      'For tailoring · you and Amma',
       'Business account',
       'Regular maintenance for a society, office or shop',
       'Payments',

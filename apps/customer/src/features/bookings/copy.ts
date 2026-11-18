@@ -9,6 +9,6 @@ export const bookingsCopy = {
   pastTab: (count: number) => `Past (${count})`,
   pastHeading: 'Past',
   paid: 'Paid ✓',
-  bookAgain: 'Book again',
+  viewReceipt: 'View receipt',
   getHelp: 'Get help',
 } as const;

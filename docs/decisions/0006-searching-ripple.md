@@ -31,3 +31,10 @@ The two lavender rings, the disc and everything else stay exactly as designed. T
   screenshot pixel for pixel.
 - The timing and opacity are the developer's choice, not the designer's. If the designer specifies
   the animation, replace the values in `SearchRipple.tsx` with theirs.
+
+## Update, design v3 (2026-11-18)
+
+The designer has now specified the animation (`motion.searchWaves` in `design/tokens.json`): 3 waves,
+2.4 s each, 0.8 s apart, ease-out `cubic-bezier(0, 0, 0.2, 1)`, scale 1 to 2.29, opacity 0.35 to 0.
+`SearchRipple.tsx` was replaced by the shared `Ripple` component in `packages/ui`, which reads those
+values from the tokens. This addition is now part of the approved design.

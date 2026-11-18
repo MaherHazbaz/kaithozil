@@ -37,6 +37,8 @@ export const color = {
   dotInactive: "#CFC9DC",
   mangoBorder: "#F8E3A8",
   overlayInk: "rgba(28,23,48,0.78)",
+  dangerStrong: "#B42318",
+  waveGold: "#E2A43A",
   pageTop: "#F3EEFB",
   goldInk: "#5A3A00",
   placeholder: "#757575",
@@ -92,6 +94,8 @@ export const shadow = {
   logoSmall: [{ offsetX: 0, offsetY: 4, blurRadius: 12, spreadDistance: 0, color: "rgba(0,0,0,0.25)" }],
   logoWelcome: [{ offsetX: 0, offsetY: 12, blurRadius: 28, spreadDistance: 0, color: "rgba(0,0,0,0.30)" }],
   logoSplash: [{ offsetX: 0, offsetY: 16, blurRadius: 36, spreadDistance: 0, color: "rgba(0,0,0,0.45)" }],
+  logoUpdate: [{ offsetX: 0, offsetY: 12, blurRadius: 28, spreadDistance: 0, color: "rgba(0,0,0,0.25)" }],
+  stateIcon: [{ offsetX: 0, offsetY: 10, blurRadius: 24, spreadDistance: 0, color: "rgba(76,29,149,0.20)" }],
 } as const;
 
 /** Corner radii. */
@@ -125,6 +129,8 @@ export const radius = {
   codeDigit: 12,
   ratingStar: 12,
   statTile: 12,
+  note: 14,
+  compactButton: 12,
 } as const;
 
 /** Spacing steps. */
@@ -172,8 +178,16 @@ export const type = {
   splashWord: { size: 58, letterSpacing: 2, font: "Anton" },
 } as const;
 
+/** Repeating waves and ripples. `easing` is a CSS cubic-bezier; `scale` and `opacity` are [from, to]. */
+export const motion = {
+  searchWaves: { durationMs: 2400, staggerMs: 800, easing: [0,0,0.2,1], scale: [1,2.2917], opacity: [0.35,0] },
+  waitingRipple: { durationMs: 2400, staggerMs: 800, easing: [0,0,0.2,1], scale: [1,1.9], opacity: [0.32,0] },
+  systemRipple: { durationMs: 2400, staggerMs: 800, scale: [1,2.14], opacity: [0.32,0] },
+} as const;
+
 export type ColorName = keyof typeof color;
 export type GradientName = keyof typeof gradient;
 export type ShadowName = keyof typeof shadow;
 export type RadiusName = keyof typeof radius;
 export type TypeName = keyof typeof type;
+export type MotionName = keyof typeof motion;

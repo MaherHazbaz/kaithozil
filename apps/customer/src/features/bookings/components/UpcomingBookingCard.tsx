@@ -20,7 +20,7 @@ export function UpcomingBookingCard({ booking, onPress, testID }: UpcomingBookin
       style={styles.card}
       testID={testID}
     >
-      <IconBox icon={booking.icon} tone="lavender" size={40} />
+      <IconBox icon={booking.icon} tone={booking.iconTone ?? 'lavender'} size={40} />
       <View style={styles.text}>
         <AppText size={typeStyle.cardTitle.size} weight={typeStyle.cardTitle.weight}>
           {booking.title}

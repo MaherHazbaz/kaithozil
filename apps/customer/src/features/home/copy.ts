@@ -10,8 +10,8 @@ export const homeCopy = {
   thereAre: 'There are ',
   verifiedWorkers: (count: number) => `${count} verified workers`,
   aroundYou: ' around you.',
-  searchLabel: 'What needs fixing?',
-  searchPlaceholder: 'What needs fixing today?',
+  // Design v2+: the field is a button that opens Search workers.
+  search: 'Search work or workers…',
   voiceLabel: 'Describe by voice',
   servicesLabel: 'Services',
   carouselLabel: 'Why Kaithozhil',
@@ -25,7 +25,14 @@ export const homeCopy = {
 } as const;
 
 export type ServiceKey =
-  'electrician' | 'plumber' | 'ac' | 'carpenter' | 'tailor' | 'painter' | 'mechanic';
+  | 'electrician'
+  | 'plumber'
+  | 'ac'
+  | 'carpenter'
+  | 'tailor'
+  | 'painter'
+  | 'mechanic'
+  | 'housekeeping';
 
 export type Service = {
   key: ServiceKey;
@@ -48,4 +55,12 @@ export const services: readonly Service[] = [
   { key: 'painter', label: 'Painter', tamil: 'பெயிண்டர்', icon: 'paintRoller', tone: 'lavender' },
   // Mango continues the design's mango, lavender, lavender pattern.
   { key: 'mechanic', label: 'Mechanic', tamil: 'வாகன பழுது', icon: 'wrench', tone: 'mango' },
+  // Design v3 (Main.dc.html).
+  {
+    key: 'housekeeping',
+    label: 'Housekeeping',
+    tamil: 'வீட்டு வேலை',
+    icon: 'sparkles',
+    tone: 'lavender',
+  },
 ];

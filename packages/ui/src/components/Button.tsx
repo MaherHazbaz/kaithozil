@@ -26,8 +26,13 @@ export type GradientButtonProps = CommonProps & {
   fontSize?: number;
   /** Default 700. "Pay with UPI" is 800 (design/source/Pay.dc.html). */
   fontWeight?: 700 | 800;
-  /** Optional 22pt icon before the label (the wallet on "Pay with UPI"). */
+  /** Optional icon before the label (the wallet on "Pay with UPI"). */
   icon?: IconName;
+  /**
+   * Default 22 with a 10pt gap (Pay.dc.html). The v3 system states use 18
+   * with an 8pt gap (NoInternet.dc.html "Try again").
+   */
+  iconSize?: 18 | 22;
   /** Horizontal padding for buttons sized by their label (e.g. "Book"). */
   paddingHorizontal?: number;
 };
@@ -52,6 +57,7 @@ function GradientButton({
   fontSize = typeStyle.button.size,
   fontWeight = typeStyle.button.weight,
   icon,
+  iconSize = 22,
   paddingHorizontal = 0,
 }: GradientButtonProps & { variant: Variant }) {
   const v = VARIANT[variant];
@@ -67,15 +73,19 @@ function GradientButton({
       testID={testID}
       // Shadow on the outer view, gradient clipped to the corners inside it.
       style={[
-        { height, borderRadius: corner, boxShadow: shadow[v.shadow] },
+        // v3 draws disabled buttons flat: half opacity and no shadow.
+        { height, borderRadius: corner, boxShadow: disabled ? undefined : shadow[v.shadow] },
         disabled ? styles.disabled : null,
       ]}
     >
       <Gradient
         name={v.gradient}
-        style={[styles.fill, { borderRadius: corner, paddingHorizontal }]}
+        style={[
+          styles.fill,
+          { borderRadius: corner, paddingHorizontal, gap: iconSize === 18 ? 8 : 10 },
+        ]}
       >
-        {icon ? <Icon name={icon} size={22} color={v.text} /> : null}
+        {icon ? <Icon name={icon} size={iconSize} color={v.text} /> : null}
         <AppText size={fontSize} weight={fontWeight} color={v.text} numberOfLines={1}>
           {label}
         </AppText>
@@ -166,12 +176,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    // Between the icon and the label (Pay.dc.html).
-    gap: 10,
     overflow: 'hidden',
   },
-  // NOT in the design, which shows no disabled buttons. Half opacity is the
-  // least intrusive way to show "not yet"; screen readers get the disabled
+  // DESIGN.md (v3): disabled = 50% opacity. Screen readers get the disabled
   // state separately through accessibilityState.
   disabled: {
     opacity: 0.5,

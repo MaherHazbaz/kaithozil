@@ -13,6 +13,8 @@ import { StatusBar } from 'expo-status-bar';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { DoneSteps, type DoneStep } from '../components/DoneSteps';
+import { DoorCode } from '../components/DoorCode';
 import { ROUTE_MAP_HEIGHT, RouteMap } from '../components/RouteMap';
 import { trackingCopy } from '../copy';
 
@@ -27,8 +29,11 @@ export type TrackingScreenProps = {
   /** The heading in Tamil. It contains the worker's name, so it arrives as data. */
   titleTamil: string;
   etaMinutes: number;
-  /** The 4-digit code the customer gives the worker at the door. */
-  startCode: string;
+  progress: TrackingProgress;
+  /** Read out when the worker reaches the door (step 1). Generated on the server, never in the app. */
+  arrivalCode: string;
+  /** Read out when the customer is ready for work to begin (step 2). */
+  workStartCode: string;
   /** e.g. "Fan not working". */
   jobSummary: string;
   /** e.g. "₹400 – 700". */
@@ -39,14 +44,41 @@ export type TrackingScreenProps = {
   onCall?: () => void;
   onMessage?: () => void;
   onPay?: () => void;
+  onReportProblem?: () => void;
 };
+
+/**
+ * Where the visit is (design v3, "two door codes"). Times are already
+ * formatted for display, e.g. "4:29 PM".
+ */
+export type TrackingProgress =
+  | { stage: 'onTheWay' }
+  | { stage: 'arrived'; arrivedAt: string }
+  | { stage: 'workStarted'; arrivedAt: string; startedAt: string };
+
+function doneSteps(
+  progress: Exclude<TrackingProgress, { stage: 'onTheWay' }>,
+  firstName: string,
+): DoneStep[] {
+  const arrived = {
+    title: trackingCopy.arrived(firstName, progress.arrivedAt),
+    detail: trackingCopy.arrivedDetail,
+  };
+  if (progress.stage === 'arrived') return [arrived];
+  return [
+    arrived,
+    { title: trackingCopy.started(progress.startedAt), detail: trackingCopy.startedDetail },
+  ];
+}
 
 /** Worker on the way (design/source/Tracking.dc.html). */
 export function TrackingScreen({
   worker,
   titleTamil,
   etaMinutes,
-  startCode,
+  progress,
+  arrivalCode,
+  workStartCode,
   jobSummary,
   estimateRange,
   onBack,
@@ -54,6 +86,7 @@ export function TrackingScreen({
   onCall,
   onMessage,
   onPay,
+  onReportProblem,
 }: TrackingScreenProps) {
   const insets = useSafeAreaInsets();
 
@@ -124,29 +157,29 @@ export function TrackingScreen({
             </Tappable>
           </Card>
 
-          <View style={styles.codeCard}>
-            <AppText size={13} weight={700} color={color.mangoText}>
-              {trackingCopy.codeLabel}
-            </AppText>
-            {/* One element for screen readers: "Start code 4 8 2 7". */}
-            <View
-              style={styles.digits}
-              accessible
-              accessibilityLabel={trackingCopy.codeSpoken(startCode)}
-              testID="tracking-code"
-            >
-              {startCode.split('').map((digit, index) => (
-                // The digits never reorder, so the position is a safe key.
-                <View key={index} style={styles.digit}>
-                  <AppText size={26} weight={800} color={color.mangoInk}>
-                    {digit}
-                  </AppText>
-                </View>
-              ))}
-            </View>
-            <AppText size={12} color={color.mangoText}>
-              {trackingCopy.codeNote}
-            </AppText>
+          <View style={styles.codes}>
+            {progress.stage === 'onTheWay' ? (
+              <DoorCode
+                title={trackingCopy.arrivalTitle}
+                titleTamil={trackingCopy.arrivalTitleTamil}
+                code={arrivalCode}
+                spokenLabel={trackingCopy.arrivalSpoken(arrivalCode)}
+                note={trackingCopy.arrivalNote(worker.firstName)}
+                testID="tracking-arrival-code"
+              />
+            ) : (
+              <DoneSteps steps={doneSteps(progress, worker.firstName)} testID="tracking-done" />
+            )}
+            {progress.stage === 'arrived' ? (
+              <DoorCode
+                title={trackingCopy.workStartTitle}
+                titleTamil={trackingCopy.workStartTitleTamil}
+                code={workStartCode}
+                spokenLabel={trackingCopy.workStartSpoken(workStartCode)}
+                note={trackingCopy.workStartNote}
+                testID="tracking-work-start-code"
+              />
+            ) : null}
           </View>
 
           <View style={styles.summary}>
@@ -174,6 +207,19 @@ export function TrackingScreen({
             >
               <AppText size={14} weight={700} color={color.muted}>
                 {trackingCopy.cancel}
+              </AppText>
+            </Tappable>
+            <Tappable
+              onPress={onReportProblem}
+              accessibilityRole="button"
+              style={styles.report}
+              // The design draws this link 40pt tall; hitSlop makes the touch
+              // area 44pt without moving anything.
+              hitSlop={{ top: 2, bottom: 2 }}
+              testID="tracking-report"
+            >
+              <AppText size={14} weight={700} color={color.muted}>
+                {trackingCopy.reportProblem}
               </AppText>
             </Tappable>
           </View>
@@ -249,26 +295,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: color.borderStrong,
   },
-  codeCard: {
-    backgroundColor: color.mangoTint,
-    borderWidth: 1,
-    borderColor: color.mangoBorder,
-    borderRadius: radius.codeCard,
-    padding: 14,
-    gap: 8,
-  },
-  digits: {
-    flexDirection: 'row',
-    gap: 8,
-  },
-  digit: {
-    width: 48,
-    height: 52,
-    borderRadius: radius.codeDigit,
-    backgroundColor: color.white,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  codes: { gap: 10 },
   summary: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -280,6 +307,11 @@ const styles = StyleSheet.create({
   },
   cancel: {
     height: 44,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  report: {
+    height: 40,
     alignItems: 'center',
     justifyContent: 'center',
   },

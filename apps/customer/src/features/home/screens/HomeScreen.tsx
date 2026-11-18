@@ -13,14 +13,13 @@ import {
   ScreenBackground,
   Tappable,
   color,
-  fontFamily,
   radius,
   shadow,
   spacing,
   type as typeStyle,
 } from '@kaithozhil/ui';
 import { StatusBar } from 'expo-status-bar';
-import { ScrollView, StyleSheet, TextInput, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { CUSTOMER_TABS, type CustomerTab } from '@/features/navigation/customerTabs';
@@ -38,6 +37,8 @@ export type HomeScreenProps = {
   verifiedWorkerCount: number;
   bookAgain: { initials: string; name: string; trade: string; rating: string };
   onProfile?: () => void;
+  /** The search field opens Search workers. */
+  onSearch?: () => void;
   onService?: (service: ServiceKey) => void;
   onVoice?: () => void;
   onCrew?: () => void;
@@ -53,6 +54,7 @@ export function HomeScreen({
   verifiedWorkerCount,
   bookAgain,
   onProfile,
+  onSearch,
   onService,
   onVoice,
   onCrew,
@@ -122,17 +124,17 @@ export function HomeScreen({
           </View>
 
           <View style={styles.searchRow}>
-            <View style={styles.searchField}>
+            <Tappable
+              onPress={onSearch}
+              accessibilityRole="button"
+              style={styles.searchField}
+              testID="home-search"
+            >
               <Icon name="search" size={20} color={color.purple} />
-              <TextInput
-                placeholder={homeCopy.searchPlaceholder}
-                placeholderTextColor={color.placeholder}
-                accessibilityLabel={homeCopy.searchLabel}
-                maxFontSizeMultiplier={1.3}
-                style={styles.searchInput}
-                testID="home-search"
-              />
-            </View>
+              <AppText size={15} color={color.muted} numberOfLines={1} style={styles.searchText}>
+                {homeCopy.search}
+              </AppText>
+            </Tappable>
             <GoldIconButton
               icon="mic"
               onPress={onVoice}
@@ -281,15 +283,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     boxShadow: shadow.searchField,
   },
-  searchInput: {
-    flexGrow: 1,
+  searchText: {
     flexShrink: 1,
-    minWidth: 0,
-    padding: 0,
-    fontFamily: fontFamily.body,
-    fontSize: 15,
-    color: color.ink,
-    includeFontPadding: false,
   },
   tiles: {
     marginTop: -40,

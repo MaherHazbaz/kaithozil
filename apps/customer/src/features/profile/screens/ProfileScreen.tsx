@@ -21,7 +21,15 @@ import { CUSTOMER_TABS, type CustomerTab } from '@/features/navigation/customerT
 import { profileCopy } from '../copy';
 
 export type ProfileRow =
-  'addresses' | 'business' | 'payments' | 'language' | 'safety' | 'help' | 'terms' | 'logOut';
+  | 'addresses'
+  | 'measurements'
+  | 'business'
+  | 'payments'
+  | 'language'
+  | 'safety'
+  | 'help'
+  | 'terms'
+  | 'logOut';
 
 export type ProfileScreenProps = {
   /** Shown data. The route passes the design's sample values until Supabase exists (Sprint 2). */
@@ -31,6 +39,8 @@ export type ProfileScreenProps = {
   phone: string;
   /** e.g. "Home · Anna Nagar, and 1 more". */
   addressesSummary: string;
+  /** Whose tailoring measurements are saved, e.g. "For tailoring · you and Amma". */
+  measurementsSummary: string;
   onEdit?: () => void;
   onRow?: (row: ProfileRow) => void;
   onTab?: (tab: CustomerTab) => void;
@@ -42,6 +52,7 @@ export function ProfileScreen({
   initials,
   phone,
   addressesSummary,
+  measurementsSummary,
   onEdit,
   onRow,
   onTab,
@@ -59,6 +70,12 @@ export function ProfileScreen({
       icon: 'mapPin',
       title: profileCopy.savedAddresses,
       subtitle: addressesSummary,
+    },
+    {
+      key: 'measurements',
+      icon: 'ruler',
+      title: profileCopy.measurements,
+      subtitle: measurementsSummary,
     },
     {
       key: 'business',

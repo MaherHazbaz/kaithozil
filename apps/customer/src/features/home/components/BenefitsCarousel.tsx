@@ -81,7 +81,7 @@ const SLIDES: readonly Slide[] = [
     gradient: 'slideLavender',
     tamil: 'பாதுகாப்பான சேவை',
     title: 'Safe at your door',
-    body: 'A 4-digit start code makes sure the right worker arrives.',
+    body: 'Two door codes confirm the right worker arrived and started.',
     labelColor: color.purple,
     titleColor: color.ink,
     bodyColor: color.muted,

@@ -1,9 +1,11 @@
-import type { IconName } from '@kaithozhil/ui';
+import type { IconBoxTone, IconName } from '@kaithozhil/ui';
 
 /** A job that has not finished yet. */
 export type UpcomingBooking = {
   id: string;
   icon: IconName;
+  /** Default lavender. The housekeeping trial card (needs a decision) is mango. */
+  iconTone?: IconBoxTone;
   /** e.g. "Painter · 2 bedroom walls". */
   title: string;
   /** When, and any other detail, e.g. "Sat 15 Nov, 9 AM". */

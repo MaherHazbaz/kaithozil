@@ -14,9 +14,11 @@ export default function ProfileRoute() {
       initials="PR"
       phone="+91 98400 12345"
       addressesSummary="Home · Anna Nagar, and 1 more"
+      measurementsSummary="For tailoring · you and Amma"
       onRow={(row) => {
-        // In the design, Log out leads to Welcome. There is no session to end
-        // yet; signing out of Supabase is added here in Sprint 2.
+        // In design v3, Log out opens "Log out or delete account", which is
+        // not built yet; until then it goes straight to Welcome. There is no
+        // session to end yet; signing out of Supabase is added in Sprint 2.
         if (row === 'logOut') router.replace('/welcome');
       }}
       onTab={(tab) => {

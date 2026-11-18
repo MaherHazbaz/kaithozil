@@ -8,6 +8,21 @@ import { BookingsScreen, type BookingsScreenProps } from './screens/BookingsScre
 const designData: BookingsScreenProps = {
   upcoming: [
     {
+      id: 'help-trial-1',
+      icon: 'calendar',
+      iconTone: 'mango',
+      title: 'Trial day done · Lakshmi R.',
+      detail: 'Housekeeping · decide if you want to continue',
+      status: { label: 'Decide', tone: 'mango' },
+    },
+    {
+      id: 'help-1',
+      icon: 'sparkles',
+      title: 'Regular help · Lakshmi R.',
+      detail: 'Housekeeping · Mon – Sat, 6 – 8 AM',
+      status: { label: 'Active', tone: 'purple' },
+    },
+    {
       id: 'crew-1',
       icon: 'brickWall',
       title: 'Construction crew · 7 workers',
@@ -48,8 +63,14 @@ describe('BookingsScreen', () => {
     expect(screen.getByRole('header', { name: 'Your bookings' })).toBeOnTheScreen();
     for (const text of [
       'உங்கள் முன்பதிவுகள்',
-      'Upcoming (2)',
+      'Upcoming (4)',
       'Past (2)',
+      'Trial day done · Lakshmi R.',
+      'Housekeeping · decide if you want to continue',
+      'Decide',
+      'Regular help · Lakshmi R.',
+      'Housekeeping · Mon – Sat, 6 – 8 AM',
+      'Active',
       'Construction crew · 7 workers',
       'From tomorrow, 8 AM · 5 days · New house',
       'Team confirmed',
@@ -66,12 +87,12 @@ describe('BookingsScreen', () => {
 
   it('starts on Upcoming and switches to Past', async () => {
     await renderScreen(<BookingsScreen {...designData} />);
-    expect(tabButton('Upcoming (2)')).toBeSelected();
+    expect(tabButton('Upcoming (4)')).toBeSelected();
     expect(screen.queryByText('Fan repair · Murugan K.')).not.toBeOnTheScreen();
 
     await fireEvent.press(tabButton('Past (2)'));
     expect(tabButton('Past (2)')).toBeSelected();
-    expect(tabButton('Upcoming (2)')).not.toBeSelected();
+    expect(tabButton('Upcoming (4)')).not.toBeSelected();
     expect(screen.queryByText('Painter · 2 bedroom walls')).not.toBeOnTheScreen();
     for (const text of [
       'Past',
@@ -85,7 +106,7 @@ describe('BookingsScreen', () => {
       expect(screen.getByText(text)).toBeOnTheScreen();
     }
     expect(screen.getAllByText('Paid ✓')).toHaveLength(2);
-    expect(screen.getAllByText('Book again')).toHaveLength(2);
+    expect(screen.getAllByText('View receipt')).toHaveLength(2);
     expect(screen.getAllByText('Get help')).toHaveLength(2);
   });
 
@@ -101,10 +122,10 @@ describe('BookingsScreen', () => {
     expect(screen.getByRole('tab', { name: 'Home' })).not.toBeSelected();
   });
 
-  it('reports which booking was opened, booked again or needs help, and tab taps', async () => {
+  it('reports which booking was opened, its receipt viewed or help asked, and tab taps', async () => {
     const handlers = {
       onOpenBooking: jest.fn(),
-      onBookAgain: jest.fn(),
+      onViewReceipt: jest.fn(),
       onGetHelp: jest.fn(),
       onTab: jest.fn(),
     };
@@ -114,10 +135,10 @@ describe('BookingsScreen', () => {
 
     await fireEvent.press(tabButton('Past (2)'));
     await fireEvent.press(
-      screen.getByRole('button', { name: 'Book again: Fan repair · Murugan K.' }),
+      screen.getByRole('button', { name: 'View receipt: Fan repair · Murugan K.' }),
     );
     await fireEvent.press(screen.getByRole('button', { name: 'Get help: Tap leak · Ravi S.' }));
-    expect(handlers.onBookAgain).toHaveBeenCalledWith('KT-20481');
+    expect(handlers.onViewReceipt).toHaveBeenCalledWith('KT-20481');
     expect(handlers.onGetHelp).toHaveBeenCalledWith('KT-19977');
 
     await fireEvent.press(screen.getByRole('tab', { name: 'Home' }));

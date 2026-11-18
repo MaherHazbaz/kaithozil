@@ -20,7 +20,7 @@ export type BottomNavProps<Key extends string> = {
 };
 
 /**
- * Floating bottom navigation: height 68, margin 0 14 16 14, radius 24.
+ * Floating bottom navigation: height 68, margin 8 14 16 14, radius 24.
  * The active tab sits on a lavender pill (radius 18).
  */
 export function BottomNav<Key extends string>({
@@ -58,6 +58,8 @@ const styles = StyleSheet.create({
   bar: {
     height: size.navHeight,
     flexShrink: 0,
+    // v3: an 8pt gap above the bar, so the last item of the page never touches it.
+    marginTop: 8,
     marginHorizontal: 14,
     padding: 6,
     flexDirection: 'row',

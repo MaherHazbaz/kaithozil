@@ -4,14 +4,29 @@ import { BookingsScreen } from '@/features/bookings/screens/BookingsScreen';
 
 // Route "/bookings". The lists below are the sample data shown in
 // design/source/Bookings.dc.html; they are replaced by real data from Supabase
-// in Sprint 2. Opening a booking, Book again and Get help are wired as the
-// screens they lead to (Crew confirmed, Finding a worker, Worker profile,
-// Support) are built.
+// in Sprint 2. Opening a booking, View receipt and Get help are wired as the
+// screens they lead to (After the trial day, Regular help, Crew confirmed,
+// Finding a worker, Job receipt, Support) are built.
 export default function BookingsRoute() {
   const router = useRouter();
   return (
     <BookingsScreen
       upcoming={[
+        {
+          id: 'help-trial-1',
+          icon: 'calendar',
+          iconTone: 'mango',
+          title: 'Trial day done · Lakshmi R.',
+          detail: 'Housekeeping · decide if you want to continue',
+          status: { label: 'Decide', tone: 'mango' },
+        },
+        {
+          id: 'help-1',
+          icon: 'sparkles',
+          title: 'Regular help · Lakshmi R.',
+          detail: 'Housekeeping · Mon – Sat, 6 – 8 AM',
+          status: { label: 'Active', tone: 'purple' },
+        },
         {
           id: 'crew-1',
           icon: 'brickWall',

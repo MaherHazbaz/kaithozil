@@ -35,9 +35,7 @@ describe('SearchingScreen', () => {
   it('draws three ripple waves around the search icon', async () => {
     await renderScreen(<SearchingScreen {...designData} />);
     // The rings are decoration, hidden from screen readers, so the query must opt in.
-    expect(
-      screen.getAllByTestId('search-ripple-wave', { includeHiddenElements: true }),
-    ).toHaveLength(3);
+    expect(screen.getAllByTestId('ripple-wave', { includeHiddenElements: true })).toHaveLength(3);
   });
 
   it('cancels the request', async () => {

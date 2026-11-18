@@ -85,7 +85,9 @@
     "searchField": { "color": "rgba(0,0,0,0.18)", "x": 0, "y": 8, "blur": 20 },
     "logoSmall": { "color": "rgba(0,0,0,0.25)", "x": 0, "y": 4, "blur": 12 },
     "logoWelcome": { "color": "rgba(0,0,0,0.30)", "x": 0, "y": 12, "blur": 28 },
-    "logoSplash": { "color": "rgba(0,0,0,0.45)", "x": 0, "y": 16, "blur": 36 }
+    "logoSplash": { "color": "rgba(0,0,0,0.45)", "x": 0, "y": 16, "blur": 36 },
+    "logoUpdate": { "color": "rgba(0,0,0,0.25)", "x": 0, "y": 12, "blur": 28 },
+    "stateIcon": { "color": "rgba(76,29,149,0.20)", "x": 0, "y": 10, "blur": 24 }
   },
   "radius": {
     "statusPill": 8,
@@ -106,7 +108,9 @@
     "codeCard": 16,
     "codeDigit": 12,
     "ratingStar": 12,
-    "statTile": 12
+    "statTile": 12,
+    "note": 14,
+    "compactButton": 12
   },
   "sources": {
     "color.pageTop": "Welcome/Login/Main root background gradient, first stop",
@@ -136,6 +140,8 @@
     "shadow.logoSmall": "Main.dc.html hero logo",
     "shadow.logoWelcome": "Welcome.dc.html logo",
     "shadow.logoSplash": "Splash.dc.html logo",
+    "shadow.logoUpdate": "UpdateApp.dc.html logo",
+    "shadow.stateIcon": "NoInternet, ErrorState, EmptyState and Maintenance .dc.html: the 84px icon disc",
     "radius.statusPill": "DESIGN.md shared components: status pill; Bookings.dc.html",
     "radius.segment": "Bookings.dc.html Upcoming / Past buttons",
     "radius.segmentTrack": "Bookings.dc.html Upcoming / Past track",
@@ -154,6 +160,8 @@
     "radius.codeCard": "Tracking.dc.html start code card",
     "radius.codeDigit": "Tracking.dc.html start code digit boxes",
     "radius.ratingStar": "Pay.dc.html rating star buttons",
-    "radius.statTile": "Book.dc.html Rating / Jobs done / Experience tiles"
+    "radius.statTile": "Book.dc.html Rating / Jobs done / Experience tiles",
+    "radius.note": "NoInternet.dc.html info notes; ErrorState.dc.html error reference box",
+    "radius.compactButton": "ErrorState.dc.html Copy button"
   }
 }

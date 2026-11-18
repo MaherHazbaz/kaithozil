@@ -1,6 +1,12 @@
 import { useState } from 'react';
 
-import { missingJobDetail, type JobDraft, type JobProblem, type JobTiming } from '../jobDraft';
+import {
+  missingJobDetail,
+  type JobDraft,
+  type JobDuration,
+  type JobProblem,
+  type JobTiming,
+} from '../jobDraft';
 
 export type JobDraftInitial = Partial<JobDraft>;
 
@@ -14,14 +20,18 @@ export function useJobDraft(problems: readonly JobProblem[], initial: JobDraftIn
   const [problem, setProblem] = useState<string | null>(initial.problem ?? null);
   const [description, setDescription] = useState(initial.description ?? '');
   const [timing, setTiming] = useState<JobTiming>(initial.timing ?? 'now');
+  // Preselected in the design: most customers can't judge the size of a repair.
+  const [duration, setDuration] = useState<JobDuration>(initial.duration ?? 'unsure');
 
   return {
     problem,
     description,
     timing,
+    duration,
     setProblem,
     setDescription,
     setTiming,
+    setDuration,
     /** What is still needed before the job can be sent; null when ready. */
     missing: missingJobDetail({ problem, description }, problems),
   };

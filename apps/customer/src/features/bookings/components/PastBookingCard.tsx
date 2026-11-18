@@ -7,13 +7,18 @@ import type { PastBooking } from '../types';
 
 export type PastBookingCardProps = {
   booking: PastBooking;
-  onBookAgain?: () => void;
+  onViewReceipt?: () => void;
   onGetHelp?: () => void;
   testID?: string;
 };
 
-/** One finished job with its amount, and Book again / Get help buttons. */
-export function PastBookingCard({ booking, onBookAgain, onGetHelp, testID }: PastBookingCardProps) {
+/** One finished job with its amount, and View receipt / Get help buttons. */
+export function PastBookingCard({
+  booking,
+  onViewReceipt,
+  onGetHelp,
+  testID,
+}: PastBookingCardProps) {
   return (
     <Card style={styles.card} testID={testID}>
       <View style={styles.summary}>
@@ -38,12 +43,12 @@ export function PastBookingCard({ booking, onBookAgain, onGetHelp, testID }: Pas
       <View style={styles.actions}>
         <View style={styles.action}>
           <SecondaryButton
-            label={bookingsCopy.bookAgain}
+            label={bookingsCopy.viewReceipt}
             // Screen readers hear which job each button belongs to.
-            accessibilityLabel={`${bookingsCopy.bookAgain}: ${booking.title}`}
+            accessibilityLabel={`${bookingsCopy.viewReceipt}: ${booking.title}`}
             height={44}
-            onPress={onBookAgain}
-            testID={testID ? `${testID}-book-again` : undefined}
+            onPress={onViewReceipt}
+            testID={testID ? `${testID}-view-receipt` : undefined}
           />
         </View>
         <View style={styles.action}>
