@@ -58,6 +58,22 @@ export default function BookingsRoute() {
           amountRupees: 350,
         },
       ]}
+      onOpenBooking={(id) => {
+        // Housekeeping cards (sample ids). The trial card opens the decision;
+        // "help-trial-1" stands for arrangement "help-1" until Sprint 2.
+        if (id === 'help-trial-1') {
+          router.push({ pathname: '/help/[id]/trial', params: { id: 'help-1' } });
+          return;
+        }
+        if (id === 'help-1') {
+          router.push({ pathname: '/help/[id]', params: { id } });
+          return;
+        }
+        // The construction crew card opens Your crew (CrewTeam.dc.html).
+        if (id === 'crew-1') {
+          router.push({ pathname: '/crew/[id]', params: { id } });
+        }
+      }}
       onTab={(tab) => {
         // `replace` swaps one tab screen for another, so Back does not walk
         // through every tab you visited.

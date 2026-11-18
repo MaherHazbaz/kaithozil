@@ -12,13 +12,26 @@ export type StepperProps = {
   /** Screen-reader labels, e.g. "Fewer days" / "More days". */
   decreaseLabel: string;
   increaseLabel: string;
+  /** Size of the number. Default 22 (Crew); HousekeepingBook.dc.html uses 20. */
+  valueSize?: number;
+  /** Width of the number's box. Default 32; HousekeepingBook.dc.html uses 30. */
+  valueWidth?: number;
 };
 
 /**
  * Two 44 x 44 buttons (outlined minus, filled purple plus) around a bold number.
  * Values from design/source/Crew.dc.html.
  */
-export function Stepper({ value, onChange, min, max, decreaseLabel, increaseLabel }: StepperProps) {
+export function Stepper({
+  value,
+  onChange,
+  min,
+  max,
+  decreaseLabel,
+  increaseLabel,
+  valueSize = 22,
+  valueWidth = 32,
+}: StepperProps) {
   const atMin = value <= min;
   const atMax = value >= max;
   return (
@@ -37,10 +50,10 @@ export function Stepper({ value, onChange, min, max, decreaseLabel, increaseLabe
         </AppText>
       </Tappable>
       <AppText
-        size={22}
+        size={valueSize}
         weight={800}
         align="center"
-        style={styles.value}
+        style={{ width: valueWidth }}
         // Announce the new number when it changes (the design's aria-live="polite").
         accessibilityLiveRegion="polite"
       >
@@ -82,8 +95,5 @@ const styles = StyleSheet.create({
   },
   plus: {
     backgroundColor: color.purple,
-  },
-  value: {
-    width: 32,
   },
 });

@@ -16,9 +16,24 @@
     "mapGround": "#ECE8F4",
     "starBorder": "#F3D9B5",
     "starTint": "#FEF6EC",
-    "starOff": "#8A979E"
+    "starOff": "#8A979E",
+    "mapBlock": "#DCD5EA",
+    "recording": "#C8553D",
+    "onHeroFillSoft": "rgba(255,255,255,0.14)",
+    "onHeroBorderStrong": "rgba(255,255,255,0.28)",
+    "onHeroPanel": "rgba(255,255,255,0.10)",
+    "onHeroPanelBorder": "rgba(255,255,255,0.18)",
+    "photoBadge": "rgba(46,15,94,0.82)"
   },
   "gradient": {
+    "homePage": {
+      "angle": 180,
+      "stops": [
+        ["#E6DCF6", 0],
+        ["#EFEAF8", 0.35],
+        ["#F6F3FB", 1]
+      ]
+    },
     "welcomeHeader": {
       "angle": 160,
       "stops": [
@@ -78,16 +93,96 @@
         ["#DDD3F5", 0.75],
         ["#7A4BC7", 1]
       ]
+    },
+    "photoPlaceholder3": {
+      "angle": 135,
+      "stops": [
+        ["#C9BCEB", 0],
+        ["#EFE9FB", 1]
+      ]
+    },
+    "photoPlaceholder4": {
+      "angle": 135,
+      "stops": [
+        ["#EFE9FB", 0],
+        ["#FEF3C7", 1]
+      ]
+    },
+    "photoCaption": {
+      "angle": 180,
+      "stops": [
+        ["rgba(28,23,48,0)", 0],
+        ["rgba(28,23,48,0.72)", 1]
+      ]
     }
   },
   "shadow": {
-    "tile": { "color": "rgba(59,21,116,0.12)", "x": 0, "y": 8, "blur": 22 },
-    "searchField": { "color": "rgba(0,0,0,0.18)", "x": 0, "y": 8, "blur": 20 },
-    "logoSmall": { "color": "rgba(0,0,0,0.25)", "x": 0, "y": 4, "blur": 12 },
-    "logoWelcome": { "color": "rgba(0,0,0,0.30)", "x": 0, "y": 12, "blur": 28 },
-    "logoSplash": { "color": "rgba(0,0,0,0.45)", "x": 0, "y": 16, "blur": 36 },
-    "logoUpdate": { "color": "rgba(0,0,0,0.25)", "x": 0, "y": 12, "blur": 28 },
-    "stateIcon": { "color": "rgba(76,29,149,0.20)", "x": 0, "y": 10, "blur": 24 }
+    "tile": {
+      "color": "rgba(59,21,116,0.12)",
+      "x": 0,
+      "y": 8,
+      "blur": 22
+    },
+    "searchField": {
+      "color": "rgba(0,0,0,0.18)",
+      "x": 0,
+      "y": 8,
+      "blur": 20
+    },
+    "logoSmall": {
+      "color": "rgba(0,0,0,0.25)",
+      "x": 0,
+      "y": 4,
+      "blur": 12
+    },
+    "logoWelcome": {
+      "color": "rgba(0,0,0,0.30)",
+      "x": 0,
+      "y": 12,
+      "blur": 28
+    },
+    "logoSplash": {
+      "color": "rgba(0,0,0,0.45)",
+      "x": 0,
+      "y": 16,
+      "blur": 36
+    },
+    "logoUpdate": {
+      "color": "rgba(0,0,0,0.25)",
+      "x": 0,
+      "y": 12,
+      "blur": 28
+    },
+    "stateIcon": {
+      "color": "rgba(76,29,149,0.20)",
+      "x": 0,
+      "y": 10,
+      "blur": 24
+    },
+    "segmentOn": {
+      "color": "rgba(59,21,116,0.10)",
+      "x": 0,
+      "y": 2,
+      "blur": 8
+    },
+    "mapButton": {
+      "color": "rgba(0,0,0,0.12)",
+      "x": 0,
+      "y": 6,
+      "blur": 16
+    },
+    "mapChip": {
+      "color": "rgba(0,0,0,0.15)",
+      "x": 0,
+      "y": 6,
+      "blur": 16
+    },
+    "dayChipOn": {
+      "color": "rgba(76,29,149,0.25)",
+      "x": 0,
+      "y": 8,
+      "blur": 18
+    }
   },
   "radius": {
     "statusPill": 8,
@@ -110,9 +205,19 @@
     "ratingStar": 12,
     "statTile": 12,
     "note": 14,
-    "compactButton": 12
+    "compactButton": 12,
+    "choiceCard": 18,
+    "tickBox": 8,
+    "photoTile": 10,
+    "bubble": 18,
+    "bubbleTail": 4,
+    "noteLarge": 16,
+    "payAppBadge": 9,
+    "receiptCard": 22,
+    "calendarDay": 10
   },
   "sources": {
+    "radius.calendarDay": "HousekeepingPlan.dc.html attendance calendar day cell (border-radius 10px)",
     "color.pageTop": "Welcome/Login/Main root background gradient, first stop",
     "color.goldInk": "Main.dc.html carousel slide 2 label and body",
     "color.placeholder": "Main.dc.html search input placeholder: the browser default grey as rendered in design/screenshots/Main.png",
@@ -128,6 +233,7 @@
     "color.starBorder": "Pay.dc.html rating star button border (chosen)",
     "color.starTint": "Pay.dc.html rating star button background (chosen)",
     "color.starOff": "Pay.dc.html rating star (not chosen)",
+    "gradient.homePage": "Owner change (2026-11-18): Home's page background, one step darker than gradient.page from Main.dc.html",
     "gradient.welcomeHeader": "Welcome.dc.html header",
     "gradient.slideNight": "Main.dc.html carousel slide 3",
     "gradient.slideLavender": "Main.dc.html carousel slide 4",
@@ -162,6 +268,28 @@
     "radius.ratingStar": "Pay.dc.html rating star buttons",
     "radius.statTile": "Book.dc.html Rating / Jobs done / Experience tiles",
     "radius.note": "NoInternet.dc.html info notes; ErrorState.dc.html error reference box",
-    "radius.compactButton": "ErrorState.dc.html Copy button"
+    "radius.compactButton": "ErrorState.dc.html Copy button",
+    "shadow.segmentOn": "Legal.dc.html selected tab (Terms / Privacy / Your data)",
+    "radius.choiceCard": "Language.dc.html language cards; Legal.dc.html Your data list",
+    "radius.tickBox": "DeleteAccount.dc.html \"I understand\" tick box",
+    "shadow.mapButton": "AddressEdit.dc.html round back button over the map",
+    "shadow.mapChip": "AddressEdit.dc.html \"Use my location\" pill over the map",
+    "shadow.dayChipOn": "Schedule.dc.html selected day",
+    "color.mapBlock": "AddressEdit.dc.html map illustration buildings",
+    "color.recording": "Media.dc.html red dot while a voice note is recording",
+    "color.onHeroFillSoft": "WorkerProfile.dc.html back and Save buttons on the hero",
+    "color.onHeroBorderStrong": "WorkerProfile.dc.html back and Save button borders",
+    "color.onHeroPanel": "WorkerProfile.dc.html stats panel on the hero",
+    "color.onHeroPanelBorder": "WorkerProfile.dc.html and JobProgress.dc.html stats panel border",
+    "color.photoBadge": "WorkerProfile.dc.html \"Kaithozhil job\" badge on work photos",
+    "gradient.photoPlaceholder3": "WorkerProfile.dc.html and Search.dc.html third work-photo tile",
+    "gradient.photoPlaceholder4": "WorkerProfile.dc.html work-photo tile",
+    "gradient.photoCaption": "WorkerProfile.dc.html caption fade over work photos",
+    "radius.photoTile": "Search.dc.html and WorkerProfile.dc.html work-photo tiles",
+    "radius.bubble": "Ticket.dc.html and Chat.dc.html chat bubbles",
+    "radius.bubbleTail": "Ticket.dc.html and Chat.dc.html chat bubble corner next to the sender",
+    "radius.noteLarge": "Addresses.dc.html privacy note; Payments.dc.html \"You pay workers directly\" card",
+    "radius.payAppBadge": "Pay.dc.html UPI app letter badges; Receipt.dc.html logo",
+    "radius.receiptCard": "Receipt.dc.html receipt card"
   }
 }

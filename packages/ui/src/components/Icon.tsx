@@ -190,6 +190,202 @@ const ICONS = {
     { t: 'path', d: 'M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2' },
     { t: 'circle', cx: 12, cy: 7, r: 4 },
   ],
+  // Settings screens (Language, Safety, Legal, DeleteAccount .dc.html).
+  languages: [
+    { t: 'path', d: 'm5 8 6 6' },
+    { t: 'path', d: 'm4 14 6-6 2-3' },
+    { t: 'path', d: 'M2 5h12' },
+    { t: 'path', d: 'M7 2h1' },
+    { t: 'path', d: 'm22 22-5-10-5 10' },
+    { t: 'path', d: 'M14 18h6' },
+  ],
+  volume: [
+    { t: 'polygon', points: '11 5 6 9 2 9 2 15 6 15 11 19 11 5' },
+    { t: 'path', d: 'M15.54 8.46a5 5 0 0 1 0 7.07' },
+  ],
+  type: [{ t: 'polyline', points: '4 7 4 4 20 4 20 7' }, line(9, 20, 15, 20), line(12, 4, 12, 20)],
+  plus: [{ t: 'path', d: 'M12 5v14M5 12h14' }],
+  users: [
+    { t: 'path', d: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2' },
+    { t: 'circle', cx: 9, cy: 7, r: 4 },
+    { t: 'path', d: 'M23 21v-2a4 4 0 0 0-3-3.87' },
+    { t: 'path', d: 'M16 3.13a4 4 0 0 1 0 7.75' },
+  ],
+  scale: [
+    { t: 'path', d: 'm16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z' },
+    { t: 'path', d: 'm2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z' },
+    { t: 'path', d: 'M7 21h10' },
+    { t: 'path', d: 'M12 3v18' },
+    { t: 'path', d: 'M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2' },
+  ],
+  idCard: [
+    { t: 'rect', x: 2, y: 5, width: 20, height: 14, rx: 2 },
+    { t: 'circle', cx: 8, cy: 12, r: 2 },
+    line(13, 10, 18, 10),
+    line(13, 14, 18, 14),
+  ],
+  eye: [
+    { t: 'path', d: 'M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z' },
+    { t: 'circle', cx: 12, cy: 12, r: 3 },
+  ],
+  clock: [
+    { t: 'circle', cx: 12, cy: 12, r: 10 },
+    { t: 'polyline', points: '12 6 12 12 16 14' },
+  ],
+  mail: [
+    { t: 'rect', x: 2, y: 4, width: 20, height: 16, rx: 2 },
+    { t: 'path', d: 'm22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7' },
+  ],
+  pencil: [
+    { t: 'path', d: 'M12 20h9' },
+    { t: 'path', d: 'M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z' },
+  ],
+  trash: [
+    { t: 'polyline', points: '3 6 5 6 21 6' },
+    { t: 'path', d: 'M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6' },
+  ],
+  // Account, job details and search screens (design v3).
+  plusLines: [line(12, 5, 12, 19), line(5, 12, 19, 12)],
+  x: [line(18, 6, 6, 18), line(6, 6, 18, 18)],
+  stop: [{ t: 'rect', x: 6, y: 6, width: 12, height: 12, rx: 2 }],
+  play: [{ t: 'polygon', points: '6 3 20 12 6 21 6 3' }],
+  image: [
+    { t: 'rect', x: 3, y: 3, width: 18, height: 18, rx: 2 },
+    { t: 'circle', cx: 9, cy: 9, r: 2 },
+    { t: 'path', d: 'm21 15-3.09-3.09a2 2 0 0 0-2.82 0L6 21' },
+  ],
+  locate: [
+    line(2, 12, 5, 12),
+    line(19, 12, 22, 12),
+    line(12, 2, 12, 5),
+    line(12, 19, 12, 22),
+    { t: 'circle', cx: 12, cy: 12, r: 7 },
+    { t: 'circle', cx: 12, cy: 12, r: 3 },
+  ],
+  lock: [
+    { t: 'rect', x: 3, y: 11, width: 18, height: 11, rx: 2 },
+    { t: 'path', d: 'M7 11V7a5 5 0 0 1 10 0v4' },
+  ],
+  paperclip: [
+    {
+      t: 'path',
+      d: 'm21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48',
+    },
+  ],
+  send: [
+    { t: 'path', d: 'm22 2-7 20-4-9-9-4Z' },
+    { t: 'path', d: 'M22 2 11 13' },
+  ],
+  bike: [
+    { t: 'circle', cx: 18.5, cy: 17.5, r: 3.5 },
+    { t: 'circle', cx: 5.5, cy: 17.5, r: 3.5 },
+    { t: 'circle', cx: 15, cy: 5, r: 1 },
+    { t: 'path', d: 'M12 17.5V14l-3-3 4-3 2 3h2' },
+  ],
+  car: [
+    {
+      t: 'path',
+      d: 'M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2',
+    },
+    { t: 'circle', cx: 7, cy: 17, r: 2 },
+    { t: 'path', d: 'M9 17h6' },
+    { t: 'circle', cx: 17, cy: 17, r: 2 },
+  ],
+  truck: [
+    { t: 'path', d: 'M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2' },
+    { t: 'path', d: 'M15 18H9' },
+    {
+      t: 'path',
+      d: 'M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14',
+    },
+    { t: 'circle', cx: 17, cy: 18, r: 2 },
+    { t: 'circle', cx: 7, cy: 18, r: 2 },
+  ],
+  road: [
+    { t: 'path', d: 'M4 19 8 5' },
+    { t: 'path', d: 'm16 5 4 14' },
+    { t: 'path', d: 'M12 6v2' },
+    { t: 'path', d: 'M12 11v2' },
+    { t: 'path', d: 'M12 16v2' },
+  ],
+  lightbulb: [
+    {
+      t: 'path',
+      d: 'M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5',
+    },
+    { t: 'path', d: 'M9 18h6' },
+    { t: 'path', d: 'M10 22h4' },
+  ],
+  battery: [{ t: 'rect', x: 2, y: 7, width: 16, height: 10, rx: 2 }, line(22, 11, 22, 13)],
+  // Worker profile, chat, quotes and tailor screens (design v3).
+  bookmark: [{ t: 'path', d: 'm19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z' }],
+  graduationCap: [
+    { t: 'path', d: 'M22 10v6M2 10l10-5 10 5-10 5z' },
+    { t: 'path', d: 'M6 12v5c3 3 9 3 12 0v-5' },
+  ],
+  phoneOff: [
+    {
+      t: 'path',
+      d: 'M10.68 13.31a16 16 0 0 0 3.41 2.6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7 2 2 0 0 1 1.72 2v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.42 19.42 0 0 1-3.33-2.67m-2.67-3.34a19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91',
+    },
+    line(22, 2, 2, 22),
+  ],
+  receipt: [
+    {
+      t: 'path',
+      d: 'M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z',
+    },
+    { t: 'path', d: 'M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8' },
+    { t: 'path', d: 'M12 17.5v-11' },
+  ],
+  store: [
+    { t: 'path', d: 'm2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7' },
+    { t: 'path', d: 'M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8' },
+    { t: 'path', d: 'M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4' },
+    { t: 'path', d: 'M2 7h20' },
+  ],
+  // Housekeeping, crews, handover and receipt screens (design v3).
+  repeat: [
+    { t: 'path', d: 'm17 2 4 4-4 4' },
+    { t: 'path', d: 'M3 11v-1a4 4 0 0 1 4-4h14' },
+    { t: 'path', d: 'm7 22-4-4 4-4' },
+    { t: 'path', d: 'M21 13v1a4 4 0 0 1-4 4H3' },
+  ],
+  pause: [
+    { t: 'rect', x: 6, y: 4, width: 4, height: 16, rx: 1 },
+    { t: 'rect', x: 14, y: 4, width: 4, height: 16, rx: 1 },
+  ],
+  // Crew.dc.html draws this slightly narrower version of `users`.
+  team: [
+    { t: 'path', d: 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2' },
+    { t: 'circle', cx: 9, cy: 7, r: 4 },
+    { t: 'path', d: 'M22 21v-2a4 4 0 0 0-3-3.87' },
+    { t: 'path', d: 'M16 3.13a4 4 0 0 1 0 7.75' },
+  ],
+  // CrewTeam.dc.html "daily payments" (a newer Lucide wallet than `wallet`).
+  walletDaily: [
+    {
+      t: 'path',
+      d: 'M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1',
+    },
+    { t: 'path', d: 'M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4' },
+  ],
+  package: [
+    { t: 'path', d: 'm7.5 4.27 9 5.15' },
+    {
+      t: 'path',
+      d: 'M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z',
+    },
+    { t: 'path', d: 'm3.3 7 8.7 5 8.7-5' },
+    { t: 'path', d: 'M12 22V12' },
+  ],
+  share: [
+    { t: 'circle', cx: 18, cy: 5, r: 3 },
+    { t: 'circle', cx: 6, cy: 12, r: 3 },
+    { t: 'circle', cx: 18, cy: 19, r: 3 },
+    line(8.59, 13.51, 15.42, 17.49),
+    line(15.41, 6.51, 8.59, 10.49),
+  ],
   // Profile.dc.html Measurements row.
   ruler: [
     {
@@ -252,6 +448,19 @@ const ICONS = {
     { t: 'path', d: 'M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4' },
     { t: 'polyline', points: '7 10 12 15 17 10' },
     line(12, 15, 12, 3),
+  ],
+  // Pay.dc.html "Show a QR code instead".
+  qrCode: [
+    { t: 'rect', x: 3, y: 3, width: 7, height: 7, rx: 1 },
+    { t: 'rect', x: 14, y: 3, width: 7, height: 7, rx: 1 },
+    { t: 'rect', x: 3, y: 14, width: 7, height: 7, rx: 1 },
+    { t: 'path', d: 'M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3' },
+  ],
+  // Pay.dc.html "Paying in cash".
+  banknote: [
+    { t: 'rect', x: 2, y: 6, width: 20, height: 12, rx: 2 },
+    { t: 'circle', cx: 12, cy: 12, r: 2 },
+    { t: 'path', d: 'M6 12h.01M18 12h.01' },
   ],
 } satisfies Record<string, Shape[]>;
 

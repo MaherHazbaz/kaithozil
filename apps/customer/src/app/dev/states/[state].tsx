@@ -33,7 +33,13 @@ export default function StatePreviewRoute() {
         <NoInternetScreen status={status} onRetry={recheck} onOpenSettings={openNetworkSettings} />
       );
     case 'error':
-      return <ErrorStateScreen reference="KT-ERR-4821" onHome={goHome} />;
+      return (
+        <ErrorStateScreen
+          reference="KT-ERR-4821"
+          onHome={goHome}
+          onHelp={() => router.push('/support')}
+        />
+      );
     case 'empty-bookings':
       return <EmptyStateScreen kind="bookings" onAction={goHome} />;
     case 'empty-search':

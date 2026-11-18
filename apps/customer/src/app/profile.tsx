@@ -16,10 +16,15 @@ export default function ProfileRoute() {
       addressesSummary="Home · Anna Nagar, and 1 more"
       measurementsSummary="For tailoring · you and Amma"
       onRow={(row) => {
-        // In design v3, Log out opens "Log out or delete account", which is
-        // not built yet; until then it goes straight to Welcome. There is no
-        // session to end yet; signing out of Supabase is added in Sprint 2.
-        if (row === 'logOut') router.replace('/welcome');
+        // Business account has no screen in the design yet, so it does nothing.
+        if (row === 'addresses') router.push('/addresses');
+        if (row === 'measurements') router.push('/measurements');
+        if (row === 'payments') router.push('/payments');
+        if (row === 'help') router.push('/support');
+        if (row === 'language') router.push('/language');
+        if (row === 'safety') router.push('/safety');
+        if (row === 'terms') router.push('/legal');
+        if (row === 'logOut') router.push('/account/delete');
       }}
       onTab={(tab) => {
         // `replace` swaps one tab screen for another, so Back does not walk

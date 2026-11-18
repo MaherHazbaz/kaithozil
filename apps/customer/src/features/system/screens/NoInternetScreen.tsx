@@ -1,6 +1,11 @@
-import { AppText, InfoNote, PrimaryButton, SecondaryButton } from '@kaithozhil/ui';
+import {
+  StateIllustration,
+  AppText,
+  InfoNote,
+  PrimaryButton,
+  SecondaryButton,
+} from '@kaithozhil/ui';
 
-import { StateIllustration } from '../components/StateIllustration';
 import { StateLayout } from '../components/StateLayout';
 import { StateMessage } from '../components/StateMessage';
 import { noInternetCopy as copy } from '../copy';

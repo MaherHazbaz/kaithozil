@@ -10,10 +10,12 @@ export { AppText, type AppTextProps } from './components/AppText';
 export { Avatar, type AvatarProps } from './components/Avatar';
 export { BottomNav, type BottomNavItem, type BottomNavProps } from './components/BottomNav';
 export {
+  DangerButton,
   GoldButton,
   GoldIconButton,
   PrimaryButton,
   SecondaryButton,
+  type DangerButtonProps,
   type GoldIconButtonProps,
   type GradientButtonProps,
   type SecondaryButtonProps,
@@ -37,5 +39,8 @@ export {
 } from './components/SegmentedControl';
 export { Skyline } from './components/Skyline';
 export { StatusPill, type StatusPillProps } from './components/StatusPill';
+export { StateIllustration, type StateIllustrationProps } from './components/StateIllustration';
 export { Stepper, type StepperProps } from './components/Stepper';
 export { Tappable, type TappableProps } from './components/Tappable';
+export { TickItem, type TickItemProps } from './components/TickItem';
+export { Toggle } from './components/Toggle';

@@ -18,16 +18,39 @@ export default function HomeRoute() {
       bookAgain={{ initials: 'MK', name: 'Murugan K.', trade: 'Electrician', rating: '4.8' }}
       onProfile={() => router.replace('/profile')}
       // Sample worker until bookings come from the server (Sprint 2).
-      onBookAgain={() => router.push({ pathname: '/worker/[id]', params: { id: 'murugan-k' } })}
+      onBookAgain={() =>
+        router.push({ pathname: '/worker/[id]/book', params: { id: 'murugan-k' } })
+      }
       onTab={(tab) => {
         // `replace` swaps one tab screen for another, so Back does not walk
         // through every tab you visited.
         if (tab === 'bookings') router.replace('/bookings');
         if (tab === 'profile') router.replace('/profile');
       }}
+      onSearch={() => router.push('/search')}
+      onCrew={() => router.push('/crew/new')}
       onService={(service) => {
-        // Only services whose Describe-the-job wording is approved open it;
-        // the other tiles do nothing yet.
+        // Mechanic has its own form (vehicle, roadside). Only services whose
+        // Describe-the-job wording is approved open it; the other tiles do
+        // nothing yet.
+        if (service === 'mechanic') {
+          router.push('/job/new/mechanic');
+          return;
+        }
+        if (service === 'tailor') {
+          router.push('/job/new/tailor');
+          return;
+        }
+        if (service === 'housekeeping') {
+          router.push('/job/new/housekeeping');
+          return;
+        }
+        // Painters book a site visit first, then get a quote. Carpenters use
+        // Describe the job for small repairs (docs/decisions/0008-more-trades.md).
+        if (service === 'painter') {
+          router.push('/job/new/visit');
+          return;
+        }
         if (isJobServiceKey(service)) {
           router.push({ pathname: '/job/new', params: { service } });
         }

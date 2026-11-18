@@ -21,11 +21,41 @@ const designDraft = {
 
 describe('isJobServiceKey', () => {
   it('accepts only services this screen is ready for', () => {
-    expect(isJobServiceKey('electrician')).toBe(true);
-    expect(isJobServiceKey('plumber')).toBe(false);
+    for (const key of ['electrician', 'plumber', 'ac', 'carpenter']) {
+      expect(isJobServiceKey(key)).toBe(true);
+    }
+    // Their own forms (or no approved wording yet), not this screen.
+    for (const key of ['painter', 'tailor', 'mechanic', 'housekeeping']) {
+      expect(isJobServiceKey(key)).toBe(false);
+    }
     expect(isJobServiceKey('toString')).toBe(false);
     expect(isJobServiceKey(undefined)).toBe(false);
     expect(isJobServiceKey(['electrician'])).toBe(false);
+  });
+});
+
+describe('jobServices', () => {
+  it('ends every trade with an "Other" that needs a description, and keeps keys unique', () => {
+    for (const service of Object.values(jobServices)) {
+      const last = service.problems[service.problems.length - 1];
+      expect(last).toEqual({ key: 'other', label: 'Other', needsDescription: true });
+      const keys = service.problems.map((problem) => problem.key);
+      expect(new Set(keys).size).toBe(keys.length);
+    }
+  });
+});
+
+describe('DescribeJobScreen for the added trades', () => {
+  it.each([
+    ['plumber', 'Plumber', 'குழாய்', 'Tap / Leak', 'Find a plumber'],
+    ['ac', 'AC repair', 'ஏசி பழுது', 'Not cooling', 'Find an AC technician'],
+    ['carpenter', 'Carpenter', 'தச்சர்', 'Door / Lock', 'Find a carpenter'],
+  ] as const)('shows the %s wording', async (service, title, tamil, firstChip, cta) => {
+    await renderScreen(<DescribeJobScreen {...designData} service={service} />);
+    expect(screen.getByText(title)).toBeOnTheScreen();
+    expect(screen.getByText(tamil)).toBeOnTheScreen();
+    expect(screen.getByText(firstChip)).toBeOnTheScreen();
+    expect(screen.getByText(cta)).toBeOnTheScreen();
   });
 });
 

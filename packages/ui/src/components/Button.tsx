@@ -30,9 +30,12 @@ export type GradientButtonProps = CommonProps & {
   icon?: IconName;
   /**
    * Default 22 with a 10pt gap (Pay.dc.html). The v3 system states use 18
-   * with an 8pt gap (NoInternet.dc.html "Try again").
+   * with an 8pt gap (NoInternet.dc.html "Try again"); JobPlan.dc.html's
+   * "Confirm plan" uses 20 with an 8pt gap.
    */
-  iconSize?: 18 | 22;
+  iconSize?: 18 | 20 | 22;
+  /** Default 2. JobPlan.dc.html's "Confirm plan" tick is 3. */
+  iconStrokeWidth?: number;
   /** Horizontal padding for buttons sized by their label (e.g. "Book"). */
   paddingHorizontal?: number;
 };
@@ -58,6 +61,7 @@ function GradientButton({
   fontWeight = typeStyle.button.weight,
   icon,
   iconSize = 22,
+  iconStrokeWidth,
   paddingHorizontal = 0,
 }: GradientButtonProps & { variant: Variant }) {
   const v = VARIANT[variant];
@@ -82,10 +86,12 @@ function GradientButton({
         name={v.gradient}
         style={[
           styles.fill,
-          { borderRadius: corner, paddingHorizontal, gap: iconSize === 18 ? 8 : 10 },
+          { borderRadius: corner, paddingHorizontal, gap: iconSize === 22 ? 10 : 8 },
         ]}
       >
-        {icon ? <Icon name={icon} size={iconSize} color={v.text} /> : null}
+        {icon ? (
+          <Icon name={icon} size={iconSize} color={v.text} strokeWidth={iconStrokeWidth} />
+        ) : null}
         <AppText size={fontSize} weight={fontWeight} color={v.text} numberOfLines={1}>
           {label}
         </AppText>
@@ -143,6 +149,43 @@ export function SecondaryButton({
   );
 }
 
+export type DangerButtonProps = CommonProps & {
+  /** Optional 18pt icon before the label (the bin on "Delete my account"). */
+  icon?: IconName;
+};
+
+/**
+ * Destructive confirm: dark ink, white label (tokens.json `button_danger`).
+ * Disabled is 45% opacity here, as drawn in DeleteAccount.dc.html.
+ */
+export function DangerButton({
+  label,
+  onPress,
+  disabled,
+  accessibilityLabel,
+  accessibilityHint,
+  testID,
+  icon,
+}: DangerButtonProps) {
+  return (
+    <Tappable
+      onPress={onPress}
+      disabled={disabled}
+      accessibilityRole="button"
+      accessibilityLabel={accessibilityLabel ?? label}
+      accessibilityHint={accessibilityHint}
+      accessibilityState={{ disabled: Boolean(disabled) }}
+      testID={testID}
+      style={[styles.danger, disabled ? styles.dangerDisabled : null]}
+    >
+      {icon ? <Icon name={icon} size={18} color={color.white} /> : null}
+      <AppText size={16} weight={700} color={color.white} numberOfLines={1}>
+        {label}
+      </AppText>
+    </Tappable>
+  );
+}
+
 export type GoldIconButtonProps = {
   icon: IconName;
   onPress?: () => void;
@@ -193,6 +236,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: 8,
   },
+  danger: {
+    height: size.primaryButtonHeight,
+    borderRadius: radius.button,
+    backgroundColor: color.ink,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+  },
+  dangerDisabled: { opacity: 0.45 },
   iconButton: {
     width: 52,
     height: 52,

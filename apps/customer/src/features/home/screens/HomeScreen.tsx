@@ -64,7 +64,7 @@ export function HomeScreen({
   const insets = useSafeAreaInsets();
 
   return (
-    <ScreenBackground>
+    <ScreenBackground name="homePage">
       <StatusBar style="light" />
 
       {/* Everything above the bottom navigation scrolls, including the hero. */}

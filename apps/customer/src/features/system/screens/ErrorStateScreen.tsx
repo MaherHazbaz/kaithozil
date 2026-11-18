@@ -1,8 +1,15 @@
-import { AppText, PrimaryButton, SecondaryButton, Tappable, color, radius } from '@kaithozhil/ui';
+import {
+  StateIllustration,
+  AppText,
+  PrimaryButton,
+  SecondaryButton,
+  Tappable,
+  color,
+  radius,
+} from '@kaithozhil/ui';
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { StateIllustration } from '../components/StateIllustration';
 import { StateLayout } from '../components/StateLayout';
 import { StateMessage } from '../components/StateMessage';
 import { errorStateCopy as copy } from '../copy';

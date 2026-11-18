@@ -1,8 +1,15 @@
-import { AppText, Card, Icon, PrimaryButton, color, type IconName } from '@kaithozhil/ui';
+import {
+  StateIllustration,
+  AppText,
+  Card,
+  Icon,
+  PrimaryButton,
+  color,
+  type IconName,
+} from '@kaithozhil/ui';
 import type { ReactNode } from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { StateIllustration } from '../components/StateIllustration';
 import { StateLayout } from '../components/StateLayout';
 import { StateMessage } from '../components/StateMessage';
 import { maintenanceCopy as copy } from '../copy';

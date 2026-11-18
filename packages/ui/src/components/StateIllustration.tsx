@@ -1,5 +1,9 @@
-import { Gradient, Icon, Ripple, color, shadow, type IconName } from '@kaithozhil/ui';
 import { StyleSheet, View } from 'react-native';
+
+import { color, shadow } from '../tokens';
+import { Gradient } from './Gradient';
+import { Icon, type IconName } from './Icon';
+import { Ripple } from './Ripple';
 
 export type StateIllustrationProps = {
   icon: IconName;
@@ -10,6 +14,8 @@ export type StateIllustrationProps = {
   tone: 'neutral' | 'warning' | 'brand';
   /** Waves around the disc (DESIGN.md "Motion": system ripple). */
   ripple?: boolean;
+  /** Default "soft" (system states). Permissions.dc.html draws the stronger button shadow. */
+  discShadow?: 'soft' | 'strong';
 };
 
 const TONE = {
@@ -19,7 +25,12 @@ const TONE = {
 } as const;
 
 /** Two lavender rings around an 84pt icon disc, as drawn on every system-state screen. */
-export function StateIllustration({ icon, tone, ripple = false }: StateIllustrationProps) {
+export function StateIllustration({
+  icon,
+  tone,
+  ripple = false,
+  discShadow = 'soft',
+}: StateIllustrationProps) {
   const t = TONE[tone];
   const glyph = <Icon name={icon} size={ICON} color={t.icon} />;
   return (
@@ -33,7 +44,13 @@ export function StateIllustration({ icon, tone, ripple = false }: StateIllustrat
       <View style={[styles.ring, styles.inner]} />
       {ripple ? <Ripple kind="systemRipple" size={DISC} /> : null}
       {/* The shadow sits on this wrapper: a gradient view clips to its corners and could not show it. */}
-      <View style={[styles.disc, { backgroundColor: t.background }]}>
+      <View
+        style={[
+          styles.disc,
+          { backgroundColor: t.background },
+          discShadow === 'strong' ? styles.strongShadow : null,
+        ]}
+      >
         {tone === 'brand' ? (
           <Gradient name="hero" style={[styles.disc, styles.gradient]}>
             {glyph}
@@ -76,5 +93,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     boxShadow: shadow.stateIcon,
   },
+  strongShadow: { boxShadow: shadow.button },
   gradient: { boxShadow: undefined, overflow: 'hidden' },
 });

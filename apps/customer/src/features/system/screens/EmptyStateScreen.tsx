@@ -1,6 +1,5 @@
-import { PrimaryButton, type IconName } from '@kaithozhil/ui';
+import { StateIllustration, PrimaryButton, type IconName } from '@kaithozhil/ui';
 
-import { StateIllustration } from '../components/StateIllustration';
 import { StateLayout } from '../components/StateLayout';
 import { StateMessage } from '../components/StateMessage';
 import { emptyStateCopy } from '../copy';

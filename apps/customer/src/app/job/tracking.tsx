@@ -5,8 +5,8 @@ import { TrackingScreen } from '@/features/job/screens/TrackingScreen';
 // Route "/job/tracking". Everything below is the sample data shown in
 // design/source/Tracking.dc.html; in Sprint 2 it comes from the accepted job on
 // the server (both door codes are generated there, never in the app; the stage
-// follows the codes the worker enters). Call, Message and Report a problem are
-// wired when those screens are built.
+// follows the codes the worker enters). Call and Message open the job chat
+// until masked calling exists.
 export default function TrackingRoute() {
   const router = useRouter();
   return (
@@ -26,10 +26,15 @@ export default function TrackingRoute() {
       estimateRange="₹400 – 700"
       // Opened by a deep link there is nothing to go back to, so go to Home.
       onBack={() => (router.canGoBack() ? router.back() : router.replace('/home'))}
-      // Back to Home, closing the screens that led here, as the design's link does.
-      onCancel={() => router.dismissTo('/home')}
-      // Design v3 goes to "Check the bill" first; until it is built, straight to Pay.
-      onPay={() => router.push('/job/pay')}
+      // Sample job id until the job comes from the server.
+      onCall={() => router.push({ pathname: '/job/[id]/chat', params: { id: 'KT-20517' } })}
+      onMessage={() => router.push({ pathname: '/job/[id]/chat', params: { id: 'KT-20517' } })}
+      onCancel={() => router.push({ pathname: '/job/[id]/cancel', params: { id: 'KT-20517' } })}
+      onReportProblem={() =>
+        router.push({ pathname: '/job/[id]/problem', params: { id: 'KT-20517' } })
+      }
+      // Design v3: Check the bill first, then Pay and rate, then the receipt.
+      onPay={() => router.push({ pathname: '/job/[id]/bill', params: { id: 'KT-20517' } })}
     />
   );
 }

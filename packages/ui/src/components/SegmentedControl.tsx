@@ -1,6 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 
-import { color, radius } from '../tokens';
+import { color, radius, shadow } from '../tokens';
 import { AppText } from './AppText';
 import { Tappable } from './Tappable';
 
@@ -17,6 +17,10 @@ export type SegmentedControlProps<Key extends string> = {
   accessibilityLabel: string;
   /** Each button gets `${testID}-${key}`. */
   testID?: string;
+  /** Label size. Default 14 (Bookings); Legal.dc.html uses 13. */
+  fontSize?: 13 | 14;
+  /** Soft shadow under the selected segment (Legal.dc.html). Default false. */
+  raised?: boolean;
 };
 
 /**
@@ -31,6 +35,8 @@ export function SegmentedControl<Key extends string>({
   onSelect,
   accessibilityLabel,
   testID,
+  fontSize = 14,
+  raised = false,
 }: SegmentedControlProps<Key>) {
   return (
     <View style={styles.track} accessibilityLabel={accessibilityLabel}>
@@ -45,11 +51,15 @@ export function SegmentedControl<Key extends string>({
             // The design marks the chosen button with aria-pressed; `selected`
             // is how React Native tells screen readers the same thing.
             accessibilityState={{ selected }}
-            style={[styles.segment, selected ? styles.on : null]}
+            style={[
+              styles.segment,
+              selected ? styles.on : null,
+              selected && raised ? styles.raised : null,
+            ]}
             testID={testID ? `${testID}-${segment.key}` : undefined}
           >
             <AppText
-              size={14}
+              size={fontSize}
               weight={selected ? 800 : 600}
               color={selected ? color.purple : color.muted}
               numberOfLines={1}
@@ -82,5 +92,8 @@ const styles = StyleSheet.create({
   },
   on: {
     backgroundColor: color.white,
+  },
+  raised: {
+    boxShadow: shadow.segmentOn,
   },
 });

@@ -13,7 +13,8 @@ export default function LoginRoute() {
       initialCode="48271"
       resendIn="0:24"
       onBack={() => (router.canGoBack() ? router.back() : router.replace('/welcome'))}
-      onVerify={() => router.replace('/home')}
+      // Design v2+: Log in leads to Permissions, then Home.
+      onVerify={() => router.replace('/permissions')}
       // Worker sign-up (WSignup) is built in Sprint 2.
     />
   );

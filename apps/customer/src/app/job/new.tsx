@@ -5,8 +5,7 @@ import { DescribeJobScreen } from '@/features/job/screens/DescribeJobScreen';
 
 // Route "/job/new?service=electrician". The address and estimate below are the
 // sample data shown in design/source/Post.dc.html; they are replaced by real
-// data from Supabase in Sprint 2. Add photo, Voice note and Change are wired as
-// the screens they lead to are built.
+// data from Supabase in Sprint 2.
 export default function DescribeJobRoute() {
   const router = useRouter();
   const { service } = useLocalSearchParams<{ service?: string }>();
@@ -26,6 +25,12 @@ export default function DescribeJobRoute() {
       onBack={() => (router.canGoBack() ? router.back() : router.replace('/home'))}
       // The draft is not sent anywhere yet (Sprint 2); this only opens the next screen.
       onSubmit={() => router.push({ pathname: '/job/searching', params: { service } })}
+      // These screens don't hand their result back to this job yet; that needs
+      // a shared job draft (Sprint 2).
+      onAddPhoto={() => router.push('/job/new/media')}
+      onVoiceNote={() => router.push('/job/new/media')}
+      onChooseTime={() => router.push('/job/new/schedule')}
+      onChangeAddress={() => router.push('/addresses')}
     />
   );
 }

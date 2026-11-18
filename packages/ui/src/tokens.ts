@@ -54,6 +54,13 @@ export const color = {
   starBorder: "#F3D9B5",
   starTint: "#FEF6EC",
   starOff: "#8A979E",
+  mapBlock: "#DCD5EA",
+  recording: "#C8553D",
+  onHeroFillSoft: "rgba(255,255,255,0.14)",
+  onHeroBorderStrong: "rgba(255,255,255,0.28)",
+  onHeroPanel: "rgba(255,255,255,0.10)",
+  onHeroPanelBorder: "rgba(255,255,255,0.18)",
+  photoBadge: "rgba(46,15,94,0.82)",
 } as const;
 
 /** Linear gradients. `angle` is a CSS angle in degrees; see theme/gradient.ts. */
@@ -68,6 +75,7 @@ export const gradient = {
   lavenderCard: { angle: 135, colors: ["#EFE9FB","#DDD3F5"], locations: [0,1] },
   photoPlaceholder1: { angle: 135, colors: ["#DDD3F5","#EFE9FB"], locations: [0,1] },
   photoPlaceholder2: { angle: 135, colors: ["#FEF3C7","#FBDD96"], locations: [0,1] },
+  homePage: { angle: 180, colors: ["#E6DCF6","#EFEAF8","#F6F3FB"], locations: [0,0.35,1] },
   welcomeHeader: { angle: 160, colors: ["#6A3BB5","#4C1D95","#3B1574"], locations: [0,0.55,1] },
   slideNight: { angle: 135, colors: ["#2E0F5E","#1E0A3F"], locations: [0,1] },
   slideLavender: { angle: 135, colors: ["#EFE9FB","#DDD3F5"], locations: [0,1] },
@@ -75,6 +83,9 @@ export const gradient = {
   splashSky: { angle: 180, colors: ["#1E0A3F","#4C1D95","#7A4BC7","#DDD3F5","#FDF3D8"], locations: [0,0.3,0.55,0.78,1] },
   splashEnd: { angle: 180, colors: ["#1E0A3F","#2E0F5E","#3A2F4F"], locations: [0,0.55,1] },
   splashShimmer: { angle: 90, colors: ["#7A4BC7","#DDD3F5","#F5C76A","#DDD3F5","#7A4BC7"], locations: [0,0.25,0.5,0.75,1] },
+  photoPlaceholder3: { angle: 135, colors: ["#C9BCEB","#EFE9FB"], locations: [0,1] },
+  photoPlaceholder4: { angle: 135, colors: ["#EFE9FB","#FEF3C7"], locations: [0,1] },
+  photoCaption: { angle: 180, colors: ["rgba(28,23,48,0)","rgba(28,23,48,0.72)"], locations: [0,1] },
 } as const;
 
 /** Radial gradients (alert screens). */
@@ -96,6 +107,10 @@ export const shadow = {
   logoSplash: [{ offsetX: 0, offsetY: 16, blurRadius: 36, spreadDistance: 0, color: "rgba(0,0,0,0.45)" }],
   logoUpdate: [{ offsetX: 0, offsetY: 12, blurRadius: 28, spreadDistance: 0, color: "rgba(0,0,0,0.25)" }],
   stateIcon: [{ offsetX: 0, offsetY: 10, blurRadius: 24, spreadDistance: 0, color: "rgba(76,29,149,0.20)" }],
+  segmentOn: [{ offsetX: 0, offsetY: 2, blurRadius: 8, spreadDistance: 0, color: "rgba(59,21,116,0.10)" }],
+  mapButton: [{ offsetX: 0, offsetY: 6, blurRadius: 16, spreadDistance: 0, color: "rgba(0,0,0,0.12)" }],
+  mapChip: [{ offsetX: 0, offsetY: 6, blurRadius: 16, spreadDistance: 0, color: "rgba(0,0,0,0.15)" }],
+  dayChipOn: [{ offsetX: 0, offsetY: 8, blurRadius: 18, spreadDistance: 0, color: "rgba(76,29,149,0.25)" }],
 } as const;
 
 /** Corner radii. */
@@ -131,6 +146,15 @@ export const radius = {
   statTile: 12,
   note: 14,
   compactButton: 12,
+  choiceCard: 18,
+  tickBox: 8,
+  photoTile: 10,
+  bubble: 18,
+  bubbleTail: 4,
+  noteLarge: 16,
+  payAppBadge: 9,
+  receiptCard: 22,
+  calendarDay: 10,
 } as const;
 
 /** Spacing steps. */

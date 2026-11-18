@@ -13,8 +13,9 @@ export type AvatarProps = {
   /**
    * "mango": mango tint circle. "onHero": translucent white circle for purple
    * headers. "primary": the purple button gradient with its shadow (Profile).
+   * "lavender": lavender circle, purple initials (Safety emergency contacts).
    */
-  tone?: 'mango' | 'onHero' | 'primary';
+  tone?: 'mango' | 'onHero' | 'primary' | 'lavender';
   /** Initials size. Default 14; Profile's 52pt avatar uses 17. */
   fontSize?: number;
   /** Makes the avatar a button. Requires `accessibilityLabel`. */
@@ -22,6 +23,13 @@ export type AvatarProps = {
   accessibilityLabel?: string;
   testID?: string;
 };
+
+const LABEL_COLOR = {
+  mango: color.mangoText,
+  onHero: color.white,
+  primary: color.white,
+  lavender: color.purple,
+} as const;
 
 /** Circle with initials. */
 export function Avatar({
@@ -35,7 +43,7 @@ export function Avatar({
 }: AvatarProps) {
   const round = { width: size, height: size, borderRadius: size / 2 };
   const label = (
-    <AppText size={fontSize} weight={800} color={tone === 'mango' ? color.mangoText : color.white}>
+    <AppText size={fontSize} weight={800} color={LABEL_COLOR[tone]}>
       {initials}
     </AppText>
   );
@@ -43,7 +51,7 @@ export function Avatar({
   const circle =
     tone === 'primary'
       ? [styles.circle, round, { boxShadow: shadow.button }]
-      : [styles.circle, round, tone === 'mango' ? styles.mango : styles.onHero];
+      : [styles.circle, round, styles[tone]];
   const content =
     tone === 'primary' ? (
       <Gradient name="button" style={[styles.fill, round]}>
@@ -89,6 +97,9 @@ const styles = StyleSheet.create({
   },
   mango: {
     backgroundColor: color.mangoTint,
+  },
+  lavender: {
+    backgroundColor: color.lavender,
   },
   onHero: {
     backgroundColor: color.onHeroFill,

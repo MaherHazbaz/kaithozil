@@ -9,6 +9,9 @@ export default function WelcomeRoute() {
     <WelcomeScreen
       onNeedWorker={() => router.push('/login')}
       onAmWorker={() => router.push('/login')}
+      // The design's links point nowhere yet (href="#"); Terms and privacy is the closest screen.
+      onTerms={() => router.push('/legal')}
+      onPrivacy={() => router.push({ pathname: '/legal', params: { tab: 'privacy' } })}
     />
   );
 }
