@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Check in</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Noto+Sans+Tamil:wght@400;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#4C1D95}a:hover{color:#3B1574}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: linear-gradient(180deg, #F3EEFB 0%, #F8F7FB 35%, #FFFFFF 100%); font-family: 'Plus Jakarta Sans', 'Noto Sans Tamil', sans-serif; color: #1C1730; display: flex; flex-direction: column; overflow: hidden">
+<div style="padding: 22px 20px 0 20px; display: flex; align-items: center; gap: 12px">
+  <a href="HousekeeperHome.dc.html" aria-label="Back" style="width: 44px; height: 44px; flex-shrink: 0; border-radius: 22px; background: #FFFFFF; border: 1px solid #E8E5F0; display: flex; align-items: center; justify-content: center; color: #1C1730"><svg style="flex-shrink: 0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg></a>
+  <div style="flex-grow: 1; display: flex; flex-direction: column"><div style="font-size: 18px; font-weight: 800">Check in</div><div style="font-size: 12px; color: #625B73">வருகைப் பதிவு</div></div>
+  <span style="flex-shrink: 0; font-size: 12px; font-weight: 700; color: #7C4A03; background: #FEF3C7; border-radius: 8px; padding: 4px 8px">10 AM – 12 PM</span>
+</div><div style="padding: 16px 20px 0 20px; display: flex; flex-direction: column; gap: 12px; flex-grow: 1; min-height: 0; overflow-y: auto; overflow-x: hidden">
+
+<div style="background: #FFFFFF; border: 1px solid #EEEAF6; border-radius: 20px; padding: 14px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 8px 24px rgba(59, 21, 116, 0.08); flex-direction: row; align-items: center; gap: 12px; flex-shrink: 0"><div style="width: 44px; height: 44px; flex-shrink: 0; border-radius: 22px; background: #EFE9FB; color: #4C1D95; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px">KS</div><div style="flex-grow: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px; font-weight: 800">Karthik S. · regular</span><span style="font-size: 12px; color: #625B73">Shenoy Nagar · Mon – Sat</span></div></div>
+<sc-if value="{{code}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 8px; flex-shrink: 0"><div style="font-size: 15px; font-weight: 800">Ask Karthik for today's code</div><span style="display: inline-flex; align-self: flex-start; align-items: center; gap: 4px; background: #EFE9FB; color: #4C1D95; border-radius: 999px; padding: 4px 10px; font-size: 12px; font-weight: 700"><svg style="flex-shrink: 0" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>You're at the address ✓</span><div style="display: flex; gap: 10px" role="group" aria-label="4-digit check-in code"><input aria-label="Check-in code digit 1" type="text" inputmode="numeric" maxlength="1" style="width: 56px; height: 56px; border-radius: 12px; border: 1px solid #DDD8E8; background: #FFFFFF; text-align: center; font-family: inherit; font-size: 24px; font-weight: 800; color: #1C1730; box-sizing: border-box"><input aria-label="Check-in code digit 2" type="text" inputmode="numeric" maxlength="1" style="width: 56px; height: 56px; border-radius: 12px; border: 1px solid #DDD8E8; background: #FFFFFF; text-align: center; font-family: inherit; font-size: 24px; font-weight: 800; color: #1C1730; box-sizing: border-box"><input aria-label="Check-in code digit 3" type="text" inputmode="numeric" maxlength="1" style="width: 56px; height: 56px; border-radius: 12px; border: 1px solid #DDD8E8; background: #FFFFFF; text-align: center; font-family: inherit; font-size: 24px; font-weight: 800; color: #1C1730; box-sizing: border-box"><input aria-label="Check-in code digit 4" type="text" inputmode="numeric" maxlength="1" style="width: 56px; height: 56px; border-radius: 12px; border: 1px solid #DDD8E8; background: #FFFFFF; text-align: center; font-family: inherit; font-size: 24px; font-weight: 800; color: #1C1730; box-sizing: border-box"></div><span style="font-size: 12px; color: #625B73">The code changes every day. It records today as worked.</span></div>
+<button onClick="{{checkIn}}" style="height: 56px; border-radius: 16px; border: none; background: linear-gradient(135deg, #6A3BB5 0%, #4C1D95 60%, #3B1574 100%); box-shadow: 0 10px 24px rgba(76, 29, 149, 0.30); color: #FFFFFF; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 16px; font-weight: 700; text-decoration: none; cursor: pointer; box-sizing: border-box; flex-shrink: 0">Check in</button>
+</sc-if>
+<sc-if value="{{working}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 10px; flex-shrink: 0"><span style="width: 24px; height: 24px; flex-shrink: 0; border-radius: 12px; background: #4C1D95; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg style="flex-shrink: 0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span><span style="display: flex; flex-direction: column"><span style="font-size: 13px; font-weight: 700">Checked in · 9:58 AM</span><span style="font-size: 11px; color: #625B73">Code and location matched</span></span></div>
+<div style="display: flex; flex-direction: column; gap: 6px; flex-shrink: 0"><div style="font-size: 14px; font-weight: 800">Today's tasks <span style="font-weight: 500; color: #625B73">· இன்றைய வேலைகள்</span></div><div style="border: 1px solid #EEEAF6; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; background: #FFFFFF; flex-shrink: 0"><sc-for list="{{tasks}}" as="t" hint-placeholder-count="2"><button role="checkbox" aria-checked="{{t.pressed}}" onClick="{{t.toggle}}" style="width: 100%; min-height: 54px; display: flex; align-items: center; gap: 12px; padding: 8px 14px; background: #FFFFFF; border: none; border-bottom: 1px solid #E8E5F0; font-family: inherit; color: #1C1730; text-align: left; cursor: pointer"><span style="{{t.box}}"><svg style="flex-shrink: 0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span><span style="font-size: 14px; font-weight: 600">{{t.name}}</span></button></sc-for></div></div>
+<div style="display: flex; flex-direction: column; flex-shrink: 0"><button onClick="{{checkOut}}" style="{{outStyle}}">Check out</button></div>
+<sc-if value="{{notAll}}" hint-placeholder-val="{{ true }}"><div style="font-size: 12px; color: #625B73; text-align: center; flex-shrink: 0">Tick today's tasks to check out</div></sc-if>
+</sc-if>
+<sc-if value="{{out}}" hint-placeholder-val="{{ false }}">
+<div style="background: #FFFFFF; border: 2px solid #4C1D95; border-radius: 18px; padding: 14px; display: flex; flex-direction: column; gap: 8px; flex-shrink: 0"><div style="display: flex; align-items: center; gap: 10px"><span style="width: 24px; height: 24px; flex-shrink: 0; border-radius: 12px; background: #4C1D95; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg style="flex-shrink: 0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span><span style="display: flex; flex-direction: column"><span style="font-size: 13px; font-weight: 700">Day recorded · 9:58 AM – 11:54 AM</span><span style="font-size: 11px; color: #625B73">Counts in Karthik's November record and your pay</span></span></div></div>
+<a href="HousekeeperHome.dc.html" style="height: 56px; border-radius: 16px; border: none; background: linear-gradient(135deg, #6A3BB5 0%, #4C1D95 60%, #3B1574 100%); box-shadow: 0 10px 24px rgba(76, 29, 149, 0.30); color: #FFFFFF; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 16px; font-weight: 700; text-decoration: none; cursor: pointer; box-sizing: border-box; flex-shrink: 0">Next home</a>
+</sc-if>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { st: 'code', done: [] }; }
+  renderVals() {
+    const s = this.state;
+    const box = (on) => on ? 'width: 28px; height: 28px; flex-shrink: 0; border-radius: 8px; background: #4C1D95; color: #FFFFFF; display: flex; align-items: center; justify-content: center' : 'width: 28px; height: 28px; flex-shrink: 0; box-sizing: border-box; border-radius: 8px; border: 2px solid #DDD8E8; background: #FFFFFF; color: transparent; display: flex; align-items: center; justify-content: center';
+    const all = s.done.length === 2;
+    return {
+      code: s.st === 'code', working: s.st === 'working', out: s.st === 'out',
+      checkIn: () => this.setState({ st: 'working' }),
+      tasks: ["Sweeping and mopping", "Bathroom cleaning"].map((t, k) => ({ name: t, pressed: s.done.indexOf(k) >= 0 ? 'true' : 'false', box: box(s.done.indexOf(k) >= 0), toggle: () => { const d = this.state.done.slice(); const j = d.indexOf(k); if (j >= 0) d.splice(j, 1); else d.push(k); this.setState({ done: d }); } })),
+      checkOut: () => { if (all) this.setState({ st: 'out' }); },
+      outStyle: all ? 'height: 56px; border-radius: 16px; border: none; background: linear-gradient(135deg, #6A3BB5 0%, #4C1D95 60%, #3B1574 100%); box-shadow: 0 10px 24px rgba(76, 29, 149, 0.30); color: #FFFFFF; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 16px; font-weight: 700; text-decoration: none; cursor: pointer; box-sizing: border-box' : 'height: 56px; border-radius: 16px; border: none; background: linear-gradient(135deg, #6A3BB5 0%, #4C1D95 60%, #3B1574 100%); color: #FFFFFF; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 16px; font-weight: 700; text-decoration: none; cursor: default; opacity: 0.5; pointer-events: none; box-sizing: border-box',
+      notAll: !all
+    };
+  }
+}
+</script>
+</body>
+</html>

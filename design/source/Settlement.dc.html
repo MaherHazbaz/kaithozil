@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Settle the payment</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Noto+Sans+Tamil:wght@400;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#4C1D95}a:hover{color:#3B1574}
+@keyframes kzRipple { 0% { transform: scale(1); opacity: 0.32 } 100% { transform: scale(1.9); opacity: 0 } }
+.kz-ripple { animation: kzRipple 2.4s cubic-bezier(0, 0, 0.2, 1) infinite }
+@media (prefers-reduced-motion: reduce) { .kz-ripple { animation: none; display: none } }
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: linear-gradient(180deg, #F3EEFB 0%, #F8F7FB 35%, #FFFFFF 100%); font-family: 'Plus Jakarta Sans', 'Noto Sans Tamil', sans-serif; color: #1C1730; display: flex; flex-direction: column; overflow: hidden">
+<div style="padding: 22px 20px 0 20px; display: flex; align-items: center; gap: 12px">
+  <a href="WorkRecord.dc.html" aria-label="Back" style="width: 44px; height: 44px; flex-shrink: 0; border-radius: 22px; background: #FFFFFF; border: 1px solid #E8E5F0; display: flex; align-items: center; justify-content: center; color: #1C1730"><svg style="flex-shrink: 0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg></a>
+  <div style="flex-grow: 1; display: flex; flex-direction: column"><div style="font-size: 18px; font-weight: 800">Settle the payment</div><div style="font-size: 12px; color: #625B73">பணத் தீர்வு</div></div>
+  
+</div><div style="padding: 16px 20px 0 20px; display: flex; flex-direction: column; gap: 12px; flex-grow: 1; min-height: 0; overflow-y: auto; overflow-x: hidden">
+
+<div style="background: #FFFFFF; border: 1px solid #EEEAF6; border-radius: 20px; padding: 14px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 8px 24px rgba(59, 21, 116, 0.08); gap: 0; padding: 6px 14px; flex-shrink: 0"><div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px solid #E8E5F0; font-size: 13px"><span style="display: flex; flex-direction: column"><span style="color: #625B73; font-weight: 400">Agreed quote</span></span><span style="font-weight: 800; ">₹18,400</span></div><div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px solid #E8E5F0; font-size: 13px"><span style="display: flex; flex-direction: column"><span style="color: #625B73; font-weight: 400">Work done (agreed)</span><span style="font-size: 11px; color: #625B73">From your work record</span></span><span style="font-weight: 800; ">about 75%</span></div><div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px solid #E8E5F0; font-size: 13px"><span style="display: flex; flex-direction: column"><span style="color: #625B73; font-weight: 400">Value of work done</span></span><span style="font-weight: 800; ">₹13,800</span></div><div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px solid #E8E5F0; font-size: 13px"><span style="display: flex; flex-direction: column"><span style="color: #625B73; font-weight: 400">Already paid</span><span style="font-size: 11px; color: #625B73">Materials, paid at the start</span></span><span style="font-weight: 800; ">− ₹7,200</span></div><div style="display: flex; justify-content: space-between; align-items: baseline; padding: 10px 0 6px 0"><span style="font-size: 14px; font-weight: 800">Fair amount still due</span><span style="font-size: 20px; font-weight: 800; color: #4C1D95">₹6,600</span></div></div>
+<sc-if value="{{propose}}" hint-placeholder-val="{{ true }}">
+<div style="font-size: 15px; font-weight: 800; flex-shrink: 0">What would you like to do?</div>
+<div role="radiogroup" aria-label="Settlement option" style="display: flex; flex-direction: column; gap: 8px; flex-shrink: 0"><button role="radio" aria-checked="{{p0}}" onClick="{{pick0}}" style="{{o0}}"><span style="flex-grow: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px; font-weight: 800">Pay for the work done and end the job</span><span style="font-size: 12px; color: #625B73">Ravi is paid for what's finished. You're free to hire someone else.</span></span><span style="{{d0}}"></span></button><button role="radio" aria-checked="{{p1}}" onClick="{{pick1}}" style="{{o1}}"><span style="flex-grow: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px; font-weight: 800">Ravi finishes the remaining work</span><span style="font-size: 12px; color: #625B73">You pay the rest when the work is complete and you've checked it.</span></span><span style="{{d1}}"></span></button></div>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-shrink: 0"><label for="stamt" style="display: flex; flex-direction: column"><span style="font-size: 14px; font-weight: 700">Your offer</span><span style="font-size: 11px; color: #625B73">You can change the amount</span></label><div style="width: 150px; height: 48px; display: flex; align-items: center; gap: 4px; border-radius: 12px; border: 1px solid #DDD8E8; background: #FFFFFF; padding: 0 12px; box-sizing: border-box"><span style="font-size: 15px; font-weight: 800; color: #625B73">₹</span><input id="stamt" type="text" inputmode="numeric" value="{{amt}}" onInput="{{onAmt}}" style="border: none; outline: none; background: transparent; font-family: inherit; font-size: 16px; font-weight: 800; color: #1C1730; width: 100%; text-align: right"></div></div>
+<div style="display: flex; gap: 10px; align-items: flex-start; background: #EFE9FB; border-radius: 14px; padding: 12px; font-size: 12px; color: #1C1730; line-height: 1.45; flex-shrink: 0"><svg style="flex-shrink: 0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4C1D95" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg><span>Ravi gets <b>{{amtText}}</b> more, so <b>{{totalForJob}}</b> in total for this job. Kaithozhil's fee applies only to what's actually paid.</span></div>
+<button onClick="{{send}}" style="height: 56px; border-radius: 16px; border: none; background: linear-gradient(135deg, #6A3BB5 0%, #4C1D95 60%, #3B1574 100%); box-shadow: 0 10px 24px rgba(76, 29, 149, 0.30); color: #FFFFFF; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 16px; font-weight: 700; text-decoration: none; cursor: pointer; box-sizing: border-box; flex-shrink: 0">Send offer to Ravi</button>
+<a href="DisputeStatus.dc.html" style="min-height: 44px; border: none; background: transparent; font-family: inherit; font-size: 14px; font-weight: 700; color: #4C1D95; display: flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none; cursor: pointer; flex-shrink: 0">Can't agree? Ask Kaithozhil to review</a>
+</sc-if>
+<sc-if value="{{sent}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; padding: 20px 0 6px 0; flex-shrink: 0"><div style="position: relative; width: 167px; height: 167px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; margin: 0px 0"><div class="kz-ripple" aria-hidden="true" style="position: absolute; width: 88px; height: 88px; border-radius: 44px; background: #E2A43A; opacity: 0; animation-delay: 0s"></div><div class="kz-ripple" aria-hidden="true" style="position: absolute; width: 88px; height: 88px; border-radius: 44px; background: #E2A43A; opacity: 0; animation-delay: 0.8s"></div><div class="kz-ripple" aria-hidden="true" style="position: absolute; width: 88px; height: 88px; border-radius: 44px; background: #E2A43A; opacity: 0; animation-delay: 1.6s"></div><div style="position: relative; width: 88px; height: 88px; border-radius: 44px; background: #FEF3C7; color: #7C4A03; display: flex; align-items: center; justify-content: center"><svg style="flex-shrink: 0" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div></div><div style="font-size: 20px; font-weight: 800">Offer sent to Ravi</div><div style="font-size: 14px; line-height: 1.5; max-width: 300px">{{planText}}, {{amtText}}. Ravi can accept, or reply with his own amount.</div></div>
+<a href="DisputeStatus.dc.html" style="min-height: 44px; border: none; background: transparent; font-family: inherit; font-size: 14px; font-weight: 700; color: #4C1D95; display: flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none; cursor: pointer; flex-shrink: 0">No reply? Ask Kaithozhil to review</a>
+</sc-if>
+<sc-if value="{{respond}}" hint-placeholder-val="{{ false }}">
+<div style="background: #FFFFFF; border: 1px solid #EEEAF6; border-radius: 20px; padding: 14px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 8px 24px rgba(59, 21, 116, 0.08); flex-shrink: 0"><span style="font-size: 12px; font-weight: 700; color: #625B73">Priya's offer</span><span style="font-size: 16px; font-weight: 800">{{planText}}</span><span style="font-size: 26px; font-weight: 800; color: #4C1D95">{{amtText}}</span><span style="font-size: 12px; color: #625B73">{{totalForJob}} in total for this job, all recorded in your earnings.</span></div>
+<button onClick="{{accept}}" style="height: 56px; border-radius: 16px; border: none; background: linear-gradient(135deg, #6A3BB5 0%, #4C1D95 60%, #3B1574 100%); box-shadow: 0 10px 24px rgba(76, 29, 149, 0.30); color: #FFFFFF; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 16px; font-weight: 700; text-decoration: none; cursor: pointer; box-sizing: border-box; flex-shrink: 0">Accept offer</button>
+<div style="display: flex; gap: 8px; flex-shrink: 0"><button style="height: 48px; border-radius: 14px; border: 1px solid #DDD8E8; background: #FFFFFF; color: #4C1D95; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 14px; font-weight: 700; text-decoration: none; cursor: pointer; box-sizing: border-box; flex: 1">Reply with my amount</button><a href="DisputeStatus.dc.html" style="height: 48px; border-radius: 14px; border: 1px solid #DDD8E8; background: #FFFFFF; color: #4C1D95; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 14px; font-weight: 700; text-decoration: none; cursor: pointer; box-sizing: border-box; flex: 1; color: #1C1730">Ask for review</a></div>
+</sc-if>
+<sc-if value="{{agreed}}" hint-placeholder-val="{{ false }}">
+<div style="background: #FFFFFF; border: 2px solid #4C1D95; border-radius: 18px; padding: 14px; display: flex; flex-direction: column; gap: 8px; flex-shrink: 0"><div style="display: flex; align-items: center; gap: 10px"><span style="width: 24px; height: 24px; flex-shrink: 0; border-radius: 12px; background: #4C1D95; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg style="flex-shrink: 0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span><span style="display: flex; flex-direction: column"><span style="font-size: 13px; font-weight: 700">Settled · both agreed at 6:42 PM</span><span style="font-size: 11px; color: #625B73">{{planText}}</span></span></div><span style="font-size: 13px; line-height: 1.45">Pay <b>{{amtText}}</b> to close the job. The job record shows the agreed work and amount.</span></div>
+<a href="Pay.dc.html" style="height: 56px; border-radius: 16px; border: none; background: linear-gradient(135deg, #6A3BB5 0%, #4C1D95 60%, #3B1574 100%); box-shadow: 0 10px 24px rgba(76, 29, 149, 0.30); color: #FFFFFF; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 16px; font-weight: 700; text-decoration: none; cursor: pointer; box-sizing: border-box; flex-shrink: 0">Pay {{amtText}}</a>
+</sc-if>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"view":{"editor":"enum","options":["Customer proposes","Worker responds","Agreed"],"default":"Customer proposes"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { view: null, plan: 0, amt: 6600 }; }
+  renderVals() {
+    const s = this.state;
+    const v = s.view ?? this.props.view ?? 'Customer proposes';
+    const fmt = (n) => '₹' + n.toLocaleString('en-IN');
+    const on = 'width: 100%; display: flex; gap: 12px; align-items: center; padding: 12px 14px; background: #EFE9FB; border: 2px solid #4C1D95; border-radius: 16px; font-family: inherit; color: #1C1730; text-align: left; cursor: pointer';
+    const off = 'width: 100%; display: flex; gap: 12px; align-items: center; padding: 12px 14px; background: #FFFFFF; border: 1px solid #DDD8E8; border-radius: 16px; font-family: inherit; color: #1C1730; text-align: left; cursor: pointer';
+    const don = 'width: 22px; height: 22px; flex-shrink: 0; box-sizing: border-box; border-radius: 11px; border: 7px solid #4C1D95; background: #FFFFFF';
+    const doff = 'width: 22px; height: 22px; flex-shrink: 0; box-sizing: border-box; border-radius: 11px; border: 2px solid #DDD8E8; background: #FFFFFF';
+    return {
+      propose: v === 'Customer proposes', sent: v === 'Sent', respond: v === 'Worker responds', agreed: v === 'Agreed',
+      o0: s.plan === 0 ? on : off, o1: s.plan === 1 ? on : off, d0: s.plan === 0 ? don : doff, d1: s.plan === 1 ? don : doff,
+      p0: s.plan === 0 ? 'true' : 'false', p1: s.plan === 1 ? 'true' : 'false',
+      pick0: () => this.setState({ plan: 0, amt: 6600 }), pick1: () => this.setState({ plan: 1, amt: 11200 }),
+      finishing: s.plan === 1, ending: s.plan === 0,
+      amt: String(s.amt),
+      onAmt: (e) => { const n = parseInt(((e && e.target ? e.target.value : '') || '').replace(/[^0-9]/g, ''), 10); this.setState({ amt: isNaN(n) ? 0 : n }); },
+      amtText: fmt(s.amt),
+      totalForJob: fmt(7200 + s.amt),
+      planText: s.plan === 0 ? 'Pay for the work done and end the job' : 'Ravi finishes, then the rest is paid',
+      send: () => this.setState({ view: 'Sent' }),
+      accept: () => this.setState({ view: 'Agreed' })
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ask for leave</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Noto+Sans+Tamil:wght@400;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#4C1D95}a:hover{color:#3B1574}
+@keyframes kzRipple { 0% { transform: scale(1); opacity: 0.32 } 100% { transform: scale(1.9); opacity: 0 } }
+.kz-ripple { animation: kzRipple 2.4s cubic-bezier(0, 0, 0.2, 1) infinite }
+@media (prefers-reduced-motion: reduce) { .kz-ripple { animation: none; display: none } }
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: linear-gradient(180deg, #F3EEFB 0%, #F8F7FB 35%, #FFFFFF 100%); font-family: 'Plus Jakarta Sans', 'Noto Sans Tamil', sans-serif; color: #1C1730; display: flex; flex-direction: column; overflow: hidden">
+<div style="padding: 22px 20px 0 20px; display: flex; align-items: center; gap: 12px">
+  <a href="HousekeeperHome.dc.html" aria-label="Back" style="width: 44px; height: 44px; flex-shrink: 0; border-radius: 22px; background: #FFFFFF; border: 1px solid #E8E5F0; display: flex; align-items: center; justify-content: center; color: #1C1730"><svg style="flex-shrink: 0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg></a>
+  <div style="flex-grow: 1; display: flex; flex-direction: column"><div style="font-size: 18px; font-weight: 800">Ask for leave</div><div style="font-size: 12px; color: #625B73">விடுப்பு கேளுங்கள்</div></div>
+  
+</div><div style="padding: 16px 20px 0 20px; display: flex; flex-direction: column; gap: 12px; flex-grow: 1; min-height: 0; overflow-y: auto; overflow-x: hidden">
+
+<sc-if value="{{editing}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 6px; flex-shrink: 0"><div style="font-size: 14px; font-weight: 800">Which homes? <span style="font-weight: 500; color: #625B73">· எந்த வீடுகள்?</span></div><div style="border: 1px solid #EEEAF6; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; background: #FFFFFF; flex-shrink: 0"><sc-for list="{{homes}}" as="h" hint-placeholder-count="2"><button role="checkbox" aria-checked="{{h.pressed}}" onClick="{{h.toggle}}" style="width: 100%; min-height: 54px; display: flex; align-items: center; gap: 12px; padding: 8px 14px; background: #FFFFFF; border: none; border-bottom: 1px solid #E8E5F0; font-family: inherit; color: #1C1730; text-align: left; cursor: pointer"><span style="{{h.box}}"><svg style="flex-shrink: 0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span><span style="font-size: 14px; font-weight: 700">{{h.label}}</span></button></sc-for></div></div>
+<div style="display: flex; flex-direction: column; gap: 8px; flex-shrink: 0"><div style="font-size: 14px; font-weight: 800">Which days? <span style="font-weight: 500; color: #625B73">· எந்த நாட்கள்?</span></div><div style="display: flex; gap: 6px" role="group" aria-label="Days"><sc-for list="{{days}}" as="d" hint-placeholder-count="5"><button aria-pressed="{{d.pressed}}" onClick="{{d.pick}}" style="{{d.style}}"><span style="font-size: 12px; font-weight: 700">{{d.top}}</span><span style="font-size: 18px; font-weight: 800; line-height: 1">{{d.num}}</span></button></sc-for></div></div>
+<div style="display: flex; gap: 10px; align-items: flex-start; background: #EFE9FB; border-radius: 14px; padding: 12px; font-size: 12px; color: #1C1730; line-height: 1.45; flex-shrink: 0"><svg style="flex-shrink: 0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4C1D95" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path></svg><span>{{payLine}}</span></div>
+<div style="display: flex; flex-direction: column; gap: 8px; flex-shrink: 0"><div style="font-size: 14px; font-weight: 800">Reason (optional) <span style="font-weight: 500; color: #625B73">· காரணம்</span></div><div style="display: flex; flex-wrap: wrap; gap: 6px" role="group" aria-label="Reason"><sc-for list="{{reasons}}" as="o" hint-placeholder-count="4"><button aria-pressed="{{o.pressed}}" onClick="{{o.pick}}" style="{{o.style}}">{{o.label}}</button></sc-for></div></div>
+<div style="display: flex; flex-direction: column; flex-shrink: 0"><button onClick="{{send}}" style="{{ctaStyle}}">Send to Priya and Karthik</button></div>
+<sc-if value="{{missing}}" hint-placeholder-val="{{ false }}"><div style="font-size: 12px; color: #625B73; text-align: center; flex-shrink: 0">{{missingText}}</div></sc-if>
+</sc-if>
+<sc-if value="{{sent}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; padding: 10px 0 4px 0; flex-shrink: 0"><div style="position: relative; width: 167px; height: 167px; flex-shrink: 0; display: flex; align-items: center; justify-content: center"><div class="kz-ripple" aria-hidden="true" style="position: absolute; width: 88px; height: 88px; border-radius: 44px; background: #E2A43A; opacity: 0; animation-delay: 0s"></div><div class="kz-ripple" aria-hidden="true" style="position: absolute; width: 88px; height: 88px; border-radius: 44px; background: #E2A43A; opacity: 0; animation-delay: 0.8s"></div><div class="kz-ripple" aria-hidden="true" style="position: absolute; width: 88px; height: 88px; border-radius: 44px; background: #E2A43A; opacity: 0; animation-delay: 1.6s"></div><div style="position: relative; width: 88px; height: 88px; border-radius: 44px; background: #FEF3C7; color: #7C4A03; display: flex; align-items: center; justify-content: center"><svg style="flex-shrink: 0" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div></div><div style="font-size: 20px; font-weight: 800">Leave request sent</div><div style="font-size: 13px; color: #625B73">விடுப்புக் கோரிக்கை அனுப்பப்பட்டது</div><div style="font-size: 14px; line-height: 1.5; max-width: 300px">Each home approves it in their app. Approved days show as leave, not absent, on the monthly record.</div></div>
+<a href="HousekeeperHome.dc.html" style="height: 48px; border-radius: 14px; border: 1px solid #DDD8E8; background: #FFFFFF; color: #4C1D95; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 14px; font-weight: 700; text-decoration: none; cursor: pointer; box-sizing: border-box; flex-shrink: 0">Back to today</a>
+</sc-if>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { homes: [0, 1], days: [1, 2], why: 1, sent: false }; }
+  renderVals() {
+    const s = this.state;
+    const box = (on) => on ? 'width: 28px; height: 28px; flex-shrink: 0; border-radius: 8px; background: #4C1D95; color: #FFFFFF; display: flex; align-items: center; justify-content: center' : 'width: 28px; height: 28px; flex-shrink: 0; box-sizing: border-box; border-radius: 8px; border: 2px solid #DDD8E8; background: #FFFFFF; color: transparent; display: flex; align-items: center; justify-content: center';
+    const toggleIn = (key, k) => { const t = this.state[key].slice(); const j = t.indexOf(k); if (j >= 0) t.splice(j, 1); else t.push(k); this.setState({ [key]: t }); };
+    const n = s.days.length;
+    const paid = Math.min(n, 1), unpaid = Math.max(0, n - 1);
+    const missing = s.homes.length < 1 ? 'Choose at least one home' : (n < 1 ? 'Choose the days' : '');
+    return {
+      homes: ["Priya R. \u00b7 6 \u2013 8 AM", "Karthik S. \u00b7 10 AM \u2013 12 PM"].map((l, k) => ({ label: l, pressed: s.homes.indexOf(k) >= 0 ? 'true' : 'false', box: box(s.homes.indexOf(k) >= 0), toggle: () => toggleIn('homes', k) })),
+      days: [["Thu", "20"], ["Fri", "21"], ["Sat", "22"], ["Mon", "24"], ["Tue", "25"]].map((d, k) => ({ top: d[0], num: d[1], pressed: s.days.indexOf(k) >= 0 ? 'true' : 'false', style: s.days.indexOf(k) >= 0 ? 'flex: 1; min-width: 0; height: 64px; border-radius: 14px; border: 2px solid #4C1D95; background: #4C1D95; color: #FFFFFF; font-family: inherit; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; cursor: pointer' : 'flex: 1; min-width: 0; height: 64px; border-radius: 14px; border: 1px solid #DDD8E8; background: #FFFFFF; color: #1C1730; font-family: inherit; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; cursor: pointer', pick: () => toggleIn('days', k) })),
+      reasons: ["Unwell", "Family function", "Festival", "Something else"].map((l, k) => ({ label: l, pressed: k === s.why ? 'true' : 'false', style: k === s.why ? 'height: 44px; padding: 0 14px; border-radius: 999px; white-space: nowrap; border: 2px solid #4C1D95; background: #EFE9FB; color: #4C1D95; font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer' : 'height: 44px; padding: 0 14px; border-radius: 999px; white-space: nowrap; border: 1px solid #DDD8E8; background: #FFFFFF; color: #1C1730; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer', pick: () => this.setState({ why: k }) })),
+      payLine: n === 0 ? 'Choose days to see how pay changes' : (paid + ' paid leave day' + (unpaid ? ', ' + unpaid + ' unpaid' : '') + ' · 1 paid leave day left this month'),
+      editing: !s.sent, sent: s.sent,
+      send: () => { if (missing === '') this.setState({ sent: true }); },
+      missing: missing !== '', missingText: missing,
+      ctaStyle: missing === '' ? 'height: 56px; border-radius: 16px; border: none; background: linear-gradient(135deg, #6A3BB5 0%, #4C1D95 60%, #3B1574 100%); box-shadow: 0 10px 24px rgba(76, 29, 149, 0.30); color: #FFFFFF; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 16px; font-weight: 700; text-decoration: none; cursor: pointer; box-sizing: border-box' : 'height: 56px; border-radius: 16px; border: none; background: linear-gradient(135deg, #6A3BB5 0%, #4C1D95 60%, #3B1574 100%); color: #FFFFFF; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 16px; font-weight: 700; text-decoration: none; cursor: default; opacity: 0.5; pointer-events: none; box-sizing: border-box'
+    };
+  }
+}
+</script>
+</body>
+</html>

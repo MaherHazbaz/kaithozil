@@ -1,66 +1,79 @@
-# What changed since the first handoff
+# What changed since version 2
 
-## New screens (33)
+Version 2 had 58 screens. Version 3 has **98**.
 
-- **Customer · Saved addresses** (`source/Addresses.dc.html`)
-- **Customer · Payments** (`source/Payments.dc.html`)
-- **Shared · Language** (`source/Language.dc.html`)
-- **Worker · Payment details** (`source/WPayments.dc.html`)
-- **Worker · Government schemes** (`source/Schemes.dc.html`)
-- **Worker · Training and level up** (`source/Training.dc.html`)
-- **Customer · Schedule a time** (`source/Schedule.dc.html`)
-- **Customer · Add or edit address** (`source/AddressEdit.dc.html`)
-- **Customer · Photos and voice note** (`source/Media.dc.html`)
-- **Customer · Mechanic job** (`source/MechPost.dc.html`)
-- **Shared · Permissions** (`source/Permissions.dc.html`)
-- **Worker · Consent** (`source/Consent.dc.html`)
-- **Worker · Identity check** (`source/KYC.dc.html`)
-- **Worker · Skill video** (`source/SkillVideo.dc.html`)
-- **Worker · Battery guide** (`source/BatteryGuide.dc.html`)
-- **Customer · Cancel booking** (`source/CancelBooking.dc.html`)
-- **Shared · Chat and masked call** (`source/Chat.dc.html`)
-- **Customer · Job receipt** (`source/Receipt.dc.html`)
-- **Shared · Support ticket** (`source/Ticket.dc.html`)
-- **Worker · Can't continue a job** (`source/CancelJob.dc.html`)
-- **Worker · Share your work** (`source/PostWork.dc.html`)
-- **Worker · My work portfolio** (`source/WPortfolio.dc.html`)
-- **Customer · Search workers** (`source/Search.dc.html`)
-- **Customer · Worker profile** (`source/WorkerProfile.dc.html`)
-- **Customer · Booking request sent** (`source/RequestSent.dc.html`)
-- **Worker · Booking request** (`source/BookingRequest.dc.html`)
-- **Worker · Suggest another time** (`source/WSuggest.dc.html`)
-- **Worker · My jobs** (`source/WRequests.dc.html`)
-- **Customer · Request a site visit** (`source/QuoteRequest.dc.html`)
-- **Worker · Send a quote** (`source/SendQuote.dc.html`)
-- **Customer · Your quote** (`source/QuoteView.dc.html`)
-- **Customer · Tailor booking** (`source/TailorBook.dc.html`)
-- **Customer · Crew profile** (`source/CrewProfile.dc.html`)
+## New screens (40)
 
-## Updated screens (16)
+- **Shared · No internet** (`source/NoInternet.dc.html`)
+- **Shared · Something went wrong** (`source/ErrorState.dc.html`)
+- **Shared · Empty list** (`source/EmptyState.dc.html`)
+- **Shared · Update required** (`source/UpdateApp.dc.html`)
+- **Shared · Under maintenance** (`source/Maintenance.dc.html`)
+- **Customer · Housekeeping** (`source/HousekeepingBook.dc.html`)
+- **Customer · Job plan** (`source/JobPlan.dc.html`)
+- **Customer · Job progress** (`source/JobProgress.dc.html`)
+- **Customer · Daily crew payments** (`source/CrewPayments.dc.html`)
+- **Customer · Order status (tailor)** (`source/OrderStatus.dc.html`)
+- **Customer · Pickup and delivery** (`source/Handover.dc.html`)
+- **Customer · After the trial day** (`source/TrialDecision.dc.html`)
+- **Customer · Regular help** (`source/HousekeepingPlan.dc.html`)
+- **Customer · Approve leave** (`source/LeaveApprove.dc.html`)
+- **Customer · Check the bill** (`source/BillApprove.dc.html`)
+- **Shared · Report a problem** (`source/ReportProblem.dc.html`)
+- **Shared · Record the work done** (`source/WorkRecord.dc.html`)
+- **Shared · Settle the payment** (`source/Settlement.dc.html`)
+- **Shared · Dispute status** (`source/DisputeStatus.dc.html`)
+- **Customer · My measurements** (`source/MyMeasurements.dc.html`)
+- **Shared · Safety and emergency contacts** (`source/Safety.dc.html`)
+- **Shared · Terms and privacy** (`source/Legal.dc.html`)
+- **Shared · Log out or delete account** (`source/DeleteAccount.dc.html`)
+- **Worker · Site-visit request** (`source/VisitRequest.dc.html`)
+- **Worker · Tailor home** (`source/TailorHome.dc.html`)
+- **Worker · Tailor's orders** (`source/TailorOrders.dc.html`)
+- **Worker · Housekeeper home** (`source/HousekeeperHome.dc.html`)
+- **Worker · Start selfie** (`source/SelfieCheck.dc.html`)
+- **Worker · Daily check-in (housekeeper)** (`source/HouseCheckIn.dc.html`)
+- **Worker · Today's update** (`source/DailyUpdate.dc.html`)
+- **Worker · Request a payment** (`source/StageRequest.dc.html`)
+- **Worker · Record measurements (tailor)** (`source/Measurements.dc.html`)
+- **Shared · Change request** (`source/ChangeRequest.dc.html`)
+- **Worker · Ask for leave (housekeeper)** (`source/LeaveRequest.dc.html`)
+- **Worker · Rate the customer** (`source/RateCustomer.dc.html`)
+- **Worker · Mestri home** (`source/MestriHome.dc.html`)
+- **Worker · Daily attendance (mestri)** (`source/CrewAttendance.dc.html`)
+- **Worker · Crew invite (helper)** (`source/CrewJoin.dc.html`)
+- **Worker · Helper home** (`source/HelperHome.dc.html`)
+- **Worker · Platform fee due** (`source/FeeDue.dc.html`)
 
-- **Worker · Current job**: "Running late?" opens chat; new "Can't continue this job" link
-- **Customer · Worker profile (book again)**: Book button now sends a booking request (Booking request sent)
-- **Customer · Bookings**: "Book again" on past jobs is now "View receipt"
-- **Customer · Book construction crew**: New "Prefer to choose your crew?" link to crew profiles; screen height on the canvas is now 673
-- **Worker · Finish job and get paid**: "Yes, received" now leads to Share your work
-- **Start · Log in with OTP**: Verify and continue now goes to Permissions
-- **Customer · Home**: Plumber (tap) and Carpenter (sofa) icons, new Mechanic tile, search bar opens Search, Painter/Carpenter/Tailor tiles open their own flows
-- **Customer · Describe the job**: No problem preselected, button disabled with a reason, empty description with a hint (required for "Other"), photo/voice and schedule links, address Change link
-- **Customer · Profile**: Saved addresses, Payments and Language rows open their screens
-- **Customer · Finding a worker**: Ripple waves around the search circle (2.4 s, staggered)
-- **Customer · Help and support**: Each issue opens a support ticket
-- **Customer · Worker on the way**: Cancel opens Cancel booking; call and message open Chat
-- **Worker · Verification**: Aadhaar KYC and Skill check rows open their screens
-- **Worker · Profile**: New "My work" row; Payments, Schemes, Training and Language rows open their screens
-- **Worker · Sign-up**: Continue now goes to Consent
-- **Worker · Home and new job**: New "Booking requests" and "Make sure job alerts ring" cards
+## Updated screens (56)
 
-## Design tokens
+**Every updated screen** also received the layout fixes: icons never shrink, items in scrolling areas never squash, pill labels stay on one line, and there's an 8 px gap above the bottom navigation. These don't change the look; they stop overlaps on real phones.
 
-`tokens.json` gains new colours (danger, disabled text, toggle off, mango border…), gradients (welcome hero, deep and lavender cards, photo placeholders), the Bebas Neue font and the dark confirm button. Nothing was renamed or removed.
+Screens with functional changes:
 
-## Changes made in the app code and brought back into the design
+- **Worker · Current job**: Start selfie first, then arrival and work-start codes; Finish job disabled until work starts; links to change request, daily update, report a problem
+- **Customer · Bookings**: Trial day and regular help cards; Upcoming (4)
+- **Customer · Book construction crew**: "Not sure how many workers or days?" toggle leading to the job plan; link to crew profiles; full 844 height restored
+- **Customer · Crew confirmed**: Link to attendance and daily payments
+- **Worker · Earnings and level**: Cash jobs shown separately with the platform fee due (opens Platform fee due)
+- **Worker · Finish job and get paid**: Itemised bill; waiting for verified payment, verified, or cash (Payment tweak); then Rate the customer
+- **Worker · Identity check**: Rebuilt: DigiLocker with Aadhaar and PAN, Aadhaar QR fallback, selfie liveness, face and name match; ripple while checking
+- **Customer · Home**: New Housekeeping tile; wording for door codes
+- **Customer · Pay and rate**: Rebuilt for verified gateway payments: UPI app or QR, bank check with ripple, verified or failed, cash with disclaimer; rating only after payment
+- **Customer · Describe the job**: "How long might it take?" with "Not sure" option; schedule link and duration placed below the Now/Schedule row
+- **Customer · Profile**: Measurements, Safety, Terms and privacy, Log out or delete
+- **Customer · Request a site visit**: "How many days and painters?" with "Not sure" option
+- **Customer · Your quote**: After accepting, opens Job progress
+- **Customer · Job receipt**: Verified payment or "Cash, not verified" (Paid by tweak), arrival and start times
+- **Customer · Booking request sent**: Ripple while waiting; door-code wording
+- **Customer · Tailor booking**: Booking opens Order status
+- **Customer · Worker on the way**: Arrival code, then work-start code (Stage tweak); "Report a problem"; pay goes through Check the bill
+- **Worker · Profile**: Safety, Terms and privacy, Log out or delete
+- **Worker · My jobs**: Site-visit request and quote cards
+- **Worker · Sign-up**: Mechanic and Housekeeping added to trades
 
-- Plumber and Carpenter icons, the Mechanic tile (decision record 0004)
-- Clearer job descriptions on Describe the job (0005)
-- Ripple waves on Finding a worker (0006)
+Layout fixes only: Customer · Add or edit address, Customer · Saved addresses, Worker · Battery guide, Customer · Worker profile (book again), Worker · Booking request, Customer · Cancel booking, Worker · Can't continue a job, Shared · Chat and masked call, Worker · Consent, Customer · Crew profile, Worker · Incoming team job (mestri), Shared · Language, Start · Log in with OTP, Customer · Mechanic job, Customer · Photos and voice note, Customer · Payments, Shared · Permissions, Worker · Share your work, Worker · Incoming job (ringing), Customer · Schedule a time, Worker · Government schemes, Customer · Search workers, Customer · Finding a worker, Worker · Send a quote, Worker · Skill video, Worker · Earnings statements, Customer · Help and support, Shared · Support ticket, Worker · Training and level up, Worker · Verification, Worker · Payment details, Worker · My work portfolio, Worker · Suggest another time, Start · Welcome, Worker · Home and new job, Customer · Worker profile.
+
+## Tokens
+
+`tokens.json` version 3 adds the **motion** section (search waves, waiting ripple, system ripple, reduce motion) and two colours (`dangerStrong`, `waveGold`). Nothing was renamed or removed.

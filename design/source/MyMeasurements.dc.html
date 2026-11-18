@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>My measurements</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Noto+Sans+Tamil:wght@400;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#4C1D95}a:hover{color:#3B1574}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: linear-gradient(180deg, #F3EEFB 0%, #F8F7FB 35%, #FFFFFF 100%); font-family: 'Plus Jakarta Sans', 'Noto Sans Tamil', sans-serif; color: #1C1730; display: flex; flex-direction: column; overflow: hidden">
+<div style="padding: 22px 20px 0 20px; display: flex; align-items: center; gap: 12px">
+  <a href="Profile.dc.html" aria-label="Back" style="width: 44px; height: 44px; flex-shrink: 0; border-radius: 22px; background: #FFFFFF; border: 1px solid #E8E5F0; display: flex; align-items: center; justify-content: center; color: #1C1730"><svg style="flex-shrink: 0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg></a>
+  <div style="flex-grow: 1; display: flex; flex-direction: column"><div style="font-size: 18px; font-weight: 800">Measurements</div><div style="font-size: 12px; color: #625B73">அளவுகள்</div></div>
+  
+</div><div style="padding: 16px 20px 0 20px; display: flex; flex-direction: column; gap: 12px; flex-grow: 1; min-height: 0; overflow-y: auto; overflow-x: hidden">
+
+<div style="display: flex; flex-direction: column; gap: 8px; flex-shrink: 0"><span style="font-size: 13px; font-weight: 700; color: #625B73">Whose measurements</span><div style="display: flex; flex-wrap: wrap; gap: 6px" role="group" aria-label="Person"><sc-for list="{{people}}" as="o" hint-placeholder-count="4"><button aria-pressed="{{o.pressed}}" onClick="{{o.pick}}" style="{{o.style}}">{{o.label}}</button></sc-for></div></div>
+<div style="display: flex; flex-direction: column; gap: 8px; flex-shrink: 0"><span style="font-size: 13px; font-weight: 700; color: #625B73">Garment</span><div style="display: flex; flex-wrap: wrap; gap: 6px" role="group" aria-label="Garment"><sc-for list="{{items}}" as="g" hint-placeholder-count="4"><button aria-pressed="{{g.pressed}}" onClick="{{g.pick}}" style="{{g.style}}">{{g.label}}</button></sc-for></div></div>
+<div style="background: #FFFFFF; border: 1px solid #EEEAF6; border-radius: 20px; padding: 14px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 8px 24px rgba(59, 21, 116, 0.08); gap: 0; padding: 4px 14px; flex-shrink: 0"><sc-for list="{{rows}}" as="r" hint-placeholder-count="6"><div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #E8E5F0"><span style="display: flex; flex-direction: column"><span style="font-size: 14px; font-weight: 700">{{r.en}}</span><span style="font-size: 11px; color: #625B73">{{r.ta}}</span></span><span style="font-size: 15px; font-weight: 800">{{r.v}}</span></div></sc-for><div style="font-size: 11px; color: #625B73; padding: 10px 0">{{meta}}</div></div>
+<div style="display: flex; gap: 10px; align-items: flex-start; background: #EFE9FB; border-radius: 14px; padding: 12px; font-size: 12px; color: #1C1730; line-height: 1.45; flex-shrink: 0"><svg style="flex-shrink: 0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4C1D95" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg><span>Only tailors you book can see these, and only for that order.</span></div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; flex-shrink: 0"><button style="height: 48px; border-radius: 14px; border: 1px solid #DDD8E8; background: #FFFFFF; color: #4C1D95; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 14px; font-weight: 700; text-decoration: none; cursor: pointer; box-sizing: border-box"><svg style="flex-shrink: 0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>Edit</button><a href="TailorBook.dc.html" style="height: 48px; border-radius: 14px; border: 1px solid #DDD8E8; background: #FFFFFF; color: #4C1D95; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 14px; font-weight: 700; text-decoration: none; cursor: pointer; box-sizing: border-box"><svg style="flex-shrink: 0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z"></path><path d="m14.5 12.5 2-2"></path><path d="m11.5 9.5 2-2"></path><path d="m8.5 6.5 2-2"></path><path d="m17.5 15.5 2-2"></path></svg>Book with these</a></div>
+<button style="min-height: 44px; border: none; background: transparent; font-family: inherit; font-size: 14px; font-weight: 700; color: #4C1D95; display: flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none; cursor: pointer; flex-shrink: 0"><svg style="flex-shrink: 0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add a person</button>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { who: 0, item: 0 }; }
+  renderVals() {
+    const s = this.state;
+    const people = ['Priya', 'Amma'];
+    const items = s.who === 0 ? ['Blouse', 'Kurta'] : ['Blouse'];
+    const it = Math.min(s.item, items.length - 1);
+    const data = {
+      '0-0': [["Bust", "மார்பு", "86 cm"], ["Waist", "இடுப்பு", "72 cm"], ["Shoulder", "தோள்", "36 cm"], ["Blouse length", "நீளம்", "38 cm"], ["Sleeve length", "கை நீளம்", "24 cm"], ["Armhole", "கைக்குழி", "40 cm"], ["Front neck depth", "முன் கழுத்து", "18 cm"], ["Back neck depth", "பின் கழுத்து", "20 cm"]],
+      '0-1': [['Chest', 'மார்பு', '88 cm'], ['Waist', 'இடுப்பு', '74 cm'], ['Shoulder', 'தோள்', '37 cm'], ['Kurta length', 'நீளம்', '102 cm'], ['Sleeve length', 'கை நீளம்', '56 cm']],
+      '1-0': [['Bust', 'மார்பு', '94 cm'], ['Waist', 'இடுப்பு', '84 cm'], ['Shoulder', 'தோள்', '38 cm'], ['Blouse length', 'நீளம்', '40 cm'], ['Sleeve length', 'கை நீளம்', '28 cm']]
+    };
+    const meta = { '0-0': 'Measured by Meena S. · 15 Nov 2026', '0-1': 'Measured by Meena S. · 2 Aug 2026', '1-0': 'Added by you · 10 Jun 2026' };
+    const key = s.who + '-' + it;
+    const chipOn = 'height: 44px; padding: 0 14px; border-radius: 999px; white-space: nowrap; border: 2px solid #4C1D95; background: #EFE9FB; color: #4C1D95; font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer', chipOff = 'height: 44px; padding: 0 14px; border-radius: 999px; white-space: nowrap; border: 1px solid #DDD8E8; background: #FFFFFF; color: #1C1730; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer';
+    return {
+      people: people.map((l, k) => ({ label: l, pressed: k === s.who ? 'true' : 'false', style: k === s.who ? chipOn : chipOff, pick: () => this.setState({ who: k, item: 0 }) })),
+      items: items.map((l, k) => ({ label: l, pressed: k === it ? 'true' : 'false', style: k === it ? chipOn : chipOff, pick: () => this.setState({ item: k }) })),
+      rows: data[key].map((r) => ({ en: r[0], ta: r[1], v: r[2] })),
+      meta: meta[key]
+    };
+  }
+}
+</script>
+</body>
+</html>

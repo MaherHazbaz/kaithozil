@@ -1,197 +1,239 @@
-# Kaithozhil design handoff (version 2)
+# Kaithozhil design handoff (version 3)
 
-This folder is the source of truth for the app's UI: **58 screens**. Build every screen to match it exactly.
+This folder is the source of truth for the mobile app's UI: **98 screens** for customers and workers across every trade (repairs, mechanics, painters and carpenters, tailors, construction crews and helpers, housekeeping). Build every screen to match it exactly. The admin panel (web) is not part of this handoff yet.
 
 ## What's here
 
 | Folder / file | Contents |
 |---|---|
-| `source/` | The original design files (`*.dc.html`). Every colour, size, radius, shadow, gap and piece of text is in the inline styles. `canvas.json` lists every screen and how the canvas groups them. |
+| `source/` | The original design files (`*.dc.html`). Every colour, size, radius, shadow, gap and piece of text is in the inline styles; interaction rules are in each file's script block. `canvas.json` holds the canvas layout and workflow rows. |
 | `preview/` | Each screen as a plain HTML file you can open in a browser, in its default state. |
-| `screenshots/` | 3x PNG renders of every screen (1170 x 2532 for phone screens; the A4 statement at 2382 x 3369), plus frames of the opening animation. Rendered with the real fonts. |
+| `screenshots/` | 3x PNG renders of every screen with the real fonts (1170 x 2532; the A4 statement at 2382 x 3369), plus opening-animation frames. |
 | `assets/` | `logo.png` (square, cream background) and `logo-transparent.png`. |
-| `tokens.json` | All design tokens: colours, gradients, shadows, radii, sizes, fonts, type styles. Version 2 only **adds** values; nothing from version 1 was renamed or removed. |
-| `CHANGES.md` | What's new or changed since the first handoff. |
+| `tokens.json` | Design tokens, version 3. Adds the **motion** tokens (search waves, waiting ripples) to version 2. Nothing was renamed or removed. |
+| `CHANGES.md` | What's new or changed since version 2 (58 screens). |
 
 ## Rules for matching the design
 
-1. The design frame is **390 x 844**. CSS pixels in the source equal React Native points, 1:1.
+1. The design frame is **390 x 844**. CSS pixels in the source equal React Native points, 1:1. Layouts must stay correct from 360 to 430 px wide.
 2. Use the exact values from `source/` and `tokens.json`. Don't eyeball from screenshots when the source has the number.
-3. **English first, Tamil secondary** on every screen, exactly as designed. Don't reword text without asking.
-4. Touch targets are at least 44 x 44.
-5. Content areas scroll; headers and bottom bars stay fixed. Nothing overlaps the bottom navigation.
-6. Layouts must stay correct from 360 to 430 px wide.
-7. Respect "reduce motion": show final states without animation.
-8. Check each finished screen against its screenshot (visual QA report), on the emulator.
-9. Placeholders in square brackets (for example **[VISIT FEE]**, **[DAILY RATE]**, **[CANCELLATION RULE]**, **[RESPONSE TIME]**, **[HELP CENTRE]**, **[TEST CENTRE]**, **[REVIEW TIME]**, **[PICKUP FEE]**) are decisions still to be made: keep them visible and list them in your open questions.
-10. Numbers, names and amounts on screens are **sample data**. Real values come from the backend.
+3. **English first, Tamil secondary** on every screen. All text comes from the language files (en, ta) so the language setting changes the whole app, including notifications and SMS.
+4. Touch targets at least 44 x 44. Content scrolls; headers and bottom bars stay fixed; nothing overlaps the bottom navigation (keep the 8 px gap above it).
+5. **Nothing may shrink or overlap:** icons never shrink next to long text; cards, rows and buttons inside scrolling areas keep their height (the equivalent of `flexShrink: 0`); pill labels stay on one line.
+6. Respect reduce motion: no waves, ripples or slide animations when it's on.
+7. Placeholders in square brackets are decisions still to be made (see the list at the end). Keep them visible and list them in your open questions.
+8. Names, numbers and amounts on screens are **sample data**.
+9. Check every screen and every state against its screenshot on the emulator and record it in the visual QA report.
 
 ### Translating the CSS to React Native
 
-- Flexbox maps directly, but React Native defaults to `flexDirection: 'column'`; set directions explicitly to match the CSS.
+- Flexbox maps directly, but React Native defaults to `flexDirection: 'column'`; set directions explicitly.
 - `linear-gradient(angle, …)` → `expo-linear-gradient` start/end points calculated from the angle.
-- `line-height` is absolute in React Native (font size x CSS line-height).
-- `box-shadow` → `boxShadow` (New Architecture) with the same values.
-- Interactive states (selected chips, steppers, toggles, tabs, enabled/disabled buttons) are written in each source file's script block: read it for the rules (for example, which fields must be filled before a button turns on).
-- Some screens have several states in one file (shown with `sc-if`): for example the identity check (DigiLocker → selfie → result) and the booking-request outcomes. Build each state.
-- **Booking request sent** has a design tweak called "Reply" (Waiting / Accepted / New time suggested / Declined) used to preview the four outcomes; in the app the state comes from the server.
+- `line-height` is absolute in React Native (font size x CSS line-height). `box-shadow` → `boxShadow` (New Architecture).
+- Interactive rules (what enables a button, what each tap changes) are in each source file's script block.
+- Many screens contain several states in one file (`sc-if` blocks), for example Pay and rate (choose, QR, checking, verified, failed, cash), Identity check (DigiLocker, selfie, result) or Booking request sent (waiting, accepted, new time, declined). Build every state.
+- Some screens have **design tweaks** in `data-props` (for example "Reply", "Stage", "Role", "View", "Result", "List", "Type", "Step", "Paid by"). They only switch states for review; in the app the state comes from the server or the user's role.
 
-## Fonts (bundle them in the app, all Open Font License)
+## Key product rules shown in the designs
 
-- **Plus Jakarta Sans** 400, 500, 600, 700, 800: English text
-- **Noto Sans Tamil** 400, 600, 700: Tamil text
-- **Anton** 400: opening animation
-- **Bebas Neue** 400: the app name on the Welcome screen (new in version 2)
+- **Verified payments:** customers pay through a payment gateway ([PAYMENT PARTNER]) by UPI app or QR. Opening a UPI app is never proof; a job is paid only when the gateway confirms. Cash is allowed with the disclaimer, is marked "not verified", gets no receipt, doesn't count in statements, and leaves the platform fee due.
+- **Two door codes:** an **arrival code**, then a **work-start code**, each time-stamped. Workers also take a **start selfie** matched to their verified photo. Housekeepers **check in with a daily code**.
+- **Job plan and changes:** when the customer chooses "Not sure", workers and days are agreed in a job plan; changes need both sides to accept.
+- **Disputes:** reporting pauses the job and payments; work done is recorded by milestones; a settlement can be agreed in the app or reviewed by Kaithozhil.
+- **Role homes:** the worker app shows a different home per role: Worker (repairs), Tailor home, Mestri home, Helper home, Housekeeper home.
+- **No contact details** on profiles or portfolios; booking and payment only through the app.
 
-Icons are Lucide (stroke 2): use `lucide-react-native`, or the exact SVG paths in the source files.
+## Fonts (bundle them, all Open Font License)
 
-## Screens, grouped as on the canvas
+- **Plus Jakarta Sans** 400–800 (English), **Noto Sans Tamil** 400/600/700 (Tamil), **Anton** 400 (opening animation), **Bebas Neue** 400 (Welcome title). Icons: Lucide (stroke 2), `lucide-react-native` or the SVG paths in the source.
 
-### Start: opening animation, welcome, login and worker sign-up
+## Screens, in workflow order (as on the canvas)
 
-| Screen | Route | Source | Screenshot | Links to |
-|---|---|---|---|---|
-| Start · Opening animation | `/splash` | `source/Splash.dc.html` | `screenshots/Splash.png` | Welcome |
-| Start · Welcome | `/welcome` | `source/Welcome.dc.html` | `screenshots/Welcome.png` | Login |
-| Start · Log in with OTP *(updated)* | `/login` | `source/Login.dc.html` | `screenshots/Login.png` | Permissions, WSignup, Welcome |
-| Worker · Sign-up *(updated)* | `/w/signup` | `source/WSignup.dc.html` | `screenshots/WSignup.png` | Consent, Login |
-| Worker · Verification *(updated)* | `/w/verify` | `source/Verify.dc.html` | `screenshots/Verify.png` | KYC, SkillVideo, WSignup, Worker |
+### Shared: start, language and chat (1–6)
 
-### Customer: book a repair
+| # | Screen | Route | Source | Screenshot | Links to |
+|---|---|---|---|---|---|
+| 1 | Start · Opening animation | `/splash` | `source/Splash.dc.html` | `screenshots/Splash.png` | Welcome |
+| 2 | Start · Welcome *(updated)* | `/welcome` | `source/Welcome.dc.html` | `screenshots/Welcome.png` | Login |
+| 3 | Start · Log in with OTP *(updated)* | `/login` | `source/Login.dc.html` | `screenshots/Login.png` | Permissions, WSignup, Welcome |
+| 4 | Shared · Permissions *(updated)* | `/permissions` | `source/Permissions.dc.html` | `screenshots/Permissions.png` | - |
+| 5 | Shared · Language *(updated)* | `/language` | `source/Language.dc.html` | `screenshots/Language.png` | Profile |
+| 6 | Shared · Chat and masked call *(updated)* | `/job/:id/chat` | `source/Chat.dc.html` | `screenshots/Chat.png` | Tracking |
 
-| Screen | Route | Source | Screenshot | Links to |
-|---|---|---|---|---|
-| Customer · Home *(updated)* | `/home` | `source/Main.dc.html` | `screenshots/Main.png` | Book, Bookings, Crew, MechPost, Post, Profile, QuoteRequest, Search, TailorBook |
-| Customer · Describe the job *(updated)* | `/job/new` | `source/Post.dc.html` | `screenshots/Post.png` | Addresses, Main, Media, Schedule |
-| Customer · Finding a worker *(updated)* | `/job/searching` | `source/Searching.dc.html` | `screenshots/Searching.png` | Main, Tracking |
-| Customer · Worker on the way *(updated)* | `/job/:id/tracking` | `source/Tracking.dc.html` | `screenshots/Tracking.png` | CancelBooking, Chat, Pay, Searching |
-| Customer · Pay and rate | `/job/:id/pay` | `source/Pay.dc.html` | `screenshots/Pay.png` | Bookings |
-| Customer · Worker profile (book again) *(updated)* | `/worker/:id/book` | `source/Book.dc.html` | `screenshots/Book.png` | Main, RequestSent |
+### Shared: system states (7–11)
 
-### Customer: construction crew and account
+| # | Screen | Route | Source | Screenshot | Links to |
+|---|---|---|---|---|---|
+| 7 | Shared · No internet **(new)** | `(state)` | `source/NoInternet.dc.html` | `screenshots/NoInternet.png` | - |
+| 8 | Shared · Something went wrong **(new)** | `(state)` | `source/ErrorState.dc.html` | `screenshots/ErrorState.png` | Main, Support |
+| 9 | Shared · Empty list **(new)** | `(state)` | `source/EmptyState.dc.html` | `screenshots/EmptyState.png` | - |
+| 10 | Shared · Update required **(new)** | `/update` | `source/UpdateApp.dc.html` | `screenshots/UpdateApp.png` | Main |
+| 11 | Shared · Under maintenance **(new)** | `(state)` | `source/Maintenance.dc.html` | `screenshots/Maintenance.png` | - |
 
-| Screen | Route | Source | Screenshot | Links to |
-|---|---|---|---|---|
-| Customer · Book construction crew *(updated)* | `/crew/new` | `source/Crew.dc.html` | `screenshots/Crew.png` | CrewProfile, CrewTeam, Main |
-| Customer · Crew confirmed | `/crew/:id` | `source/CrewTeam.dc.html` | `screenshots/CrewTeam.png` | Bookings, Crew |
-| Customer · Bookings *(updated)* | `/bookings` | `source/Bookings.dc.html` | `screenshots/Bookings.png` | CrewTeam, Main, Profile, Receipt, Searching, Support |
-| Customer · Profile *(updated)* | `/profile` | `source/Profile.dc.html` | `screenshots/Profile.png` | Addresses, Bookings, Language, Main, Payments, Support, Welcome |
-| Customer · Help and support *(updated)* | `/support` | `source/Support.dc.html` | `screenshots/Support.png` | Profile, Ticket |
+### Customer: home and finding workers (12–15)
 
-### Worker: getting and doing jobs
+| # | Screen | Route | Source | Screenshot | Links to |
+|---|---|---|---|---|---|
+| 12 | Customer · Home *(updated)* | `/home` | `source/Main.dc.html` | `screenshots/Main.png` | Book, Bookings, Crew, HousekeepingBook, MechPost, Post, Profile, QuoteRequest, Search, TailorBook |
+| 13 | Customer · Search workers *(updated)* | `/search` | `source/Search.dc.html` | `screenshots/Search.png` | Main, Post, WorkerProfile |
+| 14 | Customer · Worker profile *(updated)* | `/worker/:id` | `source/WorkerProfile.dc.html` | `screenshots/WorkerProfile.png` | Book, Search |
+| 15 | Customer · Crew profile *(updated)* | `/crews/:id` | `source/CrewProfile.dc.html` | `screenshots/CrewProfile.png` | Crew |
 
-| Screen | Route | Source | Screenshot | Links to |
-|---|---|---|---|---|
-| Worker · Home and new job *(updated)* | `/w/home` | `source/Worker.dc.html` | `screenshots/Worker.png` | ActiveJob, BatteryGuide, CrewRing, Earnings, WProfile, WRequests |
-| Worker · Incoming job (ringing) | `/w/incoming` | `source/Ringing.dc.html` | `screenshots/Ringing.png` | ActiveJob, Worker |
-| Worker · Incoming team job (mestri) | `/w/incoming-team` | `source/CrewRing.dc.html` | `screenshots/CrewRing.png` | CrewTeam, Worker |
-| Worker · Current job *(updated)* | `/w/job/:id` | `source/ActiveJob.dc.html` | `screenshots/ActiveJob.png` | CancelJob, Chat, JobDone, Worker |
-| Worker · Finish job and get paid *(updated)* | `/w/job/:id/finish` | `source/JobDone.dc.html` | `screenshots/JobDone.png` | ActiveJob, PostWork |
+### Customer: booking a job (16–24)
 
-### Worker: earnings and profile
+| # | Screen | Route | Source | Screenshot | Links to |
+|---|---|---|---|---|---|
+| 16 | Customer · Describe the job *(updated)* | `/job/new` | `source/Post.dc.html` | `screenshots/Post.png` | Addresses, Main, Media, Schedule |
+| 17 | Customer · Photos and voice note *(updated)* | `/job/new/media` | `source/Media.dc.html` | `screenshots/Media.png` | Post |
+| 18 | Customer · Schedule a time *(updated)* | `/job/new/schedule` | `source/Schedule.dc.html` | `screenshots/Schedule.png` | Post |
+| 19 | Customer · Add or edit address *(updated)* | `/addresses/edit` | `source/AddressEdit.dc.html` | `screenshots/AddressEdit.png` | Addresses |
+| 20 | Customer · Mechanic job *(updated)* | `/job/new/mechanic` | `source/MechPost.dc.html` | `screenshots/MechPost.png` | Addresses, Main, Media, Schedule |
+| 21 | Customer · Request a site visit *(updated)* | `/job/new/visit` | `source/QuoteRequest.dc.html` | `screenshots/QuoteRequest.png` | Addresses, Bookings, Main, Media, QuoteView, Schedule |
+| 22 | Customer · Your quote *(updated)* | `/quote/:id` | `source/QuoteView.dc.html` | `screenshots/QuoteView.png` | Bookings, Chat, JobProgress, Search, WorkerProfile |
+| 23 | Customer · Tailor booking *(updated)* | `/job/new/tailor` | `source/TailorBook.dc.html` | `screenshots/TailorBook.png` | Main, Media |
+| 24 | Customer · Housekeeping **(new)** | `/job/new/housekeeping` | `source/HousekeepingBook.dc.html` | `screenshots/HousekeepingBook.png` | HousekeepingPlan, Main |
 
-| Screen | Route | Source | Screenshot | Links to |
-|---|---|---|---|---|
-| Worker · Earnings and level | `/w/earnings` | `source/Earnings.dc.html` | `screenshots/Earnings.png` | Statements, WProfile, Worker |
-| Worker · Earnings statements | `/w/statements` | `source/Statements.dc.html` | `screenshots/Statements.png` | Earnings, Statement |
-| Monthly earnings statement (A4 PDF) | `(server PDF)` | `source/Statement.dc.html` | `screenshots/Statement.png` | - |
-| Worker · Profile *(updated)* | `/w/profile` | `source/WProfile.dc.html` | `screenshots/WProfile.png` | Earnings, Language, Schemes, Statements, Support, Training, WPayments, WPortfolio, Welcome, Worker |
+### Customer: crews and booking a chosen worker (25–29)
 
-### Settings and growth
+| # | Screen | Route | Source | Screenshot | Links to |
+|---|---|---|---|---|---|
+| 25 | Customer · Book construction crew *(updated)* | `/crew/new` | `source/Crew.dc.html` | `screenshots/Crew.png` | CrewProfile, Main |
+| 26 | Customer · Job plan **(new)** | `/job/:id/plan` | `source/JobPlan.dc.html` | `screenshots/JobPlan.png` | Bookings, Crew, CrewTeam |
+| 27 | Customer · Crew confirmed *(updated)* | `/crew/:id` | `source/CrewTeam.dc.html` | `screenshots/CrewTeam.png` | Bookings, Crew, CrewPayments |
+| 28 | Customer · Worker profile (book again) *(updated)* | `/worker/:id/book` | `source/Book.dc.html` | `screenshots/Book.png` | Main, RequestSent |
+| 29 | Customer · Booking request sent *(updated)* | `/booking/:id` | `source/RequestSent.dc.html` | `screenshots/RequestSent.png` | Bookings, Chat, Schedule, Search, Searching, WorkerProfile |
 
-| Screen | Route | Source | Screenshot | Links to |
-|---|---|---|---|---|
-| Customer · Saved addresses **(new)** | `/addresses` | `source/Addresses.dc.html` | `screenshots/Addresses.png` | AddressEdit, Profile |
-| Customer · Payments **(new)** | `/payments` | `source/Payments.dc.html` | `screenshots/Payments.png` | Profile |
-| Shared · Language **(new)** | `/language` | `source/Language.dc.html` | `screenshots/Language.png` | Profile |
-| Worker · Payment details **(new)** | `/w/payment-details` | `source/WPayments.dc.html` | `screenshots/WPayments.png` | Earnings, Statements, WProfile |
-| Worker · Government schemes **(new)** | `/w/schemes` | `source/Schemes.dc.html` | `screenshots/Schemes.png` | WProfile |
-| Worker · Training and level up **(new)** | `/w/training` | `source/Training.dc.html` | `screenshots/Training.png` | WProfile |
+### Customer: during and after the job (30–42)
 
-### Booking details
+| # | Screen | Route | Source | Screenshot | Links to |
+|---|---|---|---|---|---|
+| 30 | Customer · Finding a worker *(updated)* | `/job/searching` | `source/Searching.dc.html` | `screenshots/Searching.png` | Main, Tracking |
+| 31 | Customer · Worker on the way *(updated)* | `/job/:id/tracking` | `source/Tracking.dc.html` | `screenshots/Tracking.png` | BillApprove, CancelBooking, Chat, ReportProblem, Searching |
+| 32 | Customer · Job progress **(new)** | `/job/:id/progress` | `source/JobProgress.dc.html` | `screenshots/JobProgress.png` | Bookings, ChangeRequest, Chat, ReportProblem |
+| 33 | Customer · Daily crew payments **(new)** | `/crew/:id/payments` | `source/CrewPayments.dc.html` | `screenshots/CrewPayments.png` | CrewTeam, Pay, ReportProblem |
+| 34 | Customer · Order status (tailor) **(new)** | `/order/:id` | `source/OrderStatus.dc.html` | `screenshots/OrderStatus.png` | Bookings, ChangeRequest, Chat, Handover, MyMeasurements, Pay, ReportProblem |
+| 35 | Customer · Pickup and delivery **(new)** | `/order/:id/handover` | `source/Handover.dc.html` | `screenshots/Handover.png` | Chat, OrderStatus, ReportProblem |
+| 36 | Customer · After the trial day **(new)** | `/help/:id/trial` | `source/TrialDecision.dc.html` | `screenshots/TrialDecision.png` | Bookings, HousekeepingPlan, Searching |
+| 37 | Customer · Regular help **(new)** | `/help/:id` | `source/HousekeepingPlan.dc.html` | `screenshots/HousekeepingPlan.png` | Bookings, CancelBooking, Chat, LeaveApprove, Pay, ReportProblem, Schedule |
+| 38 | Customer · Approve leave **(new)** | `/help/:id/leave/:leaveId` | `source/LeaveApprove.dc.html` | `screenshots/LeaveApprove.png` | Chat, HousekeepingPlan |
+| 39 | Customer · Cancel booking *(updated)* | `/job/:id/cancel` | `source/CancelBooking.dc.html` | `screenshots/CancelBooking.png` | Schedule, Tracking |
+| 40 | Customer · Check the bill **(new)** | `/job/:id/bill` | `source/BillApprove.dc.html` | `screenshots/BillApprove.png` | Pay, ReportProblem, Tracking |
+| 41 | Customer · Pay and rate *(updated)* | `/job/:id/pay` | `source/Pay.dc.html` | `screenshots/Pay.png` | Bookings, Receipt |
+| 42 | Customer · Job receipt *(updated)* | `/job/:id/receipt` | `source/Receipt.dc.html` | `screenshots/Receipt.png` | Book, Bookings, Support |
 
-| Screen | Route | Source | Screenshot | Links to |
-|---|---|---|---|---|
-| Customer · Schedule a time **(new)** | `/job/new/schedule` | `source/Schedule.dc.html` | `screenshots/Schedule.png` | Post |
-| Customer · Add or edit address **(new)** | `/addresses/edit` | `source/AddressEdit.dc.html` | `screenshots/AddressEdit.png` | Addresses |
-| Customer · Photos and voice note **(new)** | `/job/new/media` | `source/Media.dc.html` | `screenshots/Media.png` | Post |
-| Customer · Mechanic job **(new)** | `/job/new/mechanic` | `source/MechPost.dc.html` | `screenshots/MechPost.png` | Addresses, Main, Media, Schedule |
+### Shared: problems and disputes (43–46)
 
-### Onboarding and trust
+| # | Screen | Route | Source | Screenshot | Links to |
+|---|---|---|---|---|---|
+| 43 | Shared · Report a problem **(new)** | `/job/:id/problem` | `source/ReportProblem.dc.html` | `screenshots/ReportProblem.png` | Chat, Support, Tracking, WorkRecord |
+| 44 | Shared · Record the work done **(new)** | `/job/:id/problem/work` | `source/WorkRecord.dc.html` | `screenshots/WorkRecord.png` | ReportProblem, Settlement |
+| 45 | Shared · Settle the payment **(new)** | `/job/:id/problem/settle` | `source/Settlement.dc.html` | `screenshots/Settlement.png` | DisputeStatus, Pay, WorkRecord |
+| 46 | Shared · Dispute status **(new)** | `/dispute/:id` | `source/DisputeStatus.dc.html` | `screenshots/DisputeStatus.png` | Pay, Settlement, Ticket |
 
-| Screen | Route | Source | Screenshot | Links to |
-|---|---|---|---|---|
-| Shared · Permissions **(new)** | `/permissions` | `source/Permissions.dc.html` | `screenshots/Permissions.png` | - |
-| Worker · Consent **(new)** | `/w/consent` | `source/Consent.dc.html` | `screenshots/Consent.png` | WSignup |
-| Worker · Identity check **(new)** | `/w/verify/identity` | `source/KYC.dc.html` | `screenshots/KYC.png` | Verify |
-| Worker · Skill video **(new)** | `/w/verify/skill` | `source/SkillVideo.dc.html` | `screenshots/SkillVideo.png` | Verify |
-| Worker · Battery guide **(new)** | `` | `source/BatteryGuide.dc.html` | `screenshots/BatteryGuide.png` | Ringing, Worker |
+### Customer: account and help (47–56)
 
-### Cancellations, chat and help
+| # | Screen | Route | Source | Screenshot | Links to |
+|---|---|---|---|---|---|
+| 47 | Customer · Bookings *(updated)* | `/bookings` | `source/Bookings.dc.html` | `screenshots/Bookings.png` | CrewTeam, HousekeepingPlan, Main, Profile, Receipt, Searching, Support, TrialDecision |
+| 48 | Customer · Profile *(updated)* | `/profile` | `source/Profile.dc.html` | `screenshots/Profile.png` | Addresses, Bookings, DeleteAccount, Language, Legal, Main, MyMeasurements, Payments, Safety, Support |
+| 49 | Customer · Saved addresses *(updated)* | `/addresses` | `source/Addresses.dc.html` | `screenshots/Addresses.png` | AddressEdit, Profile |
+| 50 | Customer · My measurements **(new)** | `/measurements` | `source/MyMeasurements.dc.html` | `screenshots/MyMeasurements.png` | Profile, TailorBook |
+| 51 | Customer · Payments *(updated)* | `/payments` | `source/Payments.dc.html` | `screenshots/Payments.png` | Profile |
+| 52 | Customer · Help and support *(updated)* | `/support` | `source/Support.dc.html` | `screenshots/Support.png` | Profile, Ticket |
+| 53 | Shared · Support ticket *(updated)* | `/support/:id` | `source/Ticket.dc.html` | `screenshots/Ticket.png` | Support |
+| 54 | Shared · Safety and emergency contacts **(new)** | `/safety` | `source/Safety.dc.html` | `screenshots/Safety.png` | Profile, Support |
+| 55 | Shared · Terms and privacy **(new)** | `/legal` | `source/Legal.dc.html` | `screenshots/Legal.png` | Consent, DeleteAccount, Profile |
+| 56 | Shared · Log out or delete account **(new)** | `/account/delete` | `source/DeleteAccount.dc.html` | `screenshots/DeleteAccount.png` | Profile, Welcome |
 
-| Screen | Route | Source | Screenshot | Links to |
-|---|---|---|---|---|
-| Customer · Cancel booking **(new)** | `/job/:id/cancel` | `source/CancelBooking.dc.html` | `screenshots/CancelBooking.png` | Schedule, Tracking |
-| Shared · Chat and masked call **(new)** | `/job/:id/chat` | `source/Chat.dc.html` | `screenshots/Chat.png` | Tracking |
-| Customer · Job receipt **(new)** | `/job/:id/receipt` | `source/Receipt.dc.html` | `screenshots/Receipt.png` | Book, Bookings, Support |
-| Shared · Support ticket **(new)** | `/support/:id` | `source/Ticket.dc.html` | `screenshots/Ticket.png` | Support |
-| Worker · Can't continue a job **(new)** | `/w/job/:id/cancel` | `source/CancelJob.dc.html` | `screenshots/CancelJob.png` | ActiveJob, Support |
+### Worker: joining and verification (57–62)
 
-### Worker portfolios
+| # | Screen | Route | Source | Screenshot | Links to |
+|---|---|---|---|---|---|
+| 57 | Worker · Sign-up *(updated)* | `/w/signup` | `source/WSignup.dc.html` | `screenshots/WSignup.png` | Consent, Login |
+| 58 | Worker · Consent *(updated)* | `/w/consent` | `source/Consent.dc.html` | `screenshots/Consent.png` | WSignup |
+| 59 | Worker · Verification *(updated)* | `/w/verify` | `source/Verify.dc.html` | `screenshots/Verify.png` | KYC, SkillVideo, WSignup, Worker |
+| 60 | Worker · Identity check *(updated)* | `/w/verify/identity` | `source/KYC.dc.html` | `screenshots/KYC.png` | Verify |
+| 61 | Worker · Skill video *(updated)* | `/w/verify/skill` | `source/SkillVideo.dc.html` | `screenshots/SkillVideo.png` | Verify |
+| 62 | Worker · Battery guide *(updated)* | `/w/battery` | `source/BatteryGuide.dc.html` | `screenshots/BatteryGuide.png` | Ringing, Worker |
 
-| Screen | Route | Source | Screenshot | Links to |
-|---|---|---|---|---|
-| Worker · Share your work **(new)** | `/w/job/:id/share` | `source/PostWork.dc.html` | `screenshots/PostWork.png` | Earnings, JobDone, WPortfolio |
-| Worker · My work portfolio **(new)** | `/w/portfolio` | `source/WPortfolio.dc.html` | `screenshots/WPortfolio.png` | PostWork, WProfile, WorkerProfile |
-| Customer · Search workers **(new)** | `/search` | `source/Search.dc.html` | `screenshots/Search.png` | Main, Post, WorkerProfile |
-| Customer · Worker profile **(new)** | `/worker/:id` | `source/WorkerProfile.dc.html` | `screenshots/WorkerProfile.png` | Book, Search |
+### Worker: getting jobs (63–73)
 
-### Direct booking from a profile
+| # | Screen | Route | Source | Screenshot | Links to |
+|---|---|---|---|---|---|
+| 63 | Worker · Home and new job *(updated)* | `/w/home` | `source/Worker.dc.html` | `screenshots/Worker.png` | ActiveJob, BatteryGuide, CrewRing, Earnings, WProfile, WRequests |
+| 64 | Worker · Incoming job (ringing) *(updated)* | `/w/incoming` | `source/Ringing.dc.html` | `screenshots/Ringing.png` | ActiveJob, Worker |
+| 65 | Worker · Incoming team job (mestri) *(updated)* | `/w/incoming-team` | `source/CrewRing.dc.html` | `screenshots/CrewRing.png` | CrewTeam, Worker |
+| 66 | Worker · My jobs *(updated)* | `/w/jobs` | `source/WRequests.dc.html` | `screenshots/WRequests.png` | ActiveJob, BookingRequest, Chat, Earnings, PostWork, SendQuote, VisitRequest, WProfile, Worker |
+| 67 | Worker · Booking request *(updated)* | `/w/request/:id` | `source/BookingRequest.dc.html` | `screenshots/BookingRequest.png` | Chat, WRequests, WSuggest |
+| 68 | Worker · Suggest another time *(updated)* | `/w/request/:id/suggest` | `source/WSuggest.dc.html` | `screenshots/WSuggest.png` | BookingRequest |
+| 69 | Worker · Site-visit request **(new)** | `/w/visit/:id` | `source/VisitRequest.dc.html` | `screenshots/VisitRequest.png` | Chat, SendQuote, WRequests, WSuggest |
+| 70 | Worker · Send a quote *(updated)* | `/w/quote/:id` | `source/SendQuote.dc.html` | `screenshots/SendQuote.png` | WRequests |
+| 71 | Worker · Tailor home **(new)** | `/w/home (tailor)` | `source/TailorHome.dc.html` | `screenshots/TailorHome.png` | Earnings, Handover, Measurements, TailorOrders, WProfile, Worker |
+| 72 | Worker · Tailor's orders **(new)** | `/w/orders` | `source/TailorOrders.dc.html` | `screenshots/TailorOrders.png` | Earnings, Measurements, TailorHome, WProfile, Worker |
+| 73 | Worker · Housekeeper home **(new)** | `/w/home (housekeeper)` | `source/HousekeeperHome.dc.html` | `screenshots/HousekeeperHome.png` | Earnings, HouseCheckIn, LeaveRequest, Safety, Support, Tracking, WProfile, Worker |
 
-| Screen | Route | Source | Screenshot | Links to |
-|---|---|---|---|---|
-| Customer · Booking request sent **(new)** | `/booking/:id` | `source/RequestSent.dc.html` | `screenshots/RequestSent.png` | Bookings, Chat, Schedule, Search, Searching, WorkerProfile |
-| Worker · Booking request **(new)** | `/w/request/:id` | `source/BookingRequest.dc.html` | `screenshots/BookingRequest.png` | Chat, WRequests, WSuggest |
-| Worker · Suggest another time **(new)** | `/w/request/:id/suggest` | `source/WSuggest.dc.html` | `screenshots/WSuggest.png` | BookingRequest |
-| Worker · My jobs **(new)** | `/w/jobs` | `source/WRequests.dc.html` | `screenshots/WRequests.png` | ActiveJob, BookingRequest, Chat, Earnings, PostWork, SendQuote, WProfile, Worker |
+### Worker: doing the job (74–85)
 
-### Every trade: quotes, tailors and crews
+| # | Screen | Route | Source | Screenshot | Links to |
+|---|---|---|---|---|---|
+| 74 | Worker · Start selfie **(new)** | `/w/job/:id/selfie` | `source/SelfieCheck.dc.html` | `screenshots/SelfieCheck.png` | ActiveJob, Support |
+| 75 | Worker · Current job *(updated)* | `/w/job/:id` | `source/ActiveJob.dc.html` | `screenshots/ActiveJob.png` | CancelJob, ChangeRequest, Chat, DailyUpdate, ReportProblem, SelfieCheck, Worker |
+| 76 | Worker · Daily check-in (housekeeper) **(new)** | `/w/visit/:id/check-in` | `source/HouseCheckIn.dc.html` | `screenshots/HouseCheckIn.png` | HousekeeperHome |
+| 77 | Worker · Today's update **(new)** | `/w/job/:id/update` | `source/DailyUpdate.dc.html` | `screenshots/DailyUpdate.png` | ActiveJob, StageRequest |
+| 78 | Worker · Request a payment **(new)** | `/w/job/:id/request-payment` | `source/StageRequest.dc.html` | `screenshots/StageRequest.png` | ActiveJob, DailyUpdate |
+| 79 | Worker · Record measurements (tailor) **(new)** | `/w/order/:id/measure` | `source/Measurements.dc.html` | `screenshots/Measurements.png` | TailorOrders |
+| 80 | Shared · Change request **(new)** | `/job/:id/change` | `source/ChangeRequest.dc.html` | `screenshots/ChangeRequest.png` | ActiveJob, Chat, Tracking |
+| 81 | Worker · Can't continue a job *(updated)* | `/w/job/:id/cancel` | `source/CancelJob.dc.html` | `screenshots/CancelJob.png` | ActiveJob, Support |
+| 82 | Worker · Ask for leave (housekeeper) **(new)** | `/w/leave` | `source/LeaveRequest.dc.html` | `screenshots/LeaveRequest.png` | HousekeeperHome |
+| 83 | Worker · Finish job and get paid *(updated)* | `/w/job/:id/finish` | `source/JobDone.dc.html` | `screenshots/JobDone.png` | ActiveJob, RateCustomer |
+| 84 | Worker · Rate the customer **(new)** | `/w/job/:id/rate` | `source/RateCustomer.dc.html` | `screenshots/RateCustomer.png` | JobDone, PostWork, ReportProblem |
+| 85 | Worker · Share your work *(updated)* | `/w/job/:id/share` | `source/PostWork.dc.html` | `screenshots/PostWork.png` | Earnings, JobDone, WPortfolio |
 
-| Screen | Route | Source | Screenshot | Links to |
-|---|---|---|---|---|
-| Customer · Request a site visit **(new)** | `/job/new/visit` | `source/QuoteRequest.dc.html` | `screenshots/QuoteRequest.png` | Addresses, Bookings, Main, Media, QuoteView, Schedule |
-| Worker · Send a quote **(new)** | `/w/quote/:id` | `source/SendQuote.dc.html` | `screenshots/SendQuote.png` | WRequests |
-| Customer · Your quote **(new)** | `/quote/:id` | `source/QuoteView.dc.html` | `screenshots/QuoteView.png` | Bookings, Chat, Search, WorkerProfile |
-| Customer · Tailor booking **(new)** | `/job/new/tailor` | `source/TailorBook.dc.html` | `screenshots/TailorBook.png` | Main, Media |
-| Customer · Crew profile **(new)** | `/crews/:id` | `source/CrewProfile.dc.html` | `screenshots/CrewProfile.png` | Crew |
+### Worker: construction crews (86–89)
 
-## New flows in version 2, in short
+| # | Screen | Route | Source | Screenshot | Links to |
+|---|---|---|---|---|---|
+| 86 | Worker · Mestri home **(new)** | `/w/home (mestri)` | `source/MestriHome.dc.html` | `screenshots/MestriHome.png` | CrewAttendance, CrewJoin, CrewProfile, CrewRing, Earnings, WProfile, Worker |
+| 87 | Worker · Daily attendance (mestri) **(new)** | `/w/crew/attendance` | `source/CrewAttendance.dc.html` | `screenshots/CrewAttendance.png` | CrewTeam, MestriHome |
+| 88 | Worker · Crew invite (helper) **(new)** | `/w/crew/invite/:id` | `source/CrewJoin.dc.html` | `screenshots/CrewJoin.png` | HelperHome, KYC |
+| 89 | Worker · Helper home **(new)** | `/w/home (helper)` | `source/HelperHome.dc.html` | `screenshots/HelperHome.png` | Earnings, Support, Tracking, WProfile, Worker |
 
-- **Booking details:** schedule picker (2-hour slots, 2 hours' notice, full/passed slots), add or edit address with a map pin, photos (up to 3) and a voice note, and a mechanic job (vehicle type, problem, broken down on the road).
-- **Onboarding and trust:** permissions explained one at a time, worker consent (required vs optional), identity check with **DigiLocker (Aadhaar + PAN), selfie with liveness and face match**, skill video, and a battery-settings guide so job alerts ring.
-- **Cancellations, chat and help:** cancel a booking, "can't continue this job" for workers, chat with **masked calling**, job receipt with both payment confirmations, support ticket with a status timeline.
-- **Worker portfolios:** share work only from completed Kaithozhil jobs, with the customer's permission and automatic blurring; "My work"; customer search; public worker profile. **No contact details anywhere; booking only through the app.**
-- **Direct booking from a profile:** request sent (four outcomes), the worker's booking request (accept, suggest a time, decline), suggest another time, and "My jobs" (requests, upcoming, done).
-- **Every trade:** painters and carpenters book a site visit, then get an itemised quote (with staged payments); tailors choose shop visit, home measurement or pickup; construction crews have a team profile.
-- **Settings and growth:** saved addresses, payments (preferred UPI app), language, worker payment details, government schemes, training and levels.
+### Worker: earnings (90–93)
 
-## Shared components to build once
+| # | Screen | Route | Source | Screenshot | Links to |
+|---|---|---|---|---|---|
+| 90 | Worker · Earnings and level *(updated)* | `/w/earnings` | `source/Earnings.dc.html` | `screenshots/Earnings.png` | FeeDue, Statements, WProfile, Worker |
+| 91 | Worker · Platform fee due **(new)** | `/w/fees` | `source/FeeDue.dc.html` | `screenshots/FeeDue.png` | Earnings |
+| 92 | Worker · Earnings statements *(updated)* | `/w/statements` | `source/Statements.dc.html` | `screenshots/Statements.png` | Earnings, Statement |
+| 93 | Monthly earnings statement (A4 PDF) | `(server PDF)` | `source/Statement.dc.html` | `screenshots/Statement.png` | - |
 
-- **Hero header:** hero gradient, bottom radius 34 (30 on profile headers), padding 20.
-- **Floating bottom navigation:** height 68, margin 0 14 16 14, radius 24; active tab has a lavender (#EFE9FB) pill, radius 18. Customer: Home / Bookings / Profile. Worker: Jobs / Earnings / Profile.
-- **Primary button:** height 56 (44–48 for small inline buttons), radius 16, button gradient and shadow, white 16/700 text. **Disabled:** 50% opacity, no shadow, with a one-line reason underneath.
-- **Gold button:** gold gradient and shadow, text #3B2300.
-- **Dark confirm button** (destructive): #1C1730 background, white text.
-- **Secondary button:** height 48, radius 14, white, border #DDD8E8, purple 14/700 text.
-- **Chip:** height 44, pill; off = white with #DDD8E8 border; on = #EFE9FB with a 2 px #4C1D95 border and purple text.
-- **Radio row and tick card:** 22 px radio (7 px purple ring when on) and 28 px tick box.
-- **Toggle:** 52 x 30 track, #4C1D95 on, #CFC9DC off, 24 px white knob.
-- **Card:** white, radius 20, border #EEEAF6, card shadow.
-- **List row, stepper, status pill, avatar initials** as in version 1.
-- **Segmented tabs:** #F0EDF5 track, radius 12; active tab white with a soft shadow.
-- **Chat bubble:** mine = purple with 18 18 4 18 corners; theirs = white with a border, 18 18 18 4.
-- **Photo tile:** square, radius 14, with the gold "Kaithozhil job" badge on job-verified posts.
-- **Status timeline:** 24 px dots (done = purple tick, now = gold ring, to do = grey).
+### Worker: profile and growth (94–98)
+
+| # | Screen | Route | Source | Screenshot | Links to |
+|---|---|---|---|---|---|
+| 94 | Worker · Profile *(updated)* | `/w/profile` | `source/WProfile.dc.html` | `screenshots/WProfile.png` | DeleteAccount, Earnings, Language, Legal, Safety, Schemes, Statements, Support, Training, WPayments, WPortfolio, Worker |
+| 95 | Worker · My work portfolio *(updated)* | `/w/portfolio` | `source/WPortfolio.dc.html` | `screenshots/WPortfolio.png` | PostWork, WProfile, WorkerProfile |
+| 96 | Worker · Payment details *(updated)* | `/w/payment-details` | `source/WPayments.dc.html` | `screenshots/WPayments.png` | Earnings, Statements, WProfile |
+| 97 | Worker · Government schemes *(updated)* | `/w/schemes` | `source/Schemes.dc.html` | `screenshots/Schemes.png` | WProfile |
+| 98 | Worker · Training and level up *(updated)* | `/w/training` | `source/Training.dc.html` | `screenshots/Training.png` | WProfile |
+
+## Shared components
+
+- **Hero header**, **floating bottom navigation** (68 high, 8 px gap above it; customer: Home / Bookings / Profile; worker: Jobs / Earnings / Profile).
+- **Buttons:** primary (gradient, 56), gold, secondary (48, outlined), dark confirm (destructive), disabled (50% opacity with a one-line reason underneath).
+- **Chips** (44, pill, one line), **radio rows**, **tick boxes**, **toggles** (52 x 30), **steppers**, **segmented tabs**, **day pickers**, **status pills**, **avatars with initials**.
+- **Cards** (white, radius 20, soft purple shadow), **info notes** (lavender for information, mango for warnings), **link cards**.
+- **Code digits** (door, pickup, check-in codes), **status timeline** (done / now / to do), **chat bubbles**, **photo tiles** (with the "Kaithozhil job" badge), **calendar grid** (housekeeping attendance).
+- **Waiting icon with ripple waves** (see Motion).
+
+## Motion
+
+| Name | Where | Spec |
+|---|---|---|
+| Search waves | Finding a worker | 3 waves, 2.4 s each, 0.8 s apart, ease-out `cubic-bezier(0, 0, 0.2, 1)`, scale 1 → 2.29, opacity 0.35 → 0, purple |
+| Waiting ripple | Every waiting state: Booking request sent, Change request, Job plan, Settlement, Share your work, Request a payment, Ask for leave, Pay (bank check), Platform fee (bank check), Identity check, Start selfie | Same timing, scale 1 → 1.9, opacity 0.32 → 0; purple on lavender icons, gold on mango icons; reserve a box 1.9x the icon so waves never cover text |
+| System ripple | No internet (while checking), Under maintenance | Same timing, scale 1 → 2.14 |
+| Opening animation | Splash | See below |
 
 ## Opening animation (Splash) timeline, 6 s total
 
@@ -208,3 +250,40 @@ Icons are Lucide (stroke 2): use `lucide-react-native`, or the exact SVG paths i
 
 The exact keyframes are in `source/Splash.dc.html`. In React Native, drive every element from one Reanimated shared value (0 → 1 over 6 s) so they all follow the same clock; draw the giant gradient letters with Skia.
 
+
+
+## Placeholders to decide
+
+| Placeholder | Used on |
+|---|---|
+| `[AMOUNT]` | HousekeepingPlan |
+| `[APP SIZE]` | UpdateApp |
+| `[CANCELLATION RULE]` | CancelBooking, Legal |
+| `[DAILY RATE]` | CrewJoin, CrewProfile, CrewRing, HelperHome, JobPlan |
+| `[DATE]` | Legal |
+| `[DATE + 30 DAYS]` | DeleteAccount |
+| `[DAY TOTAL]` | CrewPayments |
+| `[EMAIL]` | Legal |
+| `[FEE]` | Earnings, FeeDue, JobDone, Legal |
+| `[FEE TOTAL]` | FeeDue |
+| `[GRIEVANCE OFFICER]` | Legal |
+| `[HELP CENTRE]` | KYC |
+| `[LEAVE DAYS]` | HousekeepingPlan |
+| `[MONTHLY RATE]` | HousekeepingBook, TrialDecision |
+| `[PAID SO FAR]` | CrewPayments |
+| `[PAYMENT PARTNER]` | JobDone, Pay, Receipt |
+| `[PICKUP FEE]` | TailorBook |
+| `[RATE]` | CrewPayments |
+| `[REFUND DAYS]` | Pay |
+| `[RESPONSE TIME]` | Legal, Ticket |
+| `[RETENTION PERIOD]` | DeleteAccount, Legal |
+| `[REVIEW TIME]` | SkillVideo |
+| `[SAFETY NUMBER]` | Safety |
+| `[SUPPORT HOURS]` | Support |
+| `[SUPPORT NUMBER]` | Maintenance, NoInternet |
+| `[TEST CENTRE]` | SkillVideo, Verify |
+| `[TIME]` | Maintenance |
+| `[VERSION]` | Legal, UpdateApp |
+| `[VISIT FEE]` | QuoteRequest, VisitRequest |
+| `[VISIT RATE]` | HousekeepingBook, TrialDecision |
+| `[YOUR WEBSITE]` | Statement |
