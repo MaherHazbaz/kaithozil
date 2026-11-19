@@ -74,6 +74,7 @@ export default function BookingsRoute() {
           router.push({ pathname: '/crew/[id]', params: { id } });
         }
       }}
+      onBookWorker={() => router.replace('/home')}
       onTab={(tab) => {
         // `replace` swaps one tab screen for another, so Back does not walk
         // through every tab you visited.

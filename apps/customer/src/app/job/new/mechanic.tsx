@@ -1,13 +1,14 @@
 import { useRouter } from 'expo-router';
 
+import { mechanicSummary } from '@/features/job/mechanicDraft';
 import { MechanicScreen } from '@/features/job/screens/MechanicScreen';
 
 // Route "/job/new/mechanic". The address is the sample shown in
 // design/source/MechPost.dc.html; it comes from Supabase in Sprint 2.
 //
 // NOT WIRED YET:
-// - Find a mechanic: Finding a worker only knows the electrician service so
-//   far, and the job is not sent anywhere until Sprint 2.
+// - The job is not sent anywhere until Sprint 2; "Find a mechanic" only opens
+//   Finding a worker, as the design does.
 // - Broken down promises to share live location, which needs expo-location.
 export default function MechanicRoute() {
   const router = useRouter();
@@ -20,6 +21,12 @@ export default function MechanicRoute() {
       onVoiceNote={() => router.push('/job/new/media')}
       onChooseTime={() => router.push('/job/new/schedule')}
       onChangeAddress={() => router.push('/addresses')}
+      onSubmit={(job) =>
+        router.push({
+          pathname: '/job/searching',
+          params: { service: 'mechanic', summary: mechanicSummary(job) },
+        })
+      }
     />
   );
 }

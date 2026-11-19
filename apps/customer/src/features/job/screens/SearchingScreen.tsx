@@ -13,10 +13,10 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { SearchStep } from '../components/SearchStep';
-import { jobServices, searchingCopy, type JobServiceKey } from '../copy';
+import { searchingCopy, searchingTitle, type SearchingServiceKey } from '../copy';
 
 export type SearchingScreenProps = {
-  service: JobServiceKey;
+  service: SearchingServiceKey;
   /** e.g. "Fan not working · Now". */
   jobSummary: string;
   /** Neighbourhood named in the explainer, e.g. "Anna Nagar". */
@@ -38,7 +38,7 @@ export function SearchingScreen({
   onOpenWorker,
 }: SearchingScreenProps) {
   const insets = useSafeAreaInsets();
-  const title = jobServices[service].searchingTitle;
+  const title = searchingTitle(service);
 
   return (
     <ScreenBackground>

@@ -1,3 +1,4 @@
+import { mechanicCopy } from './copy';
 import {
   missingJobDetail,
   type JobDraft,
@@ -35,4 +36,15 @@ export function missingMechanicDetail(
 ): MissingMechanicDetail {
   if (draft.vehicle === null) return 'vehicle';
   return missingJobDetail(draft, problems);
+}
+
+/**
+ * The job line on Finding a worker, made only from the form's own labels
+ * (owner, 2026-11-19): "Bike or scooter · Won't start · Now".
+ */
+export function mechanicSummary(job: MechanicJob): string {
+  const vehicle = mechanicCopy.vehicles.find((v) => v.key === job.vehicle)?.label;
+  const problem = mechanicCopy.problems.find((p) => p.key === job.problem)?.label;
+  const timing = job.timing === 'now' ? mechanicCopy.now.title : mechanicCopy.schedule.title;
+  return [vehicle, problem, timing].filter(Boolean).join(' · ');
 }

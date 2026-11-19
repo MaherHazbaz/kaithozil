@@ -116,6 +116,24 @@ describe('BookingsScreen', () => {
     expect(tabButton('Past (0)')).toBeOnTheScreen();
   });
 
+  it('shows the empty state when there are no bookings at all', async () => {
+    const onBookWorker = jest.fn();
+    await renderScreen(<BookingsScreen upcoming={[]} past={[]} onBookWorker={onBookWorker} />);
+    expect(screen.getByRole('header', { name: 'No bookings yet' })).toBeOnTheScreen();
+    // As designed: no Upcoming/Past switch and no bottom navigation.
+    expect(screen.queryByText('Upcoming (0)')).not.toBeOnTheScreen();
+    expect(screen.queryByRole('tab', { name: 'Bookings' })).not.toBeOnTheScreen();
+
+    await fireEvent.press(screen.getByRole('button', { name: 'Book a worker' }));
+    expect(onBookWorker).toHaveBeenCalledTimes(1);
+  });
+
+  it('keeps the lists when only past bookings exist', async () => {
+    await renderScreen(<BookingsScreen upcoming={[]} past={designData.past} />);
+    expect(tabButton('Upcoming (0)')).toBeOnTheScreen();
+    expect(screen.queryByText('No bookings yet')).not.toBeOnTheScreen();
+  });
+
   it('marks Bookings as the active tab', async () => {
     await renderScreen(<BookingsScreen {...designData} />);
     expect(screen.getByRole('tab', { name: 'Bookings' })).toBeSelected();

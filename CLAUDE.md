@@ -109,7 +109,7 @@ pnpm lint               ESLint, zero warnings
 pnpm test               Jest (also checks tokens.ts is current)
 pnpm format:check       Prettier
 pnpm check              all of the above
-pnpm doctor             expo-doctor for the customer app
+pnpm run doctor         expo-doctor for the customer app (plain `pnpm doctor` is pnpm 12's own check)
 
 cd apps/customer
 pnpm prebuild           generate android/ (never edit android/ by hand; it is build output)
@@ -118,7 +118,7 @@ pnpm start              start Metro for an installed development build
 pnpm visual             screenshot the screens and compare with design/screenshots
 ```
 
-Quality gates before showing any change: `pnpm check`, `pnpm doctor`, and the app still runs on the
+Quality gates before showing any change: `pnpm check`, `pnpm run doctor`, and the app still runs on the
 emulator.
 
 ## Windows build notes

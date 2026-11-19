@@ -179,6 +179,32 @@ export function isJobServiceKey(value: unknown): value is JobServiceKey {
   return typeof value === 'string' && Object.hasOwn(jobServices, value);
 }
 
+// Finding a worker headings for the trades that have their own booking form
+// (Mechanic job, Housekeeping) instead of Describe the job. Approved by the
+// owner on 2026-11-19 (docs/decisions/0009-mechanic-and-housekeeping-search.md).
+export const otherSearchingTitles = {
+  mechanic: 'Finding a mechanic',
+  housekeeping: 'Finding a housekeeper',
+} as const;
+
+/** Every service Finding a worker can be opened for. */
+export type SearchingServiceKey = JobServiceKey | keyof typeof otherSearchingTitles;
+
+/** Like isJobServiceKey, for Finding a worker's route parameter. */
+export function isSearchingServiceKey(value: unknown): value is SearchingServiceKey {
+  return (
+    isJobServiceKey(value) ||
+    (typeof value === 'string' && Object.hasOwn(otherSearchingTitles, value))
+  );
+}
+
+/** Heading on Finding a worker, e.g. "Finding a plumber". */
+export function searchingTitle(service: SearchingServiceKey): string {
+  return isJobServiceKey(service)
+    ? jobServices[service].searchingTitle
+    : otherSearchingTitles[service];
+}
+
 // Exact wording from design/source/Media.dc.html.
 export const mediaCopy = {
   back: 'Back',

@@ -1,5 +1,6 @@
 import { useRouter } from 'expo-router';
 
+import { housekeepingSummary } from '@/features/housekeeping/housekeepingDraft';
 import { sampleRegularHelp } from '@/features/housekeeping/sampleData';
 import { HousekeepingBookScreen } from '@/features/housekeeping/screens/HousekeepingBookScreen';
 
@@ -10,11 +11,8 @@ import { HousekeepingBookScreen } from '@/features/housekeeping/screens/Housekee
 // the customer's own arrangement (and is hidden when they have none).
 //
 // NOT WIRED YET:
-// - "Find housekeepers" / "Book a cleaning" send nothing. The design leads to
-//   Finding a worker, but that screen only has approved wording for
-//   electricians (features/job/copy.ts), so the button does nothing until the
-//   owner approves "Finding a housekeeper" wording and the request is sent to
-//   the server (Sprint 2).
+// - The request is not sent anywhere until Sprint 2; "Find housekeepers" /
+//   "Book a cleaning" only open Finding a worker, as the design does.
 // - [MONTHLY RATE] and [VISIT RATE] are still to be decided.
 // - PAYMENTS ARE NOT BUILT: monthly pay waits on the owner's decision (gateway
 //   or direct UPI, CLAUDE.md "Trust rules").
@@ -25,6 +23,12 @@ export default function HousekeepingBookRoute() {
       // Opened by a deep link there is nothing to go back to, so go to Home.
       onBack={() => (router.canGoBack() ? router.back() : router.replace('/home'))}
       onManage={() => router.push({ pathname: '/help/[id]', params: { id: sampleRegularHelp.id } })}
+      onSubmit={(request) =>
+        router.push({
+          pathname: '/job/searching',
+          params: { service: 'housekeeping', summary: housekeepingSummary(request) },
+        })
+      }
     />
   );
 }

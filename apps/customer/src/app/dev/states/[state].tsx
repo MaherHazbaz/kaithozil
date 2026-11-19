@@ -1,8 +1,8 @@
 import { Redirect, useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback } from 'react';
-import { Linking, Platform } from 'react-native';
 
 import { useRecheck } from '@/features/system/hooks/useRecheck';
+import { openNetworkSettings } from '@/features/system/openNetworkSettings';
 import { EmptyStateScreen } from '@/features/system/screens/EmptyStateScreen';
 import { ErrorStateScreen } from '@/features/system/screens/ErrorStateScreen';
 import { MaintenanceScreen } from '@/features/system/screens/MaintenanceScreen';
@@ -52,16 +52,3 @@ export default function StatePreviewRoute() {
 }
 
 const stillDown = () => new Promise<boolean>((resolve) => setTimeout(() => resolve(false), 1500));
-
-/** Opens Android's network settings; elsewhere, this app's settings page. */
-async function openNetworkSettings() {
-  if (Platform.OS === 'android') {
-    try {
-      await Linking.sendIntent('android.settings.WIRELESS_SETTINGS');
-      return;
-    } catch {
-      // Some phones hide that screen; fall through to the app's own settings.
-    }
-  }
-  await Linking.openSettings();
-}

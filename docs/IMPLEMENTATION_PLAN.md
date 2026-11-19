@@ -15,11 +15,21 @@ marked; their UI is built now and wired up when the decision is made.
 The design has 98 screens (`design/DESIGN.md`, numbered in workflow order). **57 belong to the
 customer app** (customer screens plus the shared screens it uses).
 
-**Built (11):** Opening animation (1), Welcome (2), Log in (3), Home (12), Describe the job (16),
-Worker profile (book again) (28), Finding a worker (30), Worker on the way (31), Pay and rate (41),
-Bookings (47), Profile (48).
+**Update 2026-11-19: phases 0–8 are built against sample data.** All 57 customer screens have a
+route in `apps/customer/src/app` and a screen in `src/features/<name>/screens`. `pnpm check` passes
+(29 test files, 291 tests). Still to do:
 
-**To build: 46 screens**, plus updating the 11 built ones to v3.
+- **Owner review:** visual QA of every screen against `design/screenshots` (`pnpm visual`), and the
+  owner's OK for each phase.
+- **PAY decision:** still open (see below). The PAY screens (33, 37, 40, 41, 42, 45, 51) are built
+  as UI only. No gateway, payment SDK or `upi://` link is called.
+- **Backend:** not started. Every screen still reads typed sample data. See `docs/backend-todo.md`
+  and the CALL, SMS, FILES and MAP rows below.
+- **Placeholders:** the square-bracket values are still shown as designed.
+
+_At the start of this plan:_ 11 screens were built (Opening animation (1), Welcome (2), Log in (3),
+Home (12), Describe the job (16), Worker profile (book again) (28), Finding a worker (30), Worker on
+the way (31), Pay and rate (41), Bookings (47), Profile (48)), and 46 were still to build.
 
 ## Sizes and estimates
 
@@ -53,6 +63,9 @@ around this.
 
 These cannot both be true. The owner needs to confirm which rule wins, then `CLAUDE.md` (and a new
 decision record) must be updated before the PAY screens are built. Phases 0–3 do not depend on it.
+
+_Update 2026-11-19:_ the PAY screens were built as UI only while this decision was still open.
+Before any of them is wired to a backend, record the decision and update `CLAUDE.md`.
 
 ## Phases
 

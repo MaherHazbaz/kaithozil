@@ -64,3 +64,18 @@ export function estimateText(draft: HousekeepingDraft): { amount: string; detail
     detail: bookCopy.estimateOneTimeSub(size, draft.hours),
   };
 }
+
+/**
+ * The job line on Finding a worker, made only from the form's own labels
+ * (owner, 2026-11-19): "Regular help · 6 days a week · 6 – 8 AM" or
+ * "One-time cleaning · 2 BHK · 6 – 8 AM".
+ */
+export function housekeepingSummary(request: HousekeepingDraft): string {
+  const type = bookCopy.types.find((t) => t.key === request.type)?.title;
+  const slot = bookCopy.slots.find((s) => s.key === request.slot)?.label;
+  const middle =
+    request.type === 'regular'
+      ? bookCopy.dayCount(request.days.length)
+      : bookCopy.sizes.find((s) => s.key === request.size)?.label;
+  return [type, middle, slot].filter(Boolean).join(' · ');
+}

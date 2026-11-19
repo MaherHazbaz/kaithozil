@@ -13,6 +13,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { CUSTOMER_TABS, type CustomerTab } from '@/features/navigation/customerTabs';
+import { EmptyStateScreen } from '@/features/system/screens/EmptyStateScreen';
 
 import { PastBookingCard } from '../components/PastBookingCard';
 import { UpcomingBookingCard } from '../components/UpcomingBookingCard';
@@ -30,6 +31,8 @@ export type BookingsScreenProps = {
   onViewReceipt?: (id: string) => void;
   onGetHelp?: (id: string) => void;
   onTab?: (tab: CustomerTab) => void;
+  /** "Book a worker" on the empty state. */
+  onBookWorker?: () => void;
 };
 
 /** Your bookings (design/source/Bookings.dc.html). */
@@ -41,9 +44,17 @@ export function BookingsScreen({
   onViewReceipt,
   onGetHelp,
   onTab,
+  onBookWorker,
 }: BookingsScreenProps) {
   const insets = useSafeAreaInsets();
   const [tab, setTab] = useState<BookingsTab>(initialTab);
+
+  // No bookings at all: Shared · Empty list (EmptyState.dc.html), which the
+  // design draws without the Upcoming/Past switch and the bottom navigation.
+  // (Hooks above run first: React needs the same hooks on every render.)
+  if (upcoming.length === 0 && past.length === 0) {
+    return <EmptyStateScreen kind="bookings" onAction={onBookWorker} />;
+  }
 
   return (
     <ScreenBackground>
