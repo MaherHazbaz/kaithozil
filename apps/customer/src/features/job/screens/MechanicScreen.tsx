@@ -22,8 +22,11 @@ import { useMechanicDraft, type MechanicDraftInitial } from '../hooks/useMechani
 import type { MechanicJob } from '../mechanicDraft';
 
 export type MechanicScreenProps = {
-  /** Where the vehicle is. The route passes the design's sample until addresses exist (Sprint 2). */
-  address: { label: string; line: string };
+  /**
+   * Where the vehicle is: the default saved address. Empty when the customer
+   * has removed them all; "Change" then leads to Saved addresses to add one.
+   */
+  address?: { label: string; line: string };
   /** Starting values. Empty by default; tests pass other states. */
   initialDraft?: MechanicDraftInitial;
   onBack: () => void;
@@ -241,10 +244,10 @@ export function MechanicScreen({
             <Icon name="mapPin" size={20} color={color.purple} />
             <View style={styles.addressText}>
               <AppText size={14} weight={700}>
-                {address.label}
+                {address?.label}
               </AppText>
               <AppText size={12} color={color.muted}>
-                {address.line}
+                {address?.line}
               </AppText>
             </View>
             <Tappable

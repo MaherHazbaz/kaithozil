@@ -1,11 +1,11 @@
 import { useRouter } from 'expo-router';
 
+import { useBookingAddress } from '@/features/addresses/hooks/useAddressBook';
 import { VisitRequestScreen } from '@/features/quote/screens/VisitRequestScreen';
 
 // Route "/job/new/visit": painters book a site visit before they get a quote.
-// The address and visit time are the samples shown in
-// design/source/QuoteRequest.dc.html; they come from Addresses and Schedule
-// once a shared job draft exists (Sprint 2).
+// The address is the default saved address (Saved addresses). The visit time is
+// the sample shown in design/source/QuoteRequest.dc.html.
 //
 // NOT WIRED YET:
 // - Only the painter's wording is designed. Carpenters use Describe the job for
@@ -16,9 +16,10 @@ import { VisitRequestScreen } from '@/features/quote/screens/VisitRequestScreen'
 //   for the server choosing a nearby verified painter (Sprint 2).
 export default function VisitRequestRoute() {
   const router = useRouter();
+  const address = useBookingAddress();
   return (
     <VisitRequestScreen
-      address={{ label: 'Home', line: '12, 4th Street, Anna Nagar' }}
+      address={address}
       visitSlot={{ day: 'Sat 15 Nov', time: '10 AM – 12 PM' }}
       // Opened by a deep link there is nothing to go back to, so go to Home.
       onBack={() => (router.canGoBack() ? router.back() : router.replace('/home'))}

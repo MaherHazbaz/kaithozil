@@ -1,9 +1,9 @@
-import { fireEvent, renderHook, screen, act } from '@testing-library/react-native';
+import { fireEvent, screen } from '@testing-library/react-native';
 
 import { renderScreen } from '@/test/renderScreen';
 
-import { removeAddress, useSavedAddresses } from './hooks/useSavedAddresses';
-import { SAMPLE_ADDRESSES, SAMPLE_PINNED_PLACE, sampleDraft } from './sampleData';
+import { draftFromAddress } from './addressBook';
+import { SAMPLE_ADDRESSES, SAMPLE_PINNED_PLACE } from './sampleData';
 import { AddressEditScreen } from './screens/AddressEditScreen';
 import { AddressesScreen, type AddressesScreenProps } from './screens/AddressesScreen';
 
@@ -55,24 +55,6 @@ describe('AddressesScreen', () => {
     expect(props.onRemove).toHaveBeenCalledWith('amma');
     expect(props.onSetDefault).toHaveBeenCalledWith('office');
     expect(props.onAdd).toHaveBeenCalled();
-  });
-});
-
-describe('useSavedAddresses', () => {
-  it('moves the default to the first address left when the default is removed', () => {
-    expect(removeAddress(SAMPLE_ADDRESSES, 'home', 'home')).toEqual({
-      addresses: SAMPLE_ADDRESSES.slice(1),
-      defaultId: 'office',
-    });
-    expect(removeAddress(SAMPLE_ADDRESSES, 'home', 'amma').defaultId).toBe('home');
-    expect(removeAddress(SAMPLE_ADDRESSES.slice(0, 1), 'home', 'home').defaultId).toBeUndefined();
-  });
-
-  it('sets a new default', async () => {
-    const { result } = await renderHook(() => useSavedAddresses(SAMPLE_ADDRESSES));
-    expect(result.current.defaultId).toBe('home');
-    await act(async () => result.current.setDefault('amma'));
-    expect(result.current.defaultId).toBe('amma');
   });
 });
 
@@ -136,7 +118,7 @@ describe('AddressEditScreen', () => {
     await renderScreen(
       <AddressEditScreen
         place={SAMPLE_PINNED_PLACE}
-        initial={sampleDraft('amma')}
+        initial={draftFromAddress({ addresses: SAMPLE_ADDRESSES, defaultId: 'home' }, 'amma')}
         usingCurrentLocation
         onBack={jest.fn()}
         onSave={jest.fn()}

@@ -22,7 +22,8 @@ import type { Address, BookedVisit, Slot } from '../types';
 import type { VisitRequest } from '../visitRequest';
 
 export type VisitRequestScreenProps = {
-  address: Address;
+  /** The default saved address; empty when the customer has removed them all. */
+  address?: Address;
   /** The visit time chosen on Schedule. */
   visitSlot: Slot;
   /** Starting answers. Empty by default; tests pass other states. */
@@ -213,10 +214,10 @@ export function VisitRequestScreen({
             <Icon name="mapPin" size={20} color={color.purple} />
             <View style={styles.infoText}>
               <AppText size={14} weight={700}>
-                {address.label}
+                {address?.label}
               </AppText>
               <AppText size={12} color={color.muted}>
-                {address.line}
+                {address?.line}
               </AppText>
             </View>
             <Tappable

@@ -26,7 +26,6 @@ export type BookingsScreenProps = {
   past: readonly PastBooking[];
   /** Which list shows first. Default: upcoming, as in the design. */
   initialTab?: BookingsTab;
-  // The screens these lead to are not built yet, so the route leaves them unset.
   onOpenBooking?: (id: string) => void;
   onViewReceipt?: (id: string) => void;
   onGetHelp?: (id: string) => void;

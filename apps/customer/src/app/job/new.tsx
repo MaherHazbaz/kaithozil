@@ -1,13 +1,16 @@
 import { Redirect, useLocalSearchParams, useRouter } from 'expo-router';
 
+import { useBookingAddress } from '@/features/addresses/hooks/useAddressBook';
 import { isJobServiceKey } from '@/features/job/copy';
 import { DescribeJobScreen } from '@/features/job/screens/DescribeJobScreen';
 
-// Route "/job/new?service=electrician". The address and estimate below are the
-// sample data shown in design/source/Post.dc.html; they are replaced by real
-// data from Supabase in Sprint 2.
+// Route "/job/new?service=electrician". The address is the default saved
+// address (Saved addresses). The estimate below is the sample shown in
+// design/source/Post.dc.html; it is replaced by real data from Supabase in
+// Sprint 2.
 export default function DescribeJobRoute() {
   const router = useRouter();
+  const address = useBookingAddress();
   const { service } = useLocalSearchParams<{ service?: string }>();
 
   // A deep link can carry any text. Anything that is not a service this
@@ -19,7 +22,7 @@ export default function DescribeJobRoute() {
   return (
     <DescribeJobScreen
       service={service}
-      address={{ label: 'Home', line: '12, 4th Street, Anna Nagar' }}
+      address={address}
       estimateRange="₹400 – 700"
       // Opened by a deep link there is nothing to go back to, so go to Home.
       onBack={() => (router.canGoBack() ? router.back() : router.replace('/home'))}

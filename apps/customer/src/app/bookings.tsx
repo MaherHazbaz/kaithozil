@@ -4,9 +4,10 @@ import { BookingsScreen } from '@/features/bookings/screens/BookingsScreen';
 
 // Route "/bookings". The lists below are the sample data shown in
 // design/source/Bookings.dc.html; they are replaced by real data from Supabase
-// in Sprint 2. Opening a booking, View receipt and Get help are wired as the
-// screens they lead to (After the trial day, Regular help, Crew confirmed,
-// Finding a worker, Job receipt, Support) are built.
+// in Sprint 2.
+//
+// NOT WIRED YET: the painter card ("Finding a worker") opens nothing. The
+// design links it to Finding a worker, which has no approved painter heading.
 export default function BookingsRoute() {
   const router = useRouter();
   return (
@@ -74,6 +75,9 @@ export default function BookingsRoute() {
           router.push({ pathname: '/crew/[id]', params: { id } });
         }
       }}
+      onViewReceipt={(id) => router.push({ pathname: '/job/[id]/receipt', params: { id } })}
+      // Bookings.dc.html links Get help to Support.
+      onGetHelp={() => router.push('/support')}
       onBookWorker={() => router.replace('/home')}
       onTab={(tab) => {
         // `replace` swaps one tab screen for another, so Back does not walk

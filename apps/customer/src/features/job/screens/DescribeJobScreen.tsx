@@ -25,8 +25,11 @@ import type { JobDraft } from '../jobDraft';
 
 export type DescribeJobScreenProps = {
   service: JobServiceKey;
-  /** Where the job is. The route passes the design's sample until addresses exist (Sprint 2). */
-  address: { label: string; line: string };
+  /**
+   * Where the job is: the default saved address. Empty when the customer has
+   * removed them all; "Change" then leads to Saved addresses to add one.
+   */
+  address?: { label: string; line: string };
   /** e.g. "₹400 – 700". Sample value until real estimates exist (Sprint 2). */
   estimateRange: string;
   /** Starting values. Empty by default; tests pass the design's sample state. */
@@ -223,10 +226,10 @@ export function DescribeJobScreen({
             <Icon name="mapPin" size={20} color={color.purple} />
             <View style={styles.addressText}>
               <AppText size={14} weight={700}>
-                {address.label}
+                {address?.label}
               </AppText>
               <AppText size={12} color={color.muted}>
-                {address.line}
+                {address?.line}
               </AppText>
             </View>
             <Tappable
